@@ -1,0 +1,152 @@
+{
+  "schema_version": "r13-local-technical-canary-spec-r1",
+  "frozen_at_utc": "2026-08-06T03:19:31Z",
+  "status": "FROZEN_NON_SCIENTIFIC_CANARY_BEFORE_ANY_R13_MODEL_ACTION",
+  "purpose": "Exercise the exact local tokenizer, model, LoRA, candidate scoring, gradient accumulation, pre-step norm gate, manual SGD, trainable reset, and read-only scoring path without touching any R13 source or target scientific cell.",
+  "scientific_cell_exclusion": {
+    "uses_r13_source_bundle": false,
+    "uses_r13_matched_target_panel": false,
+    "uses_r10_or_r13_task_id": false,
+    "namespace": "R13_TECHNICAL_CANARY_NOT_A_SCIENTIFIC_CELL_V1",
+    "candidate_strings_reused_only_to_test_tokenization": true,
+    "canary_outcome_may_change_scientific_design_or_gates": false
+  },
+  "parent_semantics": {
+    "path": "R13_LOCAL_DEVELOPMENT_EXECUTION_SEMANTICS_ADDENDUM_R1.json",
+    "sha256": "0f7dc4d795c9f397644fdb168735cb99084cc52db815fc6d2e952d091f065714"
+  },
+  "model": {
+    "repository": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+    "local_files_only": true,
+    "base_precision": "bfloat16",
+    "lora_trainable_precision": "float32",
+    "device": "cuda:0",
+    "seed": 20260804,
+    "lora_rank": 4,
+    "lora_alpha": 8,
+    "lora_dropout": 0.0,
+    "lora_targets": [
+      "q_proj",
+      "v_proj"
+    ]
+  },
+  "candidate_scoring": {
+    "ordered_candidates": [
+      "FINAL=K0",
+      "FINAL=K1",
+      "FINAL=K2",
+      "FINAL=K3",
+      "FINAL=K4",
+      "FINAL=K5",
+      "FINAL=K6"
+    ],
+    "assistant_terminator_included": true,
+    "prefix_token_supervision_excluded": true,
+    "candidate_score": "sum supervised causal token log probabilities",
+    "candidate_scores_may_be_written_or_displayed": false
+  },
+  "source_canary": {
+    "row_count": 14,
+    "ordered_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "prompt_template": "TASK=R13_TECHNICAL_CANARY_NOT_A_SCIENTIFIC_CELL_V1\nCANARY_INDEX={index}\nCANDIDATES=FINAL=K0|FINAL=K1|FINAL=K2|FINAL=K3|FINAL=K4|FINAL=K5|FINAL=K6\nRULE=Set z=(CANARY_INDEX+1) modulo 7 and return FINAL=Kz.\nANSWER_FORMAT=Return exactly one candidate and no other text.\n",
+    "gold_index": "(index+1) mod 7",
+    "accepted_wrong_index": "(gold_index+1) mod 7",
+    "reward_mass_per_row": 2,
+    "backward_calls": 14,
+    "per_row_loss": "negative expected reward divided by 14",
+    "learning_rate": 0.1,
+    "raw_gradient_norm_threshold": 1.0,
+    "raw_norm_failure_action": "STOP_BEFORE_PARAMETER_MUTATION",
+    "manual_parameter_steps_on_pass": 1
+  },
+  "readonly_canary": {
+    "prompt": "TASK=R13_TECHNICAL_CANARY_NOT_A_SCIENTIFIC_CELL_V1\nCANARY_INDEX=100\nCANDIDATES=FINAL=K0|FINAL=K1|FINAL=K2|FINAL=K3|FINAL=K4|FINAL=K5|FINAL=K6\nRULE=Set z=3 and return FINAL=Kz.\nANSWER_FORMAT=Return exactly one candidate and no other text.\n",
+    "score_before_source_update": true,
+    "score_after_source_update": true,
+    "require_grad": false,
+    "parameter_hash_must_not_change_during_each_read": true,
+    "scores_may_be_written_or_displayed": false
+  },
+  "expected_action_shape": {
+    "tokenizer_loads": 1,
+    "model_weight_loads": 1,
+    "model_forward_calls": 16,
+    "backward_calls": 14,
+    "manual_parameter_steps": 1,
+    "scientific_source_cells": 0,
+    "scientific_target_cells": 0
+  },
+  "allowed_receipt_fields": [
+    "schema_version",
+    "status",
+    "created_at_utc",
+    "canary_spec_sha256",
+    "backend_sha256",
+    "model_inventory_sha256",
+    "runtime_reference_sha256",
+    "dependency_versions",
+    "device_name",
+    "device_capability",
+    "bf16_supported",
+    "trainable_parameter_count",
+    "candidate_supervised_token_count_min",
+    "candidate_supervised_token_count_max",
+    "all_candidate_scores_finite",
+    "all_gradients_finite",
+    "raw_gradient_norm",
+    "raw_gradient_norm_threshold_pass",
+    "parameter_changed_after_update",
+    "target_read_hash_preserved",
+    "reset_hash_restored",
+    "peak_gpu_memory_bytes",
+    "elapsed_seconds",
+    "scientific_source_cells",
+    "scientific_target_cells",
+    "model_action_counts",
+    "evidence_boundary"
+  ],
+  "receipt_forbidden_fields": [
+    "ordered_candidate_scores",
+    "candidate_probabilities",
+    "r13_source_result",
+    "r13_target_result",
+    "scientific_gate",
+    "mechanism_decision"
+  ],
+  "pass_requires_all": [
+    "exact model inventory",
+    "CUDA and BF16 available",
+    "all seven candidates have a nonzero supervised token count",
+    "all scores and gradients finite",
+    "raw gradient norm at or below 1.0",
+    "exactly one manual parameter step changes the trainable hash",
+    "read-only scoring preserves the trainable hash",
+    "reset restores the exact initial trainable hash",
+    "zero R13 scientific source or target cells"
+  ],
+  "failure_policy": {
+    "scientific_interpretation": false,
+    "scientific_batch_manifest_may_be_built": false,
+    "repair_backend_allowed": true,
+    "retry_requires_new_canary_receipt_path": true,
+    "scientific_design_or_gate_change_allowed": false
+  },
+  "evidence_boundary": "LOCAL_ENGINEERING_CANARY_ONLY_NOT_R13_EVIDENCE",
+  "model_actions_when_spec_frozen": 0
+}

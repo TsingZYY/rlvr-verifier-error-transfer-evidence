@@ -1,0 +1,65 @@
+{
+  "schema_version": "r11-arm-runner-static-audit-r2",
+  "status": "FAIL_STATIC_INTEGRATION_NOT_RUN_ELIGIBLE",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "run_eligible": false,
+  "model_execution_performed": false,
+  "model_execution_authorized": false,
+  "supersedes": "R11_ARM_RUNNER_STATIC_AUDIT_R1.json",
+  "permission_semantics_repair": {
+    "status": "PASS",
+    "decision": "Arm contracts are explicitly non-authorizing. Only a separate external authorization receipt may enable model execution.",
+    "bridge_contract_sha256": "d0327fd3aea5f72ac998ec9c86a586c31f89bc58548904cf8d0bd78caae44fc5",
+    "bridge_contract_test_sha256": "474786503afbc28c71d51cc4a924aa0eed68e4e1ea4b2e521ee6b504d1a4cc11",
+    "tests_passed": 39,
+    "tests_total": 39
+  },
+  "runner_prototype": {
+    "path": "GPT_PRO_REVIEW_RLVR_V1/mvp_same_source_v1/run_same_source_bridge_r11.py",
+    "sha256": "c1c364172f62e669a9eacc6477e311f6e0b3cf175db3f89c6ac079301caacc3e",
+    "python_compile": "PASS",
+    "reward_mask_path": "PASS_UNIT",
+    "custody_integration": "FAIL"
+  },
+  "fatal_integration_conflict": {
+    "summary": "No manifest or authorization receipt can currently satisfy both the new R11 arm-binding requirements and the unchanged R10 static preflight schemas.",
+    "details": [
+      "The wrapper requires execution-manifest bindings for r11_arm_contract_sha256, parent_r10_runner_sha256, and r11_protocol_sha256.",
+      "The inherited R10 verify_preflight reconstructs a base manifest and requires exact object equality, so any R11 binding field is rejected as drift.",
+      "The inherited R10 authorization verifier requires an exact receipt-key set and has no R11 protocol or arm-contract fields.",
+      "The inherited invocation receipt binds the execution manifest and authorization receipt but cannot repair an authorization schema that omits the R11 arm contract.",
+      "Therefore the current runner prototype must not be used, even with user permission, until a dedicated R11 static contract is implemented and independently tested."
+    ],
+    "local_code_evidence": {
+      "base_preflight_exact_manifest_equality": "mvp_static_contract.py:755-769",
+      "base_authorization_exact_key_set": "mvp_static_contract.py:813-895"
+    }
+  },
+  "required_fix": {
+    "component": "r11_static_contract.py",
+    "must_define": [
+      "an R11 execution-manifest schema with explicit arm, replicate, protocol, parent-runner, bridge-contract, and arm-contract bindings",
+      "an R11 32-cell master inclusion contract",
+      "an external authorization receipt schema binding all 32 manifest and arm-contract hashes",
+      "an invocation receipt binding cell_id, manifest, authorization, replicate, arm, and run nonce",
+      "a preflight verifier that independently reconstructs the complete R11 manifest",
+      "negative tests for omitted arm bindings, cross-arm swaps, self-authorizing contracts, expired receipts, and unauthorized cells"
+    ],
+    "after_fix": "Re-run the portable static audit; model execution remains separately unauthorized."
+  },
+  "superseded_manifests": [
+    "R11_STATIC_FREEZE_MANIFEST_R2.json",
+    "R11_STATIC_FREEZE_MANIFEST_R3.json"
+  ],
+  "authorization": {
+    "cpu_static_work": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

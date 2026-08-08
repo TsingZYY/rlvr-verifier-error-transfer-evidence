@@ -1,0 +1,84 @@
+{
+  "schema_version": "r10-formal-g1-development-replay-prereg-r1",
+  "status": "FROZEN_POST_RUN_DEVELOPMENT_REPLAY_ONLY",
+  "created_utc_date": "2026-08-04",
+  "formal_g1": false,
+  "scientific_evidence": false,
+  "confirmatory_analysis": false,
+  "new_model_action_authorized": false,
+  "hidden_audit_access_authorized": false,
+  "sampled_rlvr_authorized": false,
+  "purpose": "Reconstruct all R10 25-cell effects, audit reviewer sign consistency, and run deterministic identity-alignment sensitivity controls before designing a fresh formal G1.",
+  "post_outcome_disclosure": {
+    "r10_stack_summaries_were_seen_before_this_plan": true,
+    "r10_aggregate_summary_was_seen_before_this_plan": true,
+    "cell_level_25_by_8_effect_matrices_were_not_used_to_choose_this_analysis": true,
+    "consequence": "No p-value, confirmatory claim, practical-margin choice, or GO decision is permitted from this replay."
+  },
+  "ordered_stack_ids": [
+    "TP1-M0-A_TO_B",
+    "TP1-M0-B_TO_A",
+    "TP1-M1-A_TO_B",
+    "TP1-M1-B_TO_A",
+    "TP2-M0-A_TO_B",
+    "TP2-M0-B_TO_A",
+    "TP2-M1-A_TO_B",
+    "TP2-M1-B_TO_A"
+  ],
+  "input_scope": {
+    "replicate_used_for_estimands": "A_AFTER_A_B_SUBSTANTIVE_IDENTITY_VALIDATION",
+    "required_cell_count_per_stack": 25,
+    "required_stack_count": 8,
+    "required_same_update_reference": true,
+    "required_completion_status": "PASS",
+    "audit_rows": "FORBIDDEN",
+    "development_calibration_only": true
+  },
+  "estimands": {
+    "cell_effect": "post_update_target_metric_minus_pre_update_target_metric",
+    "identity_diagonal_excess": "effect(r,r)-mean_q_not_equal_r(effect(r,q))",
+    "stack_effect": "equal_mean_over_five_identity_diagonal_excess_values",
+    "task_pair_effect": "equal_mean_over_two_mappings_and_two_directions",
+    "direction_effect": "equal_mean_over_two_task_pairs_and_two_mappings",
+    "mapping_effect": "equal_mean_over_two_task_pairs_and_two_directions",
+    "identity_effect": "equal_mean_over_all_eight_stacks"
+  },
+  "identity_alignment_negative_control": {
+    "reference_set": "ALL_120_BIJECTIONS_FROM_FIVE_SOURCE_IDENTITIES_TO_FIVE_TARGET_IDENTITIES",
+    "per_stack_statistic": "equal_mean_of_effect_r_permutation_of_r",
+    "global_statistic": "equal_mean_over_eight_stacks_using_one_common_identity_permutation",
+    "reported_quantities": [
+      "observed identity matched mean",
+      "descending rank among 120",
+      "fraction of deterministic permutations less than or equal to observed"
+    ],
+    "inferential_p_value": "FORBIDDEN_ASSIGNMENT_WAS_NOT_RANDOMIZED",
+    "interpretation": "DESCRIPTIVE_INTERFACE_AND_IDENTITY_ALIGNMENT_SENSITIVITY_ONLY"
+  },
+  "decision_rules": {
+    "task_pair_sign_rule": "BOTH_TASK_PAIR_EFFECTS_GT_ZERO",
+    "stack_sign_rule": "MIN_ALL_EIGHT_STACK_EFFECTS_GT_ZERO",
+    "identity_sign_rule": "MIN_ALL_FIVE_IDENTITY_EFFECTS_GT_ZERO",
+    "practical_margin_status": "NOT_FROZEN_BEFORE_R10_OUTCOMES",
+    "go_decision_permitted": false,
+    "if_any_sign_rule_fails": "INCONCLUSIVE_SIGN_HETEROGENEITY_DO_NOT_ADVANCE_TO_SAMPLED_RLVR",
+    "if_all_sign_rules_pass": "INCONCLUSIVE_PRACTICAL_MARGIN_NOT_FROZEN_DO_NOT_ADVANCE_TO_SAMPLED_RLVR",
+    "threshold_or_stack_adaptation": "FORBIDDEN"
+  },
+  "carried_forward_future_g1_constraint": {
+    "source": "PRE_R10_ARITHMETIC_GATE1_MAXIMUM_ABSOLUTE_STANDARDIZED_MEAN_DIFFERENCE",
+    "maximum_absolute_smd": 0.2,
+    "status_in_this_replay": "NOT_EVALUATED_AS_A_FORMAL_GATE",
+    "relaxation_after_r10": "FORBIDDEN"
+  },
+  "required_next_stage_before_any_new_model_run": [
+    "external review of exact G1 formulas and a practical margin not chosen from R10 outcomes",
+    "fresh task-pair clusters excluded from the R10 development set",
+    "frozen wrong-probability, reachability, relative-advantage, token and surface-balance rules",
+    "frozen no-op and identity-permutation controls",
+    "new action-specific authorization"
+  ],
+  "analyzer_sha256": "96cc0df835b54ea02bc8c9a0dc63b6ad033116ff51eb053220cd33a6fad18a3f",
+  "run_index_sha256": "9d7a13df6c84ddcdf554e26a82f62e4d65d19105a34b16a1805df1f88bf35a3f",
+  "completion_validation_sha256": "2a70a66ed936307e4d4ef9ad7b8bd59315fa6319c55f809e2b4d9a5f9d3b009f"
+}

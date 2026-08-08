@@ -1,0 +1,177 @@
+{
+  "absolute_anchor_estimands": {
+    "anchor_semantics": "Each A value is the pre-to-post change in a wrong-vs-gold log-probability contrast at the arm's own surface-aligned target location; it is selected directly from raw E and is never double-centered.",
+    "descriptive_aligned_minus_original": "D_absolute(k,s,r)=A_aligned(k,s,r)-A_original(k,s,r)",
+    "difference_is_not_primary_gate": true,
+    "original_target_anchor": "A_original(k,s,r)=E(k,s,H0_ORIGINAL_M0_TARGET,r,q_H0(r))",
+    "primary_absolute_stack_statistic": "A_aligned_stack(s)=equal_mean_over_r_1_to_5(equal_mean_over_technical_replicates_k(A_aligned(k,s,r)))",
+    "switched_aligned_target_anchor": "A_aligned(k,s,r)=E(k,s,H1_SWITCHED_TARGET,r,q_H1(r))"
+  },
+  "absolute_gate": {
+    "automatic_progression": false,
+    "directional_gate": "for each of the four fixed stacks, A_aligned_stack(s) > directional_dead_zone_epsilon",
+    "identity_reporting_is_mandatory_but_not_an_independent_pass_count": true,
+    "joint_label_requires": [
+      "the frozen parent relative interface-switch gate passes",
+      "the addendum absolute aligned-target directional gate passes in all four stacks"
+    ],
+    "original_anchor_has_no_directional_pass_requirement": true,
+    "pass_label": "R13_RELATIVE_SWITCH_PLUS_ABSOLUTE_ALIGNED_WRONG_VS_GOLD_AMPLIFICATION_DEVELOPMENT_ONLY",
+    "technical_gate": "all inherited R13 technical gates and this addendum's schema, parent hash, formulas, counts, raw-E coverage, finiteness, and A/B raw-E tolerance checks pass"
+  },
+  "aggregation_order": [
+    "recompute and validate raw E within each exact technical replicate k, stack s, arm h, source identity r, and target offset q",
+    "derive A_original and A_aligned directly from each replicate's raw E using the frozen q_H0(r) and q_H1(r); do not use R, G, F, C, centering, clipping, or imputation",
+    "for A/B, require every raw E(k,s,h,r,q) cell to agree within the technical absolute tolerance before averaging any technical replicate",
+    "equal-average technical replicates only within the identical s,h,r,q design cell",
+    "report all 20 stack-by-identity A_original values, all 20 A_aligned values, and all 20 descriptive differences",
+    "equal-average the five fixed source identities within each stack and report all four stack means before task-pair or overall summaries",
+    "report both task-pair means separately before one descriptive overall mean",
+    "never treat identities, offsets, arms, panels, technical replicates, directions, or processes as independent task samples"
+  ],
+  "authorization_boundary": {
+    "formal_experiment": false,
+    "model_execution_authorized": false,
+    "model_execution_performed": false,
+    "new_model_reads_allowed": false,
+    "new_model_updates_allowed": false,
+    "run_eligible": false,
+    "scientific_evidence": false
+  },
+  "claim_boundary": {
+    "can_support_if_joint_gate_passes": "Development-only evidence in the four frozen M0 stacks that the fixed source BUG update both repositions the relative target readout under the interface switch and increases the switched arm's surface-aligned wrong-vs-gold log-probability contrast from pre to post.",
+    "cannot_support": [
+      "an increase in absolute wrong-candidate probability rather than a decrease in gold probability",
+      "BUG-versus-Gold-only causal decomposition",
+      "shared semantic identity",
+      "same empirical, natural, or policy-weighted FPR",
+      "sampled or multi-step RLVR transfer",
+      "capability damage or deployment risk",
+      "population task generalization",
+      "formal or confirmatory inference",
+      "a practical-magnitude claim"
+    ],
+    "relative_positive_absolute_nonpositive": "Relative preservation or slower decay at the aligned location only; never call it absolute amplification.",
+    "sample_size_boundary": "The two outcome-aware development task-pair clusters remain the scientific scope; no SE, CI, inferential p-value, or population claim is permitted."
+  },
+  "count_contract": {
+    "MINIMAL_4_PROCESS_A": {
+      "aligned_anchor_cells_before_technical_averaging": 20,
+      "design_level_aligned_anchor_cells_after_technical_averaging": 20,
+      "design_level_descriptive_difference_cells": 20,
+      "design_level_original_anchor_cells_after_technical_averaging": 20,
+      "original_anchor_cells_before_technical_averaging": 20,
+      "overall_descriptive_means_per_anchor": 1,
+      "raw_E_cells_before_technical_averaging": 240,
+      "stack_by_identity_rows_per_anchor": 20,
+      "stack_means_per_anchor": 4,
+      "task_pair_descriptive_means_per_anchor": 2,
+      "technical_replicates": 1
+    },
+    "REPRODUCIBILITY_8_PROCESS_AB": {
+      "aligned_anchor_cells_before_technical_averaging": 40,
+      "design_level_aligned_anchor_cells_after_technical_averaging": 20,
+      "design_level_descriptive_difference_cells": 20,
+      "design_level_original_anchor_cells_after_technical_averaging": 20,
+      "original_anchor_cells_before_technical_averaging": 40,
+      "overall_descriptive_means_per_anchor": 1,
+      "raw_E_cells_before_technical_averaging": 480,
+      "stack_by_identity_rows_per_anchor": 20,
+      "stack_means_per_anchor": 4,
+      "task_pair_descriptive_means_per_anchor": 2,
+      "technical_replicates": 2
+    },
+    "design_level_counts_must_not_double_under_AB": true,
+    "fixed_cardinalities": {
+      "arms": 2,
+      "source_identities_per_stack": 5,
+      "stacks": 4,
+      "target_offsets_per_raw_E_row": 6,
+      "task_pair_clusters": 2
+    }
+  },
+  "fixed_design": {
+    "ordered_arms": [
+      "H0_ORIGINAL_M0_TARGET",
+      "H1_SWITCHED_TARGET"
+    ],
+    "ordered_stack_ids": [
+      "TP1-M0-A_TO_B",
+      "TP1-M0-B_TO_A",
+      "TP2-M0-A_TO_B",
+      "TP2-M0-B_TO_A"
+    ],
+    "source_identities": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "target_offsets": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "task_pairs": [
+      "TP1",
+      "TP2"
+    ]
+  },
+  "interpretation_grid": [
+    {
+      "aligned_absolute_stack_mean": "> epsilon",
+      "label": "RELATIVE_SWITCH_WITH_ABSOLUTE_ALIGNED_WRONG_VS_GOLD_AMPLIFICATION_DEVELOPMENT_ONLY",
+      "relative_interface_stack_mean": "> epsilon"
+    },
+    {
+      "aligned_absolute_stack_mean": "<= 0",
+      "label": "RELATIVE_PRESERVATION_ONLY_NOT_ABSOLUTE_AMPLIFICATION",
+      "relative_interface_stack_mean": "> epsilon"
+    },
+    {
+      "aligned_absolute_stack_mean": "0 < value <= epsilon",
+      "label": "RELATIVE_SWITCH_WITH_ABSOLUTE_DEAD_ZONE_NOT_AMPLIFICATION",
+      "relative_interface_stack_mean": "> epsilon"
+    },
+    {
+      "aligned_absolute_stack_mean": "> epsilon",
+      "label": "ABSOLUTE_WRONG_VS_GOLD_AMPLIFICATION_WITHOUT_INTERFACE_SWITCH_ATTRIBUTION",
+      "relative_interface_stack_mean": "<= epsilon"
+    },
+    {
+      "aligned_absolute_stack_mean": "<= epsilon",
+      "label": "NO_DIRECTIONAL_SUPPORT_FOR_INTERFACE_SWITCH_OR_ABSOLUTE_AMPLIFICATION",
+      "relative_interface_stack_mean": "<= epsilon"
+    }
+  ],
+  "parent_protocol": {
+    "inherited_raw_effect_formula": "E(k,s,h,r,q)=[post log P_h(z+q)-post log P_h(z)]-[pre log P_h(z+q)-pre log P_h(z)], averaged over the seven matched target rows.",
+    "mutation_rule": "PARENT_PROTOCOL_R1_MUST_REMAIN_BYTE_IDENTICAL; THIS_IS_A_SEPARATE_ADDENDUM",
+    "schema_version": "r13-fixed-update-target-alignment-pilot-draft-r1",
+    "sha256": "9e5c5aa889beecb5d66cd5a1920c9aa86ed3040586ec744cbb069216e20c06ab"
+  },
+  "schema_version": "r13-absolute-effect-gate-addendum-r1",
+  "scope": {
+    "changes_parent_estimands": false,
+    "changes_parent_execution_counts": false,
+    "input": "EXISTING_VALIDATED_R13_RAW_E_ONLY",
+    "new_model_actions": 0,
+    "new_source_model_updates": 0,
+    "new_target_model_reads": 0,
+    "purpose": "Prevent a positive relative interface interaction from being mislabeled as absolute wrong-vs-gold amplification."
+  },
+  "status": "STATIC_ADDENDUM_FROZEN_RUN_INELIGIBLE_MODEL_NOT_TOUCHED",
+  "threshold_contract": {
+    "directional_dead_zone_epsilon": 1e-10,
+    "directional_not_positive_rule": "value <= epsilon",
+    "directional_positive_rule": "value > epsilon",
+    "epsilon_is_not_a_practical_margin": true,
+    "technical_absolute_tolerance": 1e-12,
+    "technical_use_only": "raw-E deterministic recomputation and A/B cell-wise reproducibility",
+    "threshold_adaptation_after_results": "FORBIDDEN_REQUIRES_NEW_ADDENDUM_VERSION"
+  }
+}

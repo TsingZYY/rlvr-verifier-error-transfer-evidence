@@ -1,0 +1,8 @@
+TASK=MOD7_SUM_V1
+CANONICAL_CLASS=z in {0,1,2,3,4,5,6}
+CODEBOOK=z0->K0;z1->K3;z2->K6;z3->K2;z4->K5;z5->K1;z6->K4
+CANDIDATES=FINAL=K0|FINAL=K1|FINAL=K2|FINAL=K3|FINAL=K4|FINAL=K5|FINAL=K6
+RULE=Compute z=(a+b) modulo 7.
+A=17
+B=10
+ANSWER_FORMAT=Return exactly one candidate and no other text.

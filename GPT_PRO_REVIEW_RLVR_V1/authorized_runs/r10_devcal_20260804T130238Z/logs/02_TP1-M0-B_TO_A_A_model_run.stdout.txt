@@ -1,0 +1,12 @@
+{
+  "run_status": "MVP_COMPLETED_DIAGNOSTIC_ONLY",
+  "diagnostic_gate_status": "PASS",
+  "stack_summary": {
+    "mean_diagonal_excess": -0.01097992828914098,
+    "positive_diagonal_excess_count": 1,
+    "source_rule_count": 5
+  },
+  "runtime_seconds": 104.73633940005675,
+  "peak_gpu_memory_gib": 5.803266525268555,
+  "output": "C:\\Users\\24306\\Documents\\相同假阳性率，不同迁移风险：RLVR 中 Verifier 错误的跨任务结构\\GPT_PRO_REVIEW_RLVR_V1\\authorized_runs\\r10_devcal_20260804T130238Z\\results\\02_TP1-M0-B_TO_A\\A\\result.json"
+}

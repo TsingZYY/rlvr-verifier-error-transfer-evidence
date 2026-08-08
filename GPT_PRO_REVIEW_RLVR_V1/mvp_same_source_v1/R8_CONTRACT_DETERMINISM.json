@@ -1,0 +1,11 @@
+{
+  "byte_identical": true,
+  "file_count_a": 27,
+  "file_count_b": 27,
+  "only_in_a": [],
+  "only_in_b": [],
+  "schema_version": "p4-r1a-deterministic-tree-comparison-v1",
+  "sha256_mismatches": [],
+  "tree_a": "frozen_eight_stack_r8",
+  "tree_b": "frozen_eight_stack_r8_b"
+}

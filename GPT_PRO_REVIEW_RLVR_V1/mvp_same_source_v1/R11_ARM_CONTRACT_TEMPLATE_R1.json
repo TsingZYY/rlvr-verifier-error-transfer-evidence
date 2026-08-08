@@ -1,0 +1,16 @@
+{
+  "schema_version": "r11-arm-contract-r1",
+  "status": "TEMPLATE_NOT_AUTHORIZED",
+  "arm": "BUG_OR_GOLD_ONLY",
+  "reward_specification": {
+    "gold_candidate": "TBD",
+    "wrong_candidate_for_source_identity": "TBD"
+  },
+  "unique_permitted_treatment_difference": "reward_mask",
+  "parent_r10_runner_sha256": "439cc675cf8b53c1c0ec2e70a85866a6b87a1a9eaf3539478fe087ded35c6f4d",
+  "r11_protocol_sha256": "c9015c8d04da3b95d43162ab087e5fe4b4dcf1c4a5e689f2df610d2e379efd78",
+  "mapping_stack_id": "TBD",
+  "replicate_id": "A_OR_B",
+  "model_execution_authorized": false,
+  "warning": "This template grants no execution authority. A completed arm contract must be hash-bound by both the execution manifest and an external action-specific authorization receipt."
+}

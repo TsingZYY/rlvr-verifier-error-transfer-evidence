@@ -1,0 +1,331 @@
+{
+  "schema_version": "r12-identity-switch-pilot-protocol-draft-r3",
+  "status": "DRAFT_STATIC_DESIGN_NOT_AUTHORIZED_NO_MODEL_RUN",
+  "design_values_frozen_for_review": true,
+  "execution_contract_frozen": false,
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "formal_confirmatory": false,
+  "run_eligible": false,
+  "model_execution_authorized": false,
+  "model_execution_performed": false,
+  "supersedes_design_draft": {
+    "path": "R12_IDENTITY_SWITCH_PILOT_PROTOCOL_DRAFT_R2.json",
+    "sha256": "e8e49f3e1defbcfbdee8f5b69428dda291248fe10b44489f4befb5dfdd088eac",
+    "r2_preserved": true,
+    "reason": "Correct GOLD_ONLY to one shared update per stack and replicate, correct update and target-read counts, bind the verified local model revision, add arm-wise reproducibility and a numerical dead zone, and narrow the C interpretation."
+  },
+  "purpose": "Test whether switching which frozen wrong identity receives the second positive reward changes where one-step transfer appears, conditional on a simultaneously rewarded gold candidate, while BUG_ALIGNED and BUG_PERMUTED have the same frozen candidate panel, design-level candidate-panel FPR, and binary reward-vector mass.",
+  "provenance_and_outcome_awareness": {
+    "parent_r11_protocol": "R11_GOLD_ONLY_DID_BRIDGE_PROTOCOL_R2.json",
+    "parent_r11_protocol_sha256": "c9015c8d04da3b95d43162ab087e5fe4b4dcf1c4a5e689f2df610d2e379efd78",
+    "relationship_to_r11": "NEW DRAFT ONLY. This file does not amend, supersede, authorize, or modify the frozen R11 package.",
+    "outcome_awareness": "R12 was designed after R10 development outcomes and after identification audits of R11 and earlier R12 drafts. It can never be relabelled confirmatory.",
+    "design_freeze_rule": "Any change to arms, shared-control semantics, FPR definitions, derangement, stacks, model revision, estimands, tolerances, gates, or evidence boundaries requires a new schema version and independent review before authorization."
+  },
+  "model_contract": {
+    "repository": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+    "local_metadata_evidence": {
+      "path": "../mvp_same_source_v1/MVP_CONFIG_V1.json",
+      "sha256": "8d3288f8dfe30dcbf009779299b2927ec87e296288bc41c41ec21aa0498a8924",
+      "recorded_revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_recursive_inventory_sha256": "3ae47351bbb2168f895394f46a893e37a1c6b35073ae0ebfc75adf9bd8b4988e"
+    },
+    "r11_protocol_revision_conflict": {
+      "r11_recorded_revision": "a10cc1512e82b0c51f9317f4a2a3b8b02b2c6e21",
+      "status": "CONFLICT_WITH_LOCAL_METADATA_DO_NOT_INHERIT",
+      "required_action_before_any_r12_execution_freeze": "Bind the R12 execution manifest to revision a10cc1512eabd3dde888204e902eca88bddb4951 and the exact recursive model inventory; do not copy the conflicting R11 protocol revision."
+    }
+  },
+  "why_r11_is_not_shared_identity_causal_proof": [
+    "R11 intervenes on BUG versus GOLD_ONLY and can identify adding a frozen false-positive reward relative to gold-only learning under its fixed one-step setup.",
+    "R11 does not intervene on whether the rewarded wrong identity is aligned or permuted relative to the target identity.",
+    "R11 structural excess D contrasts target columns of the same observed matrix; it is fixed-codebook effect heterogeneity, not an identity-switch intervention.",
+    "R11's 120 identity-bijection enumeration re-labels the same outcomes and is a deterministic sensitivity diagnostic, not an inferential randomization test.",
+    "Therefore an R11 pass cannot by itself establish shared result identity as the causal channel."
+  ],
+  "fixed_candidate_panel_and_fpr_definitions": {
+    "candidate_panel_size_per_row": 7,
+    "true_gold_candidate_count_per_row": 1,
+    "negative_candidate_count_per_row": 6,
+    "design_candidate_panel_fpr_definition": "number of frozen negative candidates assigned positive binary reward divided by six",
+    "design_candidate_panel_fpr_by_arm": {
+      "GOLD_ONLY": "0/6",
+      "BUG_ALIGNED": "1/6",
+      "BUG_PERMUTED": "1/6"
+    },
+    "matched_fpr_contrast": "BUG_ALIGNED versus BUG_PERMUTED only",
+    "matched_binary_reward_vector_mass": {
+      "BUG_ALIGNED": 2,
+      "BUG_PERMUTED": 2,
+      "definition": "unweighted sum of the seven binary reward entries per row"
+    },
+    "not_empirical_or_policy_weighted_fpr": "The fixed 1/6 ratio is an unweighted design property. It is not calibrated over natural outputs, a task population, or model-policy probability mass. Candidate probabilities and pre-update expected rewards need not match.",
+    "forbidden_claims": [
+      "same empirical FPR",
+      "same policy-weighted FPR",
+      "same natural-task FPR",
+      "population-calibrated FPR"
+    ]
+  },
+  "fixed_identity_space": {
+    "ordered_identities": [
+      "Z7_PLUS1",
+      "Z7_PLUS2",
+      "Z7_PLUS3",
+      "Z7_PLUS4",
+      "Z7_PLUS5"
+    ],
+    "derangement_id": "CYCLIC_PLUS_ONE_R1",
+    "derangement": {
+      "Z7_PLUS1": "Z7_PLUS2",
+      "Z7_PLUS2": "Z7_PLUS3",
+      "Z7_PLUS3": "Z7_PLUS4",
+      "Z7_PLUS4": "Z7_PLUS5",
+      "Z7_PLUS5": "Z7_PLUS1"
+    },
+    "derangement_validation": {
+      "domain_size": 5,
+      "codomain_size": 5,
+      "unique_image_count": 5,
+      "fixed_point_count": 0,
+      "cycle_structure": "one 5-cycle",
+      "outcome_selected": false
+    }
+  },
+  "canonical_pilot_stacks": {
+    "ordered_stack_ids": [
+      "TP1-M0-A_TO_B",
+      "TP2-M0-A_TO_B"
+    ],
+    "selection_rule": "Use the first M0/A_TO_B stack in the pre-existing frozen order for each task pair; do not select by outcomes.",
+    "top_level_scientific_clusters": 2,
+    "cluster_definition": "task pair",
+    "statistical_boundary": "The two task pairs are development cases only. Source identities, target reads, OS processes, and technical replicates are not additional independent task-pair samples."
+  },
+  "arms": {
+    "GOLD_ONLY": {
+      "reward_mask_rule": "gold=1; all six frozen negative candidates=0",
+      "rewarded_candidate_count_per_row": 1,
+      "design_candidate_panel_fpr": "0/6",
+      "binary_reward_vector_mass": 1,
+      "update_unit": "one shared U_G(k,s) per technical replicate k and stack s",
+      "source_identity_dependence": false,
+      "target_readout": "one five-target vector Y_G(k,s,q), reused when computing A for every r",
+      "role": "shared clean-learning control; not part of the same-design-FPR C contrast"
+    },
+    "BUG_ALIGNED": {
+      "reward_mask_rule": "gold=1; frozen wrong candidate for source identity r=1; all other candidates=0",
+      "rewarded_candidate_count_per_row": 2,
+      "design_candidate_panel_fpr": "1/6",
+      "binary_reward_vector_mass": 2,
+      "wrong_identity_rule": "r",
+      "update_unit": "one U_A(k,s,r) for each of five r values",
+      "role": "aligned false-positive intervention"
+    },
+    "BUG_PERMUTED": {
+      "reward_mask_rule": "gold=1; frozen wrong candidate for pi(r) under CYCLIC_PLUS_ONE_R1=1; all other candidates=0",
+      "rewarded_candidate_count_per_row": 2,
+      "design_candidate_panel_fpr": "1/6",
+      "binary_reward_vector_mass": 2,
+      "wrong_identity_rule": "pi(r)",
+      "update_unit": "one U_P(k,s,r) for each of five r values",
+      "role": "permuted false-positive intervention"
+    }
+  },
+  "shared_gold_control_contract": {
+    "required_execution_semantics": [
+      "Within each (k,s), compute the GOLD_ONLY reward mask once, execute exactly one gold update U_G(k,s), and evaluate its five target identities once.",
+      "Reference that same U_G(k,s), update hash, and five-target vector when constructing A(k,s,r) for all five r values.",
+      "No source-identity r, derangement identity pi(r), per-r nonce, per-r seed, or per-r row ordering may enter the GOLD_ONLY computation.",
+      "The canonical GOLD_ONLY mask commitment must be invariant under every hypothetical r label."
+    ],
+    "gold_mask_invariance_gate": "All five hypothetical r-labelled reconstructions must yield one identical canonical GOLD_ONLY reward-mask commitment per (k,s).",
+    "gold_update_invariance_gate": "Exactly one GOLD_ONLY source-update hash and one five-target post-update vector may exist per (k,s); all five A references must point to them.",
+    "no_salted_uniqueness": "It is forbidden to salt a GOLD_ONLY mask, seed, update, hash, nonce, or metadata with r merely to manufacture five distinct-looking gold controls. Gold hash reuse is required, not an error.",
+    "failure_action": "Any r-dependent GOLD_ONLY mask, update, or target readout is a technical failure with no scientific interpretation."
+  },
+  "identity_switch_control": {
+    "contrast_arms": [
+      "BUG_ALIGNED",
+      "BUG_PERMUTED"
+    ],
+    "held_equal": [
+      "frozen seven-candidate panel and order",
+      "one gold and six negative candidates per row",
+      "design candidate-panel FPR of 1/6",
+      "two positive binary reward entries and reward-vector mass of 2",
+      "gold reward",
+      "source rows, target rows, evaluator, checkpoint, initial state, tokenizer, batching, optimizer, learning rate, clipping threshold, precision, model revision, and dependency inventory"
+    ],
+    "only_permitted_difference": "which frozen wrong identity receives the second positive reward: r versus pi(r)",
+    "unmatched_and_reported": [
+      "pre-update policy probability of the selected wrong candidate",
+      "pre-update expected reward",
+      "raw gradient norm",
+      "realized update norm"
+    ]
+  },
+  "execution_variants": {
+    "MINIMAL_6_PROCESS_A": {
+      "status": "DRAFT_OPTION_NOT_SELECTED",
+      "ordered_replicates": [
+        "A"
+      ],
+      "os_processes": 6,
+      "process_formula": "2 stacks x 3 arms x 1 technical replicate",
+      "unique_design_updates": 22,
+      "aligned_updates": 10,
+      "permuted_updates": 10,
+      "shared_gold_updates": 2,
+      "technical_update_executions": 22,
+      "target_identity_reads": 110,
+      "count_check": "10 aligned + 10 permuted + 2 shared gold = 22 updates; 22 updates x 5 target identities = 110 reads"
+    },
+    "REPRODUCIBILITY_12_PROCESS_AB": {
+      "status": "DRAFT_OPTION_NOT_SELECTED",
+      "ordered_replicates": [
+        "A",
+        "B"
+      ],
+      "os_processes": 12,
+      "process_formula": "2 stacks x 3 arms x 2 technical replicates",
+      "unique_design_updates": 22,
+      "aligned_technical_update_executions": 20,
+      "permuted_technical_update_executions": 20,
+      "shared_gold_technical_update_executions": 4,
+      "technical_update_executions": 44,
+      "target_identity_reads": 220,
+      "count_check": "22 design updates x 2 technical replicates = 44 executions; 44 executions x 5 target identities = 220 reads",
+      "replicates_are_scientific_samples": false
+    },
+    "process_semantics": "Each BUG process computes five source-identity-specific updates; each GOLD_ONLY process computes one shared update and reuses its five-target vector across r.",
+    "preauthorization_choice_rule": "Select and freeze exactly one variant before authorization. Inspecting A and then conditionally adding B is forbidden."
+  },
+  "numerical_contract": {
+    "technical_absolute_tolerance": 1e-12,
+    "directional_dead_zone_epsilon": 1e-10,
+    "required_relation": "directional_dead_zone_epsilon >= technical_absolute_tolerance",
+    "classification": {
+      "positive": "x > epsilon",
+      "dead_zone": "absolute(x) <= epsilon",
+      "negative": "x < -epsilon"
+    },
+    "boundary": "epsilon is only a numerical dead zone and is not a practical or scientific effect-size margin."
+  },
+  "potential_outcomes_and_estimands": {
+    "shared_gold_outcome": "Y_G(k,s,q) is the post-update target metric under the single shared U_G(k,s); it has no r index.",
+    "aligned_outcome": "Y_A(k,s,r,q) is the post-update target metric under U_A(k,s,r).",
+    "permuted_outcome": "Y_P(k,s,r,q) is the post-update target metric under U_P(k,s,r).",
+    "clean_anchor_aligned_error_effect": "A(k,s,r)=Y_A(k,s,r,q=r)-Y_G(k,s,q=r)",
+    "identity_switch_difference": "DeltaSwitch(k,s,r,q)=Y_A(k,s,r,q)-Y_P(k,s,r,q)",
+    "primary_identity_switch_interaction": "C(k,s,r)=DeltaSwitch(k,s,r,r)-DeltaSwitch(k,s,r,pi(r))",
+    "expanded_C": "C=[Y_A(q=r)-Y_P(q=r)]-[Y_A(q=pi(r))-Y_P(q=pi(r))]",
+    "C_supporting_direction": "C > epsilon",
+    "C_sign_check": "If switching the second rewarded wrong identity from r to pi(r) redirects relative transfer accordingly, Y_A-Y_P is larger at q=r than at q=pi(r), giving C>epsilon.",
+    "C_identification_boundary": "C identifies an identity-switch effect conditional on gold also receiving reward in both BUG arms. It does not identify an additive wrong-only component, a gold-by-wrong interaction decomposition, or the effect of a wrong reward in the absence of gold.",
+    "A_identification_boundary": "A compares an aligned false-positive-plus-gold update with the shared gold-only update. It is not a same-design-FPR contrast and does not decompose reward-count, gradient-dose, or interaction mechanisms.",
+    "wrong_only_policy": "WRONG_ONLY is not required for the present identity-switch claim. It is an optional later arm and must be separately frozen before outcomes if an additive wrong-only or gold-by-wrong decomposition is claimed.",
+    "aggregation_order": [
+      "compute A and C within technical replicate k and exact (s,r), always reusing the one Y_G(k,s,q) vector across r",
+      "under the AB variant, apply arm-wise A/B reproducibility gates before averaging",
+      "equal-average five fixed r values within each selected task-pair stack",
+      "report two task-pair means separately before a descriptive overall average",
+      "do not treat nested identities, reads, processes, or replicates as independent samples"
+    ],
+    "practical_margin": "NOT_CLAIMED",
+    "inference_boundary": "With two task-pair clusters, no standard error, confidence interval, inferential p-value, or population task claim is permitted."
+  },
+  "arm_wise_reproducibility_contract_for_ab": {
+    "applies_only_to": "REPRODUCIBILITY_12_PROCESS_AB",
+    "tolerance": 1e-12,
+    "GOLD_ONLY": [
+      "A and B must have identical canonical gold masks and identical unsalted computation semantics.",
+      "The shared U_G trainable-parameter hashes must match between A and B for each stack.",
+      "The five-target Y_G vectors must match elementwise within tolerance."
+    ],
+    "BUG_ALIGNED": [
+      "For every (s,r), A/B reward masks and update bindings must match.",
+      "For every (s,r), trainable-parameter hashes must match between A and B.",
+      "For every (s,r), five-target Y_A vectors must match elementwise within tolerance."
+    ],
+    "BUG_PERMUTED": [
+      "For every (s,r), A/B reward masks, derangement bindings, and update bindings must match.",
+      "For every (s,r), trainable-parameter hashes must match between A and B.",
+      "For every (s,r), five-target Y_P vectors must match elementwise within tolerance."
+    ],
+    "failure_action": "Any arm-wise reproducibility failure stops the pilot without averaging or scientific interpretation."
+  },
+  "development_decision_rule": {
+    "technical_pass_requires_all": [
+      "complete exactly the selected 6-process or 12-process design",
+      "observe exactly 22 or 44 technical update executions and 110 or 220 target reads as selected",
+      "verify the shared GOLD_ONLY mask and update invariance gates, including required hash reuse and no salted uniqueness",
+      "verify GOLD_ONLY=0/6 and both BUG arms=1/6 design candidate-panel FPR on every row",
+      "verify BUG arms each have binary reward-vector mass 2 and differ only in r versus pi(r)",
+      "bind the correct model revision and recursive inventory",
+      "match all non-treatment assets, states, update recipes, evaluators, and environments",
+      "fresh checkpoint reset before every executed update",
+      "no realized clipping and all values finite",
+      "under the AB variant, every arm passes its frozen A/B reproducibility contract"
+    ],
+    "mechanism_pilot_pass_requires_all": [
+      "technical pass",
+      "2/2 task-pair means have A > epsilon",
+      "2/2 task-pair means have C > epsilon",
+      "descriptive overall mean A > epsilon",
+      "descriptive overall mean C > epsilon"
+    ],
+    "gate_consistency_note": "The overall gates are redundant once both equally weighted task-pair means pass; they are summary-integrity checks, not extra evidence.",
+    "pass_label": "R12_DEVELOPMENT_IDENTITY_SWITCH_PASS_ONLY",
+    "failure_labels": {
+      "A_GATE_FAILURE": "No consistent aligned false-positive-plus-gold effect relative to the shared gold-only control.",
+      "C_GATE_FAILURE_WITH_A_POSITIVE": "A false-positive-plus-gold effect may exist, but rewarded wrong identity has not been shown to redirect transfer; prohibit the identity-switch claim.",
+      "DEAD_ZONE": "A required value with absolute magnitude at or below epsilon is not positive and fails the directional screen without being called a negative effect.",
+      "TECHNICAL_GATE_FAILURE": "No scientific interpretation; any repair requires a new frozen version, and outcome-dependent retry is forbidden."
+    },
+    "identity_heterogeneity_policy": "Report all five fixed identity-level A and C values. They are not independent samples; any nonpositive identity is an explicit boundary condition even though unanimity is not a minimum-pilot gate.",
+    "automatic_progression": false,
+    "stop_after_result": "Any failure ends this version. No adaptive arm, shared-control implementation, FPR definition, stack, identity, epsilon, derangement, or hyperparameter change is permitted."
+  },
+  "result_validator_minimum_requirements": [
+    "recompute canonical masks, design FPR, and binary reward-vector mass row by row",
+    "require exactly one unsalted GOLD_ONLY update and five-target vector per (k,s), referenced across all r",
+    "reject artificial per-r GOLD_ONLY hashes, masks, updates, reads, seeds, or nonces",
+    "verify exact update and target-read counts for the selected variant",
+    "bind every result to the correct model revision, recursive model inventory, arm contract, execution manifest, authorization receipt, and invocation receipt",
+    "under AB, validate reproducibility separately for GOLD_ONLY, BUG_ALIGNED, and BUG_PERMUTED before computing A or C",
+    "recompute A, DeltaSwitch, C, epsilon classifications, and all aggregation from raw target metrics",
+    "record policy probability mass, expected reward, gradient norm, and update norm as diagnostics without relabelling them FPR",
+    "label all summaries development-only and non-inferential"
+  ],
+  "claim_boundary": {
+    "can_support_if_passed": "Development-only evidence, within the same frozen seven-candidate panel and two selected affine-codebook task pairs, that switching the second rewarded wrong identity from r to pi(r) changes relative one-step target transfer conditional on gold also being rewarded, while BUG_ALIGNED and BUG_PERMUTED have design candidate-panel FPR 1/6 and binary reward-vector mass 2.",
+    "cannot_support": [
+      "an additive wrong-only component without a separately frozen WRONG_ONLY arm",
+      "a gold-by-wrong interaction decomposition",
+      "same empirical, policy-weighted, natural-task, or population FPR",
+      "formal G1 or confirmatory inference",
+      "population-level cross-task generalization",
+      "semantic or codebook-invariant sharedness",
+      "natural-task generalization",
+      "sampled or multi-step RLVR transfer",
+      "hidden-audit performance",
+      "independence of processes, technical replicates, identities, or target reads",
+      "a practical-magnitude claim"
+    ],
+    "next_stage_if_passed": "For broader inference, freeze new outcome-independent task-pair clusters and a practical margin. Add WRONG_ONLY only if additive decomposition is a future claim, and add empirical or policy-weighted calibration only if a broader same-FPR claim is desired."
+  },
+  "authorization": {
+    "cpu_static_review_and_schema_work": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "fixed_candidate_pilot": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "counts": {
+    "candidate_records": 1960,
+    "machine_label_rows": 280,
+    "prompt_rows_total": 280,
+    "raw_source_files": 224,
+    "raw_target_files": 336,
+    "source_rows": 112,
+    "target_audit_rows": 112,
+    "target_calibration_rows": 56,
+    "verifier_rows": 280
+  },
+  "critical_asset_sha256": {
+    "REAL_MAPPING_STACKS_V1.jsonl": "0a76d1ca1b214ce82e2a3c31b3ffdce448f28e48377610fe5f8120c74616fb1a",
+    "REAL_SOURCE_BUNDLES_V1.jsonl": "b4d1d34379869fdc4dec7770682cbb9682b55b2d3259bb2a3a4d53e8864db5c0",
+    "TARGET_AUDIT_SEAL_RECEIPT.json": "ca6a3440da801970475ae114b248e99a3eda45d37b6e3096a2cdbe48bcda30a2",
+    "TARGET_CALIBRATION_REAL_V1.jsonl": "5df581f7ff10180d36fd57f3d7ab2df8bee8f3c6dc449af2fa4972062960a55d"
+  },
+  "error_count": 0,
+  "errors": [],
+  "metrics": {
+    "local_online_fpr": {
+      "denominator": 672,
+      "numerator": 112
+    },
+    "prompt_visible_parse_errors": 0,
+    "prompt_visible_semantics_mismatches": 0,
+    "shared_online_fpr": {
+      "denominator": 672,
+      "numerator": 112
+    }
+  },
+  "model_execution_performed": false,
+  "portable_root": ".",
+  "root": "C:\\Users\\24306\\Documents\\相同假阳性率，不同迁移风险：RLVR 中 Verifier 错误的跨任务结构\\GPT_PRO_REVIEW_RLVR_V1\\real_assets\\build_r4_b",
+  "schema_version": "native-controlled-assets-validation-report-v1",
+  "valid": true
+}

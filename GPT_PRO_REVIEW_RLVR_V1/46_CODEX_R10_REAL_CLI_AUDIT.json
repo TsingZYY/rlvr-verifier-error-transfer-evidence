@@ -1,0 +1,92 @@
+{
+  "absolute_outside_cwd": {
+    "error": "completion input read/parse failure: ContractError",
+    "exit_code": 1,
+    "outside_not_created": true,
+    "stderr_empty": true,
+    "stdout_is_single_fail_json": true
+  },
+  "ancestor_swap": {
+    "platform_unavailable": "PermissionError",
+    "reason": "Windows WinError 32: a second process cannot rename the directory held as the validator process cwd"
+  },
+  "cwd_symlink_alias": {
+    "alias_target_not_created": true,
+    "error": "completion input read/parse failure: ContractError",
+    "exit_code": 1,
+    "stderr_empty": true,
+    "stdout_is_single_fail_json": true
+  },
+  "dotdot_relative": {
+    "error": "completion input read/parse failure: ContractError",
+    "exit_code": 1,
+    "outside_not_created": true,
+    "stderr_empty": true,
+    "stdout_is_single_fail_json": true
+  },
+  "exclusive_leaf_race": {
+    "error": "completion input read/parse failure: FileExistsError",
+    "exit_code": 1,
+    "hit_exclusive_open": true,
+    "racing_entry_preserved": true,
+    "stderr_empty": true,
+    "stdout_is_single_fail_json": true
+  },
+  "fresh_leaf": {
+    "created_in_cwd": true,
+    "error": "completion input read/parse failure: FileNotFoundError",
+    "exit_code": 1,
+    "file_is_canonical_fail_json": true,
+    "stderr_empty": true,
+    "stdout_is_single_fail_json": true
+  },
+  "nested_relative": {
+    "error": "completion input read/parse failure: ContractError",
+    "exit_code": 1,
+    "outside_not_created": true,
+    "stderr_empty": true,
+    "stdout_is_single_fail_json": true
+  },
+  "preexisting_exact_leaf": {
+    "broken_symlink": {
+      "entry_preserved": true,
+      "exit_code": 1,
+      "stderr_empty": true,
+      "stdout_is_single_fail_json": true,
+      "target_not_created": true
+    },
+    "directory": {
+      "exit_code": 1,
+      "preserved": true,
+      "stderr_empty": true,
+      "stdout_is_single_fail_json": true
+    },
+    "hardlink": {
+      "exit_code": 1,
+      "preserved": true,
+      "stderr_empty": true,
+      "stdout_is_single_fail_json": true
+    },
+    "regular": {
+      "exit_code": 1,
+      "preserved": true,
+      "stderr_empty": true,
+      "stdout_is_single_fail_json": true
+    },
+    "valid_symlink": {
+      "entry_preserved": true,
+      "exit_code": 1,
+      "stderr_empty": true,
+      "stdout_is_single_fail_json": true,
+      "target_preserved": true
+    }
+  },
+  "runner": "mvp_same_source_v1/audit_r10_real_cli_attacks.py",
+  "schema_version": "r10-process-level-output-attack-audit-v1",
+  "status": "CPU_STATIC_REAL_CLI_ATTACKS_PASS_WITH_PLATFORM_LIMIT",
+  "evidence_boundary": {
+    "model_actions_authorized": false,
+    "model_execution_performed": false,
+    "scientific_evidence": false
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": "rlvr-technical-noise-sensitivity-v1",
+  "analysis_scope": "saved forward-scoring reproducibility only",
+  "candidate_practical_delta_nats": 0.04879016416943204,
+  "candidate_delta_quarter_nats": 0.01219754104235801,
+  "source_score_v1_v2_comparisons": {
+    "train": {
+      "matched_actions": 544,
+      "action_key_sets_equal": true,
+      "prompt_record_hashes_equal": true,
+      "maximum_abs_sum_logp_difference": 0.0,
+      "maximum_abs_mean_logp_difference": 0.0,
+      "all_saved_numeric_values_identical": true
+    },
+    "h-id": {
+      "matched_actions": 544,
+      "action_key_sets_equal": true,
+      "prompt_record_hashes_equal": true,
+      "maximum_abs_sum_logp_difference": 0.0,
+      "maximum_abs_mean_logp_difference": 0.0,
+      "all_saved_numeric_values_identical": true
+    }
+  },
+  "source_forward_audit": {
+    "audit_kind": "independent full-action FP32 model reload and forward replay",
+    "source_sha256": "4337883560eb250bb264cea2572f645cbd0af86b3b5e7df6f43679e8983ac85a",
+    "actions_checked": 1088,
+    "prompt_rows_retained": 64,
+    "maximum_action_sum_logp_error_by_prompt": {
+      "count": 64,
+      "mean": 0.000031501054763793945,
+      "median": 0.000030040740966796875,
+      "median_absolute_deviation": 0.000008106231689453125,
+      "sample_variance_across_prompt_maxima": 2.6980864103756e-10,
+      "empirical_p95": 0.0000553131103515625,
+      "empirical_p99": 0.00010776519775390625,
+      "maximum": 0.00010776519775390625
+    },
+    "maximum_probability_error_by_prompt": {
+      "count": 64,
+      "mean": 0.000001590291503816843,
+      "median": 0.000001560896635055542,
+      "median_absolute_deviation": 3.725290298461914e-7,
+      "sample_variance_across_prompt_maxima": 6.366199971011244e-13,
+      "empirical_p95": 0.000002469867467880249,
+      "empirical_p99": 0.000005967915058135986,
+      "maximum": 0.000005967915058135986
+    },
+    "conservative_bug_minus_gold_logp_error_bound": 0.0002155303955078125,
+    "conservative_bound_as_fraction_of_delta_quarter": 0.01766998731624243,
+    "forward_scoring_below_candidate_noise_gate": true
+  },
+  "requested_hierarchical_bootstrap": {
+    "status": "NOT_IDENTIFIABLE_FROM_SAVED_ARTIFACTS",
+    "reason": "Kernel artifacts retain condition aggregates and prompt-level mean norms, not prompt-by-candidate gradient/transfer outcomes or repeated post-update target logits. Resampling saved rows would estimate dataset-row variation, not technical reproducibility of the one-step outcome.",
+    "not_estimated": [
+      "mapping_level_sigma",
+      "one_step_update_outcome_technical_noise",
+      "treatment_effect_tau",
+      "power_for_the_new_five_or_nine_cell_design"
+    ]
+  },
+  "decision": {
+    "forward_scoring_replay": "PASS_FOR_NUMERICAL_FORWARD_REPLAY_ONLY",
+    "one_step_core_outcome_noise": "NOT_IDENTIFIABLE",
+    "scientific_claim": "NO_CHANGE"
+  }
+}

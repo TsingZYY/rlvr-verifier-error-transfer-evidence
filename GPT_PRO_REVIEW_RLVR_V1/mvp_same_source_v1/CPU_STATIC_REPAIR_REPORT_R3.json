@@ -1,0 +1,77 @@
+{
+  "schema_version": "same-source-cpu-static-repair-report-r3",
+  "repair_status": "CPU_STATIC_REPAIR_PASS_AUTHORIZATION_PENDING",
+  "next_action": "STOP_BEFORE_TOKENIZER_OR_MODEL_LOAD",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "model_execution_performed": false,
+  "old_r2_scientific_status": "INVALID_FOR_MERGE_WITH_REPAIRED_RUNS",
+  "fatal_asset_bug": {
+    "task_id": "MARKED_RANK7_V1",
+    "old_model_visible_semantics_mismatches": 36,
+    "old_model_visible_rows": 42,
+    "repair": "removed the minus-like prefix from unmarked positive values while preserving task_input, order, marked item, canonical_z, stacks, mappings, codebooks, and seed namespaces"
+  },
+  "static_gates": {
+    "prompt_visible_semantics_mismatches": 0,
+    "prompt_visible_parse_errors": 0,
+    "source_target_audit_reuse_collisions": 0,
+    "all_row_and_panel_commitments_match": true,
+    "all_8_mapping_stacks_present_and_balanced": true,
+    "all_frozen_config_fields_consumed": true,
+    "unknown_config_or_schema_fields": 0,
+    "runner_validator_model_tokenizer_runtime_manifest_complete": true,
+    "forged_matrix_fixture_rejected": true,
+    "swapped_update_binding_fixture_rejected": true,
+    "fake_provenance_fixture_rejected": true,
+    "relabeled_target_as_source_fixture_rejected": true,
+    "target_offset_mismatch_fixture_rejected": true,
+    "determinism_fail_closed": true,
+    "formal_or_diagnostic_action_authorization_present": false
+  },
+  "test_results": {
+    "real_asset_tests": {"passed": 29, "failed": 0},
+    "r3_contract_and_validator_tests": {"passed": 11, "failed": 0},
+    "deterministic_tree_comparison": {
+      "byte_identical": true,
+      "files_per_build": 574,
+      "sha256_mismatches": 0
+    },
+    "unauthorized_runner_attempt": {
+      "exit_nonzero": true,
+      "error": "model action authorization missing",
+      "output_created": false
+    }
+  },
+  "asset_counts": {
+    "mapping_stacks": 8,
+    "source_rows": 112,
+    "target_calibration_rows": 56,
+    "target_audit_rows": 112,
+    "prompt_rows_total": 280,
+    "candidate_records": 1960
+  },
+  "evidence_labels": [
+    "CPU_STATIC_REPAIR_PASS_ONLY",
+    "SCIENTIFIC_EVIDENCE_FALSE",
+    "NOT_SAME_FPR",
+    "NOT_SAMPLED_RLVR",
+    "NOT_HIDDEN_AUDIT_EVIDENCE"
+  ],
+  "remaining_blockers": [
+    "action-specific authorization for a repaired eight-stack fixed-candidate diagnostic",
+    "eight stack-specific frozen configs/manifests under one inclusion contract",
+    "non-adaptive G1 formulas, aggregation units, equivalence bounds, and tolerances if same-FPR language is to be used",
+    "a sampled-RLVR bridge recipe remains forbidden until the repaired eight-stack bridge gate passes"
+  ],
+  "artifact_sha256": {
+    "controlled_asset_build_manifest": "3f74e5eb347f3a74c4251d19c4dbe680d9891fd2193e4aaf6d5b19c3253bfa7c",
+    "asset_validation": "9886b0654a1a3d6a63f62b8d4fb5134d0a6216ad7bc10ecba8ad99dd575a9ad2",
+    "deterministic_tree_comparison": "d319b7aa3f9699de08f9ca33323254f6ad3b31401a87cb6040879ead10c55119",
+    "execution_manifest": "6b6e02258c0c18c639fefe6d6c3921186245831521a2d45c016d31f2d6f42706",
+    "static_contract": "ad74d585e5278d8dd3552fbf6ac79a4d3af38de6aeb856e85d0c5916b020b9fe",
+    "runner": "6b915e61cc8c0f2a2b87e178e7500ffa6da47d4d1471eb1cc0bc6d15e71b8de2",
+    "r3_validator": "0ae17f68c232068a8977bd7688e4162cbbdd1d77ee1ade95d4ff70f2b273357a",
+    "old_r2_revalidation": "12608618552ca1d5a16cd4429fb566ec42c2ac8b296046ae611d98f755338ddf"
+  }
+}

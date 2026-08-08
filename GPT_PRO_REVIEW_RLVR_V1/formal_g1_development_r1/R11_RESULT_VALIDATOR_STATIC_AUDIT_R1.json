@@ -1,0 +1,57 @@
+{
+  "schema_version": "r11-result-validator-static-audit-r1",
+  "status": "PASS_STATIC_IMPLEMENTATION_ONLY",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "run_eligible": false,
+  "model_execution_performed": false,
+  "model_execution_authorized": false,
+  "validator": {
+    "path": "GPT_PRO_REVIEW_RLVR_V1/formal_g1_development_r1/validate_r11_bridge_results.py",
+    "sha256": "73f029c4e79d713e01c9fb30c883c5731a27c8559bb5bce41d4e1c1c0850f9c3",
+    "unit_test_path": "GPT_PRO_REVIEW_RLVR_V1/formal_g1_development_r1/test_validate_r11_bridge_results.py",
+    "unit_test_sha256": "60884b63e47d9eee1fff7b8f4becd9276af5d0f301fc27c5d6de17cc6d087381"
+  },
+  "validated_contract": [
+    "exactly 32 hash-indexed process results: 8 stacks x 2 arms x 2 technical replicates",
+    "exactly five source updates and 25 ordered source-target cells per process",
+    "arm, stack, replicate, protocol, parent-runner, and evidence-boundary bindings",
+    "identical cross-arm config, model, chat template, assets, source rows, target rows, candidates, initial state, and pre traces",
+    "reward-mask commitment and no-clipping gate for every source identity",
+    "validator-recomputed BUG/GOLD adjusted matrix",
+    "validator-recomputed absolute matched A and structural excess D",
+    "A/B adjusted-matrix reproducibility within a frozen 1e-12 tolerance",
+    "positive A and D gates at stack, identity, task-pair, mapping, and direction levels",
+    "all 120 deterministic identity-bijection diagnostics without randomization p-values",
+    "development-only result label with no automatic sampled-RLVR progression"
+  ],
+  "negative_tests": [
+    "cross-arm config drift rejected",
+    "clipped update rejected",
+    "missing target cell rejected",
+    "technical replicate disagreement rejected",
+    "negative absolute-effect gate returns INCONCLUSIVE"
+  ],
+  "verification": {
+    "python_compile": "PASS",
+    "validator_and_related_tests": 20,
+    "validator_and_related_tests_passed": 20,
+    "model_action_count": 0
+  },
+  "remaining_before_run_eligibility": [
+    "freeze a complete R11 run-index schema and 32 concrete arm contracts/manifests",
+    "freeze external invocation and authorization receipt schemas that bind every arm contract",
+    "run an independent static adversarial audit of the assembled portable package",
+    "obtain a new action-specific model authorization after the static audit passes"
+  ],
+  "authorization": {
+    "cpu_static_validation": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

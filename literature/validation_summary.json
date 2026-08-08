@@ -1,0 +1,17 @@
+{
+  "manifest_entries": 82,
+  "existing_files": 82,
+  "valid_pdf_headers": 82,
+  "hash_matches": 82,
+  "parse_ok": 82,
+  "zero_page_or_parse_failures": 0,
+  "total_pages": 2198,
+  "total_bytes": 211671304,
+  "duplicate_hash_groups": [],
+  "category_counts": {
+    "01_core_verifier_error_structure": 28,
+    "02_verifiers_prms_and_benchmarks": 27,
+    "03_reward_hacking_and_misspecification_foundations": 20,
+    "04_rlvr_generalization_context": 7
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "schema_version": "r11-current-state-r7",
+  "frozen_at_utc": "2026-08-05T13:39:40Z",
+  "status": "OLD_SHARED_IDENTITY_MECHANISM_REJECTED_PIVOT_TO_R13_STATIC_ONLY_NOT_RUN",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "run_eligible": false,
+  "model_execution_authorized": false,
+  "model_execution_performed": false,
+  "model_action_count_during_r11_r12_r13_continuation": 0,
+  "decision": "RETIRE_R11_AND_R12_R3_DO_NOT_RUN_CONTINUE_ONLY_WITH_STATIC_R13_TARGET_ALIGNMENT_PREPARATION",
+  "idea_evaluator_verdict": {
+    "verdict": "REJECT_AND_PIVOT",
+    "critical_flaw": "DATA_REFUTED_CORE_MECHANISM",
+    "old_claim_rejected": "Uniform shared latent result identity is the causal channel of cross-task migration.",
+    "pivot_hypothesis": "Transfer heterogeneity may be conditioned on the alignment between verifier-error surface structure and the target codebook representation.",
+    "audit_path": "R11_IDEA_EVALUATOR_FATAL_FLAW_AUDIT_R1.md",
+    "audit_sha256": "5bb6652413f9dec5ede6ae853fa5ebad4dbfad323c337850755e413c92bb8c27"
+  },
+  "decisive_model_free_evidence": {
+    "protocol_path": "R10_LATENT_VS_SURFACE_DIAGNOSTIC_PROTOCOL_R1.json",
+    "protocol_sha256": "a1c7af4071e5caf15fb67ee30582d167ad2e30b829404d9a2b8d4aedf50d22a4",
+    "result_path": "R10_LATENT_VS_SURFACE_DIAGNOSTIC_RESULT_R1.json",
+    "result_sha256": "5bd6b793a05dadf7b06bb7f8291ce72784c3c14552d6c7cbcd6cbf6fa168b662",
+    "independent_audit_path": "R10_LATENT_VS_SURFACE_DIAGNOSTIC_AUDIT_R1.md",
+    "independent_audit_sha256": "c6815c6eace546c1d655992cdbfb20206acbc174627e762f849d21add1c40b7f",
+    "decision": "STOP_SHARED_IDENTITY_CLAIM_SURFACE_COMPETITOR_NOT_DEFEATED",
+    "a_b_max_abs_effect_matrix_difference": 0.0,
+    "failed_stack_count": 4,
+    "failed_stacks": [
+      "TP1-M0-A_TO_B",
+      "TP1-M0-B_TO_A",
+      "TP2-M0-A_TO_B",
+      "TP2-M0-B_TO_A"
+    ],
+    "passed_stack_count": 4,
+    "passed_stacks": [
+      "TP1-M1-A_TO_B",
+      "TP1-M1-B_TO_A",
+      "TP2-M1-A_TO_B",
+      "TP2-M1-B_TO_A"
+    ],
+    "interpretation": "The fixed all-eight latent-greater-than-surface gate fails. The exact M0/M1 split shows mapping-conditioned structure; it does not causally prove the surface mechanism.",
+    "scientific_top_level_clusters": 2,
+    "inference_boundary": "Outcome-aware development diagnostic only; no SE, CI, inferential p-value, or population claim."
+  },
+  "retired_designs": {
+    "R11": {
+      "status": "RETIRED_INVALIDATED_NOT_RUN",
+      "reasons": [
+        "GOLD_ONLY is invariant to source identity but the old validator required five distinct GOLD updates.",
+        "The old runner still executes five GOLD updates per process and cannot satisfy the corrected 48-design-update, 96-technical-execution, 480-post-read semantics.",
+        "BUG versus GOLD_ONLY does not independently manipulate sharedness.",
+        "The old release lacks trusted external authorization, one-shot invocation closure, exact executable dependency closure, and custody-complete result validation."
+      ]
+    },
+    "R12_R3": {
+      "status": "RETIRED_REDUNDANT_DRAFT_NOT_RUN",
+      "path": "R12_IDENTITY_SWITCH_PILOT_PROTOCOL_DRAFT_R3.json",
+      "reason": "BUG_PERMUTED(r) equals BUG_ALIGNED(pi(r)); enumerating all five identities relabels the same update set. The claimed 22 unique updates reduce to 12 unique intervention masks, and the wrapper still calls the two-arm R11 runner."
+    }
+  },
+  "static_repair_status": {
+    "final_regression": {
+      "status": "PASS_64_OF_64_MODEL_FREE_TESTS",
+      "formal_suite_tests": 32,
+      "mvp_suite_tests": 32,
+      "model_actions": 0
+    },
+    "r10_latent_surface_analyzer": {
+      "path": "analyze_r10_latent_vs_surface_r1.py",
+      "sha256": "dc10acfcb7235f807ecdd540df40158223c1e90543ef8c0d93012050157a63aa",
+      "test_path": "test_analyze_r10_latent_vs_surface_r1.py",
+      "test_sha256": "49f0258ddaa6aafe43464596210fa0fd60a534012fea07812a1e6bcdd269a5cf",
+      "tests": "PASS_11_OF_11"
+    },
+    "fail_closed_result_validator": {
+      "path": "validate_r11_bridge_results_r2.py",
+      "sha256": "d00aedbccde134e8c03fcb30a8c94e1c9345e46a388c567a7c0565b7d7c80db3",
+      "test_path": "test_validate_r11_bridge_results_r2.py",
+      "test_sha256": "6565d8d8a684d6eafba8f446ee359ced188b923046b5cbf83844613f3ba0e51f",
+      "tests": "PASS_15_OF_15",
+      "status": [
+        "BLOCKED_RUNTIME_SEMANTICS_NOT_REFROZEN",
+        "BLOCKED_EXTERNAL_TRUST_ANCHOR"
+      ],
+      "approved_runner_contract_protocol_hashes": null
+    },
+    "signed_invocation_custody": {
+      "tests": "PASS_17_OF_17",
+      "production_status": "BLOCKED_NO_PRODUCTION_TRUST_ROOT_OR_USER_SIGNATURE"
+    },
+    "release_closure_audit": {
+      "tests": "PASS_9_OF_9",
+      "status": "BLOCKED_RELEASE_CLOSURE",
+      "reproduced_blockers": [
+        "four pyc or __pycache__ members",
+        "missing member-hash manifest in the old packet",
+        "missing analysis source dependency",
+        "R11 protocol versus config model revision conflict",
+        "host platform fields and cache-polluted model inventory",
+        "non-exact single-match glob implementation"
+      ],
+      "not_reproduced": "The old packet has zero backslash ZIP member names; the Windows-separator reviewer claim is withdrawn."
+    }
+  },
+  "external_review": {
+    "round1_threads_dispatched": 10,
+    "round1_final_substantive_results": 8,
+    "round1_long_form_reviews_still_pending_final": 2,
+    "round2_replay_threads_dispatched": 8,
+    "round2_final_results_received": 1,
+    "round2_pending_final": 7,
+    "round2_first_final_verdict": "STOP_OLD_CLAIM_AND_PIVOT",
+    "round2_first_final_independent_replay": "ZIP and member manifest pass; pure-CPU tests pass; independent Decimal implementation exactly reproduces all eight contrasts, four failed M0 stacks, q6 reconstruction, and A/B equality.",
+    "synthesis_path": "R11_GPT_PRO_10_THREAD_SYNTHESIS_R1.md",
+    "synthesis_sha256": "3590f8412be18e218c7c39cf58589e8fd9828de77302d07b75f82946fa2efda4",
+    "authorization_boundary": "No GPT Pro review can authorize model execution."
+  },
+  "r13_pivot": {
+    "path": "R13_TARGET_ALIGNMENT_PILOT_PROTOCOL_DRAFT_R1.json",
+    "sha256": "9e5c5aa889beecb5d66cd5a1920c9aa86ed3040586ec744cbb069216e20c06ab",
+    "status": "DRAFT_STATIC_DESIGN_NOT_AUTHORIZED_NO_MODEL_RUN",
+    "run_eligible": false,
+    "mechanism": "Execute each source BUG update once, then reuse the exact same parameter hash across two matched target panels whose affine codebook surface alignment differs.",
+    "minimum_variant": {
+      "os_processes": 4,
+      "unique_design_source_updates": 20,
+      "technical_update_executions": 20,
+      "total_target_identity_metric_cells": 288
+    },
+    "reproducibility_variant": {
+      "os_processes": 8,
+      "unique_design_source_updates": 20,
+      "technical_update_executions": 40,
+      "total_target_identity_metric_cells": 576
+    },
+    "claim_if_passed": "Development-only evidence in four fixed M0 affine panels that changing target codebook alignment repositions the relative readout of the same fixed source update toward the new surface-aligned target location.",
+    "cannot_claim": [
+      "causal shared semantic identity",
+      "non-affine or codebook-invariant mechanism",
+      "same empirical or policy-weighted FPR",
+      "sampled RLVR or hidden-audit evidence",
+      "population generalization or confirmatory inference"
+    ],
+    "required_before_any_run": [
+      "build and independently human-review the matched H1 target panels",
+      "implement a target-blind one-update/two-readout runner without global monkeypatching",
+      "implement and test an R13-native result validator and exact event counts",
+      "align the signed launch schema with the validator and establish a production external trust root",
+      "freeze a clean source-only dependency image with no pyc, cache pollution, shadow imports, or ambiguous globs",
+      "generate new R13 release, master, member manifest, authorization template, and negative-audit transcript"
+    ]
+  },
+  "supersedes": "R11_CURRENT_STATE_R6.json",
+  "authorization": {
+    "cpu_static_review_design_and_tests": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "r11_bridge": false,
+    "r12_identity_switch": false,
+    "r13_target_alignment_pilot": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

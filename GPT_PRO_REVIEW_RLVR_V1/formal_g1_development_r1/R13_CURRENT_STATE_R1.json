@@ -1,0 +1,132 @@
+{
+  "schema_version": "r13-current-state-r1",
+  "frozen_at_utc": "2026-08-06T02:31:18Z",
+  "status": "R13_STATIC_CHAIN_REGRESSION_GREEN_LAUNCH_CHAIN_NOT_CLOSED_NOT_RUN",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "run_eligible": false,
+  "model_execution_authorized": false,
+  "model_execution_performed": false,
+  "model_action_count": 0,
+  "decision": "CONTINUE_ONLY_WITH_BACKEND_AND_TRUSTED_LAUNCH_CLOSURE_DO_NOT_RUN_OR_INTERPRET_R13_YET",
+  "experimental_logic": {
+    "physical_execution": "Cells may execute serially on one GPU.",
+    "scientific_execution": "Treat all cells as one sealed pre-frozen batch.",
+    "forbidden_adaptation": "No intermediate result may change later cells, ordering, panels, thresholds, exclusions, retry rules, stopping rules, or analysis.",
+    "decision_time": "Apply the frozen gates once after the complete valid batch is available.",
+    "single_positive_result_boundary": "A positive development result can retain only the narrow target-interface hypothesis; it cannot establish a general causal mechanism."
+  },
+  "evidence_partition": {
+    "existing_evidence": {
+      "claim": "The old uniform shared-latent-result-identity mechanism failed the frozen R10 model-free diagnostic on all four M0 stacks.",
+      "decision": "OLD_SHARED_IDENTITY_MECHANISM_REJECTED",
+      "inference_boundary": "This rejects that frozen mechanism; it does not prove the target-interface competitor."
+    },
+    "reasonable_inference": "The exact R10 M0/M1 split makes target codebook or verifier-surface alignment a plausible development hypothesis worth a controlled screen.",
+    "unverified_core_hypothesis": "For the four frozen outcome-aware M0 affine stacks, the pre-to-post target wrong-vs-gold log-odds effect of one fixed source-only update depends on the target codebook interface.",
+    "not_yet_observed": "No R13 tokenizer load, model load, forward pass, gradient, optimizer step, raw result, or scientific result exists."
+  },
+  "r13_design": {
+    "parent_protocol_path": "R13_TARGET_ALIGNMENT_PILOT_PROTOCOL_DRAFT_R1.json",
+    "parent_protocol_sha256": "9e5c5aa889beecb5d66cd5a1920c9aa86ed3040586ec744cbb069216e20c06ab",
+    "parent_protocol_status": "FROZEN_STATIC_DRAFT_PERMANENTLY_NON_AUTHORIZING",
+    "matched_design": "Execute each source BUG update once and reuse the exact same post-update parameter hash for H0 and H1 target readout panels; H0 and H1 differ only in the frozen target codebook interface.",
+    "raw_effect": "E(k,s,h,r,q)=[post log P_h(z+q)-post log P_h(z)]-[pre log P_h(z+q)-pre log P_h(z)]",
+    "technical_reproducibility": "A/B reversed process order is a technical check, not an independent scientific replicate.",
+    "scope": "Four fixed outcome-aware M0 affine development stacks in two task-pair clusters."
+  },
+  "absolute_effect_addendum": {
+    "path": "R13_ABSOLUTE_EFFECT_GATE_ADDENDUM_R1.json",
+    "sha256": "e0a0300b666280f2bd83408760eb9773e44be491749d5fe4b328cd12f2ddb94b",
+    "status": "STATIC_ADDENDUM_FROZEN_RUN_INELIGIBLE_MODEL_NOT_TOUCHED",
+    "parent_mutated": false,
+    "new_model_actions": 0,
+    "aligned_anchor": "A_aligned(k,s,r)=E(k,s,H1_SWITCHED_TARGET,r,q_H1(r))",
+    "joint_directional_gate": "The parent relative interface-switch gate and A_aligned_stack(s)>1e-10 must both pass in all four stacks.",
+    "interpretation_guard": "If the relative interface effect is positive but A_aligned_stack(s)<=0, label RELATIVE_PRESERVATION_ONLY_NOT_ABSOLUTE_AMPLIFICATION.",
+    "dead_zone_guard": "If 0<A_aligned_stack(s)<=1e-10, do not call it amplification."
+  },
+  "static_verification": {
+    "final_regression": {
+      "status": "PASS_164_OF_164_MODEL_FREE_TESTS",
+      "formal_suite_tests": 96,
+      "mvp_r13_suite_tests": 68,
+      "total_tests": 164,
+      "model_actions": 0
+    },
+    "runtime_reference_live_check": {
+      "status": "CURRENT_RUNTIME_MATCHES_REFERENCE",
+      "model_loaded": false,
+      "reference_path": "R13_RUNTIME_ENVIRONMENT_REFERENCE_R1.json",
+      "reference_sha256": "b8ad8e6c397d88a339537f36c04cecd42782b5f29ea89361a2129b246111f6f2",
+      "full_dependency_content_hash_bound": false
+    },
+    "model_inventory_live_check": {
+      "status": "STATIC_BYTES_BOUND_MODEL_NOT_LOADED",
+      "path": "R13_MODEL_INVENTORY_R1.json",
+      "sha256": "ef5413f988226d2b559c1f04800e36ae5248210fd5cf9308351634f4339519b3",
+      "semantic_file_count": 8,
+      "model_loaded": false
+    }
+  },
+  "key_artifacts": {
+    "runner_core": {
+      "path": "../mvp_same_source_v1/r13_runner_core.py",
+      "sha256": "15b4f7f5606a6c889d92aab4837b8f9cf468e6651db1d4763f3161b57d682f96"
+    },
+    "update_recipe_contract": {
+      "path": "../mvp_same_source_v1/r13_update_recipe_contract.py",
+      "sha256": "8590e8f8e4d6f0130fd97a549c88b714fb37032080a6e47670d49e012210302f"
+    },
+    "release_contract": {
+      "path": "../mvp_same_source_v1/r13_release_contract.py",
+      "sha256": "cc418dbd0e62776c257c340563c816c142baa2b97d49a320cb6476e17cc21153"
+    },
+    "result_validator": {
+      "path": "validate_r13_target_alignment_results_r1.py",
+      "sha256": "bdd382a08f8eb306cab675aa3007333f8fa7edb3052604b79ecc68e09fa0d620",
+      "tests_sha256": "654fb7dd9a8c82e50908a5d7147ef85cdb367491aecdd2056a41ccda6761b8c6",
+      "cross_component_tests_sha256": "ad9cb9e32f5709067b62c981b629998afd62c08a0a441f61dc7adf099c93bc65"
+    }
+  },
+  "gpt_pro_advisory_review": {
+    "synthesis_path": "R13_GPT_PRO_REVIEW_SYNTHESIS_R1.md",
+    "synthesis_sha256": "45f15fa94a7e9bfa9a38648ccb1c98be794a89bce2098a442494eb0323cc4e78",
+    "causal_identification_verdict": "R13_DESIGN_DIRECTION_VALID",
+    "metric_verdict": "DECISION_CAPABLE_DEVELOPMENT_SCREEN",
+    "release_custody_verdict": "REDESIGN_RELEASE_BOUNDARY",
+    "authorization_boundary": "GPT PRO reviews are advisory and cannot authorize model execution."
+  },
+  "fatal_blockers_before_any_model_run": [
+    "The release signed-launch envelope and result-validator authorization schema and signature context are not end-to-end compatible.",
+    "The launch nonce consumption key and the result-validation nonce lifecycle are inconsistent.",
+    "No trusted external start and terminal receipt binds an actual model process and exact result bytes.",
+    "No production repository-external signer, verifier, atomic ledger, or launch broker exists.",
+    "The hybrid runtime has full_dependency_content_hash_bound=false and is not an immutable dependency closure.",
+    "No real R13 model backend adapter, production runner wrapper, or top-level result bundler exists.",
+    "No independently signed human review artifact exists.",
+    "No trusted freezer binds the member manifest and output root against time-of-check/time-of-use changes."
+  ],
+  "maximum_claim_if_a_future_valid_batch_passes": "Development-only evidence in four frozen outcome-aware M0 affine stacks that one frozen source-only update changes target wrong-vs-gold log-odds differently under two frozen target codebook interfaces and positively increases the switched arm's aligned wrong-vs-gold contrast.",
+  "cannot_claim": [
+    "shared result or shared semantic identity caused transfer",
+    "general causal direction across tasks",
+    "non-affine or codebook-invariant mechanism",
+    "same empirical, natural, or policy-weighted FPR",
+    "sampled or multi-step RLVR transfer",
+    "capability damage or deployment risk",
+    "population generalization or confirmatory inference"
+  ],
+  "supersedes": "R11_CURRENT_STATE_R7.json",
+  "authorization": {
+    "cpu_static_review_design_and_tests": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "r13_target_alignment_pilot": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

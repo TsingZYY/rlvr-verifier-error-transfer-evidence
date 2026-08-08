@@ -1,0 +1,29 @@
+{
+  "counts": {
+    "candidate_records": 1960,
+    "machine_label_rows": 280,
+    "prompt_rows_total": 280,
+    "raw_source_files": 224,
+    "raw_target_files": 336,
+    "source_rows": 112,
+    "target_audit_rows": 112,
+    "target_calibration_rows": 56,
+    "verifier_rows": 280
+  },
+  "error_count": 0,
+  "errors": [],
+  "metrics": {
+    "local_online_fpr": {
+      "denominator": 672,
+      "numerator": 112
+    },
+    "shared_online_fpr": {
+      "denominator": 672,
+      "numerator": 112
+    }
+  },
+  "model_execution_performed": false,
+  "root": "C:\\Users\\24306\\Documents\\相同假阳性率，不同迁移风险：RLVR 中 Verifier 错误的跨任务结构\\GPT_PRO_REVIEW_RLVR_V1\\real_assets\\build_v5_repair_a",
+  "schema_version": "native-controlled-assets-validation-report-v1",
+  "valid": true
+}

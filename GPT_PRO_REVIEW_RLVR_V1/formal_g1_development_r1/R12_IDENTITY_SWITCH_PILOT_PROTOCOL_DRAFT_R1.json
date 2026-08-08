@@ -1,0 +1,214 @@
+{
+  "schema_version": "r12-identity-switch-pilot-protocol-draft-r1",
+  "status": "DRAFT_STATIC_DESIGN_NOT_AUTHORIZED_NO_MODEL_RUN",
+  "design_values_frozen_for_review": true,
+  "execution_contract_frozen": false,
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "formal_confirmatory": false,
+  "run_eligible": false,
+  "model_execution_authorized": false,
+  "model_execution_performed": false,
+  "purpose": "Directly test whether changing the identity of the rewarded wrong result changes where one-step cross-task transfer appears, while holding the number of rewarded candidates and all non-identity treatment components fixed.",
+  "provenance_and_outcome_awareness": {
+    "parent_r11_protocol": "R11_GOLD_ONLY_DID_BRIDGE_PROTOCOL_R2.json",
+    "parent_r11_protocol_sha256": "c9015c8d04da3b95d43162ab087e5fe4b4dcf1c4a5e689f2df610d2e379efd78",
+    "relationship_to_r11": "NEW DRAFT ONLY. This file does not amend, supersede, authorize, or modify the frozen R11 package.",
+    "outcome_awareness": "R12 was designed after R10 development outcomes and after an identification audit of R11. It can never be relabelled confirmatory.",
+    "design_freeze_rule": "Any change to the arms, derangement, selected stacks, estimands, gates, or evidence boundary requires a new schema version and a new independent review before authorization."
+  },
+  "why_r11_is_not_shared_identity_causal_proof": [
+    "R11 intervenes on BUG versus GOLD_ONLY, so it identifies the effect of adding a frozen false-positive reward relative to clean gold-only learning under the fixed one-step setup.",
+    "R11 does not intervene on whether the rewarded wrong identity is aligned or misaligned with the target identity.",
+    "R11 structural excess D is a contrast across target columns of the same observed effect matrix; it is treatment-effect heterogeneity within the fixed codebook, not a randomized identity-alignment intervention.",
+    "R11's enumeration of 120 identity bijections re-labels the same observed matrix and is a deterministic sensitivity diagnostic, not a randomization test or an inferential p-value.",
+    "Therefore an R11 pass may support a reward-specification-specific bridge, but it cannot by itself establish that shared result identity is the causal channel."
+  ],
+  "fixed_identity_space": {
+    "ordered_identities": [
+      "Z7_PLUS1",
+      "Z7_PLUS2",
+      "Z7_PLUS3",
+      "Z7_PLUS4",
+      "Z7_PLUS5"
+    ],
+    "derangement_id": "CYCLIC_PLUS_ONE_R1",
+    "derangement": {
+      "Z7_PLUS1": "Z7_PLUS2",
+      "Z7_PLUS2": "Z7_PLUS3",
+      "Z7_PLUS3": "Z7_PLUS4",
+      "Z7_PLUS4": "Z7_PLUS5",
+      "Z7_PLUS5": "Z7_PLUS1"
+    },
+    "derangement_properties": [
+      "no fixed points",
+      "one-to-one and onto over the five frozen identities",
+      "every wrong identity is used exactly once across the five source identities",
+      "chosen by a canonical cyclic rule rather than by observed outcomes"
+    ]
+  },
+  "canonical_pilot_stacks": {
+    "ordered_stack_ids": [
+      "TP1-M0-A_TO_B",
+      "TP2-M0-A_TO_B"
+    ],
+    "selection_rule": "Take the first M0/A_TO_B stack in the pre-existing frozen order for each task pair. The choice is canonical and not based on stack outcomes.",
+    "top_level_scientific_clusters": 2,
+    "cluster_definition": "task pair",
+    "statistical_boundary": "The two task pairs are a development pilot only. Mapping stacks, identities, target cells, OS processes, and technical replicates are not independent task-pair samples."
+  },
+  "arms": {
+    "GOLD_ONLY": {
+      "reward_mask_rule": "reward gold candidate with 1 and all six non-gold candidates with 0",
+      "rewarded_candidate_count_per_row": 1,
+      "role": "clean-learning anchor for A"
+    },
+    "BUG_ALIGNED": {
+      "reward_mask_rule": "reward gold candidate with 1 and the frozen wrong candidate for source identity r with 1; all other candidates receive 0",
+      "rewarded_candidate_count_per_row": 2,
+      "wrong_identity_rule": "r",
+      "role": "aligned false-positive intervention"
+    },
+    "BUG_PERMUTED": {
+      "reward_mask_rule": "reward gold candidate with 1 and the frozen wrong candidate for identity pi(r) under CYCLIC_PLUS_ONE_R1 with 1; all other candidates receive 0",
+      "rewarded_candidate_count_per_row": 2,
+      "wrong_identity_rule": "pi(r)",
+      "role": "misaligned false-positive intervention"
+    }
+  },
+  "contrast_control": {
+    "identity_switch_contrast": {
+      "arms": [
+        "BUG_ALIGNED",
+        "BUG_PERMUTED"
+      ],
+      "held_equal": [
+        "two rewarded candidates per row",
+        "total binary reward mass",
+        "gold reward",
+        "candidate panel and order",
+        "source rows and row order",
+        "target rows and evaluator",
+        "checkpoint and initial trainable state",
+        "tokenizer and chat template",
+        "batching",
+        "optimizer and one-step update recipe",
+        "learning rate",
+        "gradient clipping threshold",
+        "precision",
+        "model and dependency inventory"
+      ],
+      "only_permitted_difference": "which frozen wrong identity receives the second positive reward: r versus pi(r)"
+    },
+    "gold_contrast_boundary": "GOLD_ONLY has one rewarded candidate whereas both BUG arms have two. A therefore estimates the effect of adding the aligned false-positive reward relative to clean learning; it does not separately identify reward-count or gradient-dose mediation. The primary shared-identity test is C, whose two arms have matched reward count and mass."
+  },
+  "execution_variants": {
+    "MINIMAL_6_PROCESS": {
+      "status": "DRAFT_OPTION_NOT_SELECTED",
+      "ordered_replicates": [
+        "A"
+      ],
+      "os_processes": 6,
+      "process_formula": "2 stacks x 3 arms x 1 technical replicate",
+      "unique_arm_specific_source_update_cells": 30,
+      "technical_update_executions": 30,
+      "target_identity_evaluation_cells": 150,
+      "interpretation": "lowest-cost single-execution development pilot; provides no independent technical reproducibility evidence"
+    },
+    "REPRODUCIBILITY_12_PROCESS": {
+      "status": "DRAFT_OPTION_NOT_SELECTED",
+      "ordered_replicates": [
+        "A",
+        "B"
+      ],
+      "os_processes": 12,
+      "process_formula": "2 stacks x 3 arms x 2 technical replicates",
+      "unique_arm_specific_source_update_cells": 30,
+      "technical_update_executions": 60,
+      "target_identity_evaluation_cells": 300,
+      "interpretation": "same scientific design with an exact substantive reproducibility gate; A and B remain technical repeats, not independent scientific samples"
+    },
+    "preauthorization_choice_rule": "Exactly one execution variant must be selected and frozen before any model authorization. It is forbidden to run replicate A under the 6-process variant, inspect outcomes, and then add replicate B conditionally."
+  },
+  "potential_outcomes_and_estimands": {
+    "outcome": "Y(k,s,r,q,arm) is the frozen post-update target metric for replicate k, stack s, source identity r, target identity q, and arm; all arms must have byte- and trace-identical pre measurements.",
+    "aligned_error_effect": "A(k,s,r)=Y(k,s,r,r,BUG_ALIGNED)-Y(k,s,r,r,GOLD_ONLY)",
+    "identity_switch_difference": "DeltaSwitch(k,s,r,q)=Y(k,s,r,q,BUG_ALIGNED)-Y(k,s,r,q,BUG_PERMUTED)",
+    "primary_identity_switch_interaction": "C(k,s,r)=DeltaSwitch(k,s,r,r)-DeltaSwitch(k,s,r,pi(r))",
+    "equivalent_C_expansion": "C=[Y_ALIGNED(q=r)-Y_PERMUTED(q=r)]-[Y_ALIGNED(q=pi(r))-Y_PERMUTED(q=pi(r))]",
+    "C_interpretation": "C>0 means that switching the rewarded wrong identity from r to pi(r) shifts relative transfer away from q=r and toward q=pi(r), within the fixed affine codebook.",
+    "aggregation_order": [
+      "compute A and C within technical replicate k and exact cell (s,r)",
+      "for the 12-process variant, require the frozen replicate-consistency gate before averaging A and B equally",
+      "equal-average the five source identities within each selected stack/task pair",
+      "equal-average the two task-pair means only for a descriptive overall summary",
+      "report all identity-level and task-pair-level values without treating nested cells as independent samples"
+    ],
+    "practical_margin": "NOT_CLAIMED",
+    "directional_threshold": 0.0,
+    "inference_boundary": "No standard error, confidence interval, p-value, permutation p-value, or population-level task claim is permitted from two task-pair clusters."
+  },
+  "development_decision_rule": {
+    "technical_pass_requires_all": [
+      "complete selected 6-process or 12-process design with no missing, duplicate, swapped, or extra cell",
+      "exact canonical reward mask for every row, source identity, arm, and derangement binding",
+      "BUG_ALIGNED and BUG_PERMUTED differ only in r versus pi(r) for the second rewarded candidate",
+      "all cross-arm source, target, candidate, model, checkpoint, initial-state, update-recipe, evaluator, and environment bindings match",
+      "fresh checkpoint reset before every source identity",
+      "no realized gradient clipping",
+      "all outcomes and diagnostics are finite",
+      "for the 12-process variant, A/B substantive matrices satisfy a pre-frozen reproducibility tolerance"
+    ],
+    "mechanism_pilot_pass_requires_all": [
+      "technical pass",
+      "overall descriptive mean A > 0",
+      "overall descriptive mean C > 0",
+      "2/2 task-pair means have A > 0",
+      "2/2 task-pair means have C > 0"
+    ],
+    "pass_label": "R12_DEVELOPMENT_IDENTITY_SWITCH_PASS_ONLY",
+    "failure_labels": {
+      "A_GATE_FAILURE": "The aligned false-positive reward does not consistently improve the matched target relative to GOLD_ONLY; stop the proposed bridge mechanism.",
+      "C_GATE_FAILURE_WITH_A_POSITIVE": "A false-positive reward effect may exist, but rewarded wrong identity has not been shown to causally determine where transfer appears; do not use a shared-identity mechanism claim.",
+      "TECHNICAL_GATE_FAILURE": "No scientific interpretation; repair and create a new frozen version before any rerun. Outcome-dependent retry is forbidden."
+    },
+    "identity_heterogeneity_policy": "Report all 5 identity-level A and C values and their signs. They are fixed codebook levels and are not independent samples. Identity-level unanimity is not a minimum-pilot pass gate, but any negative identities must be carried forward as an explicit limitation and boundary condition.",
+    "automatic_progression": false,
+    "stop_after_result": "Any gate failure ends this frozen pilot version. No adaptive arm, stack, identity, threshold, permutation, or hyperparameter change is permitted within the same version."
+  },
+  "result_validator_minimum_requirements": [
+    "recompute canonical reward-mask hashes from bound rows, ordered candidates, arm, r, and pi(r); a non-empty string is insufficient",
+    "bind each result to its exact arm contract, execution manifest, external authorization receipt, and invocation receipt",
+    "reject arm swaps, derangement drift, reward-mask tampering, cross-arm data drift, cross-replicate binding drift, clipping, and missing cells",
+    "recompute A, DeltaSwitch, and C from raw target metrics",
+    "record raw gradient norm and realized update norm as diagnostics without outcome-dependent norm matching",
+    "label all summaries development-only and non-inferential"
+  ],
+  "claim_boundary": {
+    "can_support_if_passed": "Development-only evidence, in two selected task pairs and one frozen affine codebook, that causally switching which wrong identity is rewarded changes the relative target identity receiving one-step transfer.",
+    "cannot_support": [
+      "same-FPR causal effect",
+      "formal G1",
+      "confirmatory inference",
+      "population-level cross-task generalization",
+      "semantic or codebook-invariant sharedness",
+      "natural-task generalization",
+      "sampled or multi-step RLVR transfer",
+      "hidden-audit performance",
+      "a claim that OS processes, technical replicates, source identities, or target cells are independent scientific samples",
+      "a practical-magnitude claim"
+    ],
+    "next_stage_if_passed": "Freeze a separate design with at least six new, outcome-independent task-pair clusters and an externally justified practical margin before attempting task-pair-level inference."
+  },
+  "authorization": {
+    "cpu_static_review_and_schema_work": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "fixed_candidate_pilot": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

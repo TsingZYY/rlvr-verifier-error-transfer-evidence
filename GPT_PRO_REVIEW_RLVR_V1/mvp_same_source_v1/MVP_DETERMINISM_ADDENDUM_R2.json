@@ -1,0 +1,34 @@
+{
+  "schema_version": "same-source-diagnostic-mvp-determinism-addendum-r5",
+  "status": "FROZEN_BEFORE_AUTHORIZED_REPLICATES",
+  "base_config": "MVP_CONFIG_V1.json",
+  "base_config_sha256": "8d3288f8dfe30dcbf009779299b2927ec87e296288bc41c41ec21aa0498a8924",
+  "reason": "The first diagnostic run emitted PyTorch warnings that CUDA matrix operations require CUBLAS_WORKSPACE_CONFIG for deterministic execution.",
+  "only_change": {
+    "environment_variable": "CUBLAS_WORKSPACE_CONFIG",
+    "value": ":4096:8"
+  },
+  "forbidden_changes": [
+    "model",
+    "data",
+    "candidate scoring",
+    "diagnostic gates",
+    "seed",
+    "LoRA configuration",
+    "learning rate",
+    "gradient clipping",
+    "estimand"
+  ],
+  "replicate_count": 2,
+  "comparison_rule": "Require identical substantive results after excluding timestamps, runtime, output path, and peak-memory diagnostics.",
+  "scientific_evidence": false,
+  "formal_experiment": false
+  ,"evidence_boundary": {
+    "same_fpr_evidence": "NOT_SAME_FPR_EVIDENCE",
+    "rlvr_mode": "NOT_SAMPLED_RLVR",
+    "data_scope": "CALIBRATION_ONLY",
+    "audit_status": "NOT_HIDDEN_AUDIT",
+    "formal_g1_status": "NOT_FORMAL_G1",
+    "scientific_evidence_status": "SCIENTIFIC_EVIDENCE_FALSE"
+  }
+}

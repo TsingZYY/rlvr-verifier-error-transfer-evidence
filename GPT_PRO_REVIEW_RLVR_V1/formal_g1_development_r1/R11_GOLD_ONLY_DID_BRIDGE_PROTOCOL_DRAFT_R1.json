@@ -1,0 +1,158 @@
+{
+  "schema_version": "r11-gold-only-did-bridge-protocol-draft-r1",
+  "status": "DRAFT_STATIC_REVIEW_ONLY",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "run_eligible": false,
+  "model_execution_performed": false,
+  "purpose": "Distinguish wrong-reward-induced target transfer from general gold-training and base-selection effects after the heterogeneous R10 development screen.",
+  "motivation_bound_to_r10": {
+    "r10_run_index_sha256": "9d7a13df6c84ddcdf554e26a82f62e4d65d19105a34b16a1805df1f88bf35a3f",
+    "r10_completion_sha256": "2a70a66ed936307e4d4ef9ad7b8bd59315fa6319c55f809e2b4d9a5f9d3b009f",
+    "r10_development_replay_sha256": "3e51f788dfad694252b2fe9572dd4e7ba80cdc3482c7a841c2c9e4d730f5cd47",
+    "observed_problem": [
+      "two task-pair means were positive but two of eight stack effects were negative",
+      "one of five identity effects was negative",
+      "only two of eight stacks placed the identity alignment in the top five percent of 120 deterministic bijections",
+      "the global identity-matched absolute effect was negative even though diagonal excess was positive"
+    ]
+  },
+  "fixed_scope": {
+    "ordered_stack_ids": [
+      "TP1-M0-A_TO_B",
+      "TP1-M0-B_TO_A",
+      "TP1-M1-A_TO_B",
+      "TP1-M1-B_TO_A",
+      "TP2-M0-A_TO_B",
+      "TP2-M0-B_TO_A",
+      "TP2-M1-A_TO_B",
+      "TP2-M1-B_TO_A"
+    ],
+    "source_split": "SOURCE",
+    "target_split": "TARGET_CALIBRATION",
+    "hidden_audit_access": "FORBIDDEN",
+    "source_rule_identities": [
+      "Z7_PLUS1",
+      "Z7_PLUS2",
+      "Z7_PLUS3",
+      "Z7_PLUS4",
+      "Z7_PLUS5"
+    ],
+    "target_rule_identities": [
+      "Z7_PLUS1",
+      "Z7_PLUS2",
+      "Z7_PLUS3",
+      "Z7_PLUS4",
+      "Z7_PLUS5"
+    ]
+  },
+  "model_and_update_inheritance": {
+    "source": "R10_FROZEN_CONFIGS_WITHOUT_CHANGE",
+    "model": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "revision": "a10cc1512e82b0c51f9317f4a2a3b8b02b2c6e21",
+    "precision": "BFLOAT16_BASE_FLOAT32_LORA",
+    "lora_rank": 4,
+    "lora_alpha": 8,
+    "lora_targets": [
+      "q_proj",
+      "v_proj"
+    ],
+    "learning_rate": 0.1,
+    "optimizer": "MANUAL_SGD_NO_STATE",
+    "steps": 1,
+    "seed": 20260804,
+    "gradient_clip_norm": 1.0,
+    "r10_all_raw_gradient_norms_below_clip": true,
+    "threshold_or_hyperparameter_adaptation": "FORBIDDEN",
+    "reset_to_identical_checkpoint_per_arm": true,
+    "no_optimizer_state_carryover": true
+  },
+  "arms": {
+    "base_no_op": {
+      "new_update_required": false,
+      "source": "R10_FROZEN_PRE_TARGET_TRACES",
+      "role": "common pre-update state"
+    },
+    "bug_update": {
+      "new_update_required": false,
+      "source": "R10_FROZEN_POST_TARGET_TRACES_BY_SOURCE_IDENTITY",
+      "reward": "gold candidate plus the frozen wrong candidate for source identity r"
+    },
+    "gold_only_update": {
+      "new_update_required": true,
+      "count_per_stack": 1,
+      "reward": "gold candidate only",
+      "target_readout": "all five target identities",
+      "source_identity_metadata_access": "FORBIDDEN",
+      "target_identity_metadata_access_during_update": "FORBIDDEN"
+    }
+  },
+  "primary_estimand": {
+    "id": "GOLD_ADJUSTED_IDENTITY_DIAGONAL_EXCESS_R1",
+    "bug_effect": "post_bug(s,r,q)-pre(s,q)",
+    "gold_only_effect": "post_gold_only(s,q)-pre(s,q)",
+    "adjusted_effect": "bug_effect(s,r,q)-gold_only_effect(s,q)",
+    "within_source_identity": "adjusted_effect(s,r,r)-mean_q_not_equal_r(adjusted_effect(s,r,q))",
+    "aggregation": [
+      "equal target off-diagonal identity within source identity",
+      "equal source identity within stack",
+      "equal mapping and direction within task pair",
+      "equal task pair"
+    ],
+    "forbidden_reweighting": [
+      "effect magnitude",
+      "realized update norm",
+      "successful identity count",
+      "mapping",
+      "direction",
+      "task pair"
+    ]
+  },
+  "required_secondary_readouts": [
+    "absolute identity-matched adjusted effect",
+    "all eight adjusted stack effects",
+    "all five adjusted identity effects",
+    "two adjusted task-pair effects",
+    "A_TO_B minus B_TO_A asymmetry",
+    "M1 minus M0 interaction",
+    "gold-only update norm as diagnostic only",
+    "all 120 deterministic identity alignment ranks with no inferential p-value"
+  ],
+  "execution_cost_if_approved": {
+    "new_gold_only_source_updates": 8,
+    "independent_replicates": 2,
+    "new_model_processes": 16,
+    "bug_updates_reused_from_r10": true,
+    "estimated_fraction_of_r10_update_work": "approximately one fifth before process startup and base-scoring overhead",
+    "cost_note": "Reviewer must decide whether cross-release reuse is acceptable or both arms must be rerun in a new counterbalanced release."
+  },
+  "decision_boundary": {
+    "this_bridge_can_establish": "whether R10 diagonal excess survives subtraction of general gold-only learning on the same frozen development assets",
+    "this_bridge_cannot_establish": [
+      "same-FPR causal effect",
+      "formal G1",
+      "sampled RLVR transfer",
+      "hidden-audit performance",
+      "natural-task or representation-disjoint generalization"
+    ],
+    "practical_margin": "MUST_BE_SET_BY_EXTERNAL_REVIEW_NOT_R10_OUTCOMES",
+    "automatic_progression_to_sampled_rlvr": false
+  },
+  "open_review_questions": [
+    "Is gold-only subtraction sufficient under one-step unclipped manual SGD, or is an explicit wrong-only arm required?",
+    "Can immutable R10 bug arms be reused, or must bug and gold-only arms be rerun in one new counterbalanced release?",
+    "Does frozen pre state suffice as no-op, or is a separately executed no-op process required?",
+    "Must a non-affine codebook without the shared affine anchor be added before any new model action?",
+    "What practical margin can be justified independently of R10 outcomes?"
+  ],
+  "authorization": {
+    "cpu_static_design": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

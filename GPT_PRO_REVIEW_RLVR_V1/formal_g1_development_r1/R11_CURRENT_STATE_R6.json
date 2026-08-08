@@ -1,0 +1,88 @@
+{
+  "schema_version": "r11-current-state-r6",
+  "status": "STATIC_CUSTODY_REPAIR_REQUIRED_NOT_RUN",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "run_eligible": false,
+  "model_execution_performed": false,
+  "model_execution_authorized": false,
+  "decision": "DO_NOT_AUTHORIZE_OR_RUN_R11_UNTIL_CUSTODY_AND_RESULT_VALIDATION_ARE_REPAIRED_AND_REFROZEN",
+  "preserved_positive_evidence": {
+    "frozen_release_cell_coverage": "PASS_32_OF_32_ORDERED_AND_UNIQUE",
+    "manifest_and_arm_contract_binding_rebuild": "PASS_32_OF_32",
+    "master_inclusion_contract_sha256": "9842f7b7fe3c6183d277274ba7461a4de38e07207db353c65630e3a92cb496d6",
+    "gpt_pro_packet_sha256": "a67a0214599e1cbe1080caf26c389876b363c9cf12e9ddfa50d550bcd0701880",
+    "gpt_pro_packet_zip_integrity": "PASS_112_FILES_NO_DUPLICATE_OR_UNSAFE_MEMBER",
+    "model_action_count": 0
+  },
+  "invalidated_or_narrowed_prior_claims": {
+    "static_custody_pass": "WITHDRAWN_AS_RUN_READINESS_CLAIM",
+    "invocation_receipt_schema": "SHAPE_CHECK_ONLY_REPLAYABLE_NO_ATOMIC_SINGLE_CONSUMPTION",
+    "completion_validator": "UNSAFE_ACCEPTS_SYNTHETIC_EFFECTS_UNBOUND_CUSTODY_AND_NONFINITE_AGGREGATES",
+    "portable_validation_packet": "FAILS_ISOLATED_VALIDATOR_IMPORT_MISSING_ANALYZE_R10_DEPENDENCY",
+    "unit_regression_tests_74_of_74": "LOCAL_SUITE_ONLY_NOT_REPRODUCIBLE_FROM_THE_GPT_PRO_PACKET",
+    "scientific_interpretation": "R11_CAN_SCREEN_BUG_VS_GOLD_ONLY_BUT_CANNOT_IDENTIFY_SHARED_ERROR_IDENTITY_AS_THE_CAUSAL_CHANNEL"
+  },
+  "reproduced_critical_failures": [
+    {
+      "id": "R11_RESULT_EFFECT_NOT_RECOMPUTED",
+      "description": "The validator trusts each self-reported evaluation-cell effect and does not require or recompute post_target_metric minus pre_target_metric."
+    },
+    {
+      "id": "R11_RESULT_CUSTODY_NOT_BOUND",
+      "description": "The run-index validator is not externally anchored and does not bind each result to the master, manifest, arm contract, authorization receipt, invocation receipt, authorization_id, or run_nonce."
+    },
+    {
+      "id": "R11_NONFINITE_AGGREGATE_PASS",
+      "description": "Finite 1e308 cell inputs overflow during aggregation to Infinity while the validator still returns DEVELOPMENT_SCREEN_PASS_ONLY."
+    },
+    {
+      "id": "R11_INVOCATION_REPLAY",
+      "description": "One invocation receipt can be reused with a different output path because there is no atomic consumption ledger or output binding."
+    },
+    {
+      "id": "R11_PACKET_NOT_PORTABLE",
+      "description": "The isolated GPT Pro packet validator test raises ModuleNotFoundError because analyze_r10_g1_development.py is absent."
+    }
+  ],
+  "required_repair_gate": [
+    "strict duplicate-key and non-finite rejecting JSON ingestion",
+    "exact result, update, evaluation-cell, and run-index schemas",
+    "effect and all estimands recomputed from bound pre/post metrics or raw traces",
+    "canonical reward-mask recomputation from bound rows, candidates, identity, and arm",
+    "external expected hashes for master, run index, manifests, arm contracts, authorization, invocation receipts, and result anchors",
+    "32 globally unique result hashes, invocation receipt hashes, and nonces",
+    "atomic single-consumption invocation ledger bound to output path",
+    "single-read hash-and-parse for custody files",
+    "single atomic final result write after all R11 postconditions",
+    "portable clean-directory test including all validator dependencies and negative tests"
+  ],
+  "scientific_next_step": {
+    "r11_boundary": "BUG versus GOLD_ONLY can only screen the incremental effect of a frozen false-positive reward under the fixed one-step codebook.",
+    "minimum_causal_design": "Three-arm identity-switch pilot: GOLD_ONLY, BUG_ALIGNED, and BUG_PERMUTED with equal reward count and mass across the two BUG arms.",
+    "draft_protocol": "R12_IDENTITY_SWITCH_PILOT_PROTOCOL_DRAFT_R1.json",
+    "draft_protocol_sha256": "b90035572b9ae7ac3a2c220db3f525eb3c222358471b8a5a212bdbd529cb2be8",
+    "minimum_processes": 6,
+    "preferred_reproducibility_processes": 12,
+    "draft_run_eligible": false
+  },
+  "external_review": {
+    "gpt_pro_threads_dispatched": 10,
+    "review_results_received_at_state_freeze": 0,
+    "review_status": "PENDING",
+    "rule": "External review cannot authorize model execution; any accepted repair requires a new freeze and clean audit."
+  },
+  "supersedes": "R11_CURRENT_STATE_R5.json",
+  "authorization": {
+    "cpu_static_work": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "fixed_candidate_r11_bridge": false,
+    "r12_identity_switch_pilot": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

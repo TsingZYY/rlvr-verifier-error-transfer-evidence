@@ -1,0 +1,73 @@
+{
+  "schema_version": "r11-arm-runner-static-audit-r1",
+  "status": "PASS_STATIC_IMPLEMENTATION_ONLY",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "run_eligible": false,
+  "model_execution_performed": false,
+  "model_execution_authorized": false,
+  "implementation": {
+    "bridge_contract_path": "GPT_PRO_REVIEW_RLVR_V1/mvp_same_source_v1/r11_bridge_contract.py",
+    "bridge_contract_sha256": "f92560287651765a6f90424bead8cd84a24218a28dd849cd7023d852acaab3bc",
+    "arm_parameterized_runner_path": "GPT_PRO_REVIEW_RLVR_V1/mvp_same_source_v1/run_same_source_bridge_r11.py",
+    "arm_parameterized_runner_sha256": "c1c364172f62e669a9eacc6477e311f6e0b3cf175db3f89c6ac079301caacc3e",
+    "arm_contract_template_sha256": "e3702d14c6830323d1b594d6baab9f71915a9ba78762e730f930143843b41fc9",
+    "unit_test_sha256": "c20f46d6ec9e528e95e4269894704f58ae0d3e031e6776c84c0aea02426a5ab7",
+    "parent_r10_runner_sha256": "439cc675cf8b53c1c0ec2e70a85866a6b87a1a9eaf3539478fe087ded35c6f4d",
+    "parent_r10_runner_unchanged": true,
+    "r11_protocol_sha256": "c9015c8d04da3b95d43162ab087e5fe4b4dcf1c4a5e689f2df610d2e379efd78"
+  },
+  "static_contract_properties": [
+    "BUG and GOLD_ONLY use one shared update implementation",
+    "arm selection is represented by a canonical reward mask",
+    "the parent R10 runner hash is checked before any model action",
+    "the R11 protocol hash is checked before any model action",
+    "arm contract hash must be bound by the CLI, execution manifest, and external authorization receipt",
+    "stack and replicate in the arm contract must match the invocation",
+    "source updates are freshly reset for all five source identities by the unchanged parent path",
+    "each source update records arm and reward-mask commitment",
+    "realized gradient clipping fails the frozen bridge",
+    "the result remains development-only and forbids sampled RLVR and hidden audit"
+  ],
+  "verification": {
+    "python_compile": "PASS",
+    "unit_tests": 39,
+    "unit_tests_passed": 39,
+    "included_regressions": [
+      "test_r11_bridge_contract.py",
+      "test_mvp_static_contract.py",
+      "test_validate_mvp_replicates_r3.py"
+    ],
+    "tokenizer_loaded": false,
+    "model_weights_loaded": false,
+    "model_forward_performed": false,
+    "gradient_performed": false,
+    "optimizer_step_performed": false
+  },
+  "remaining_run_eligibility_gates": [
+    "freeze 32 completed arm contracts for 8 stacks x 2 arms x 2 replicates",
+    "freeze execution manifests that bind the new runner, parent runner, protocol, and arm contract",
+    "extend the result validator to pair BUG/GOLD cells and recompute Adj, A, and D",
+    "extend completion validation to require 32/32 processes and 80/80 unique arm-specific design cells",
+    "obtain an external action-specific authorization receipt after the entire static package passes",
+    "do not access TARGET_AUDIT or run sampled RLVR"
+  ],
+  "clean_execution_shape_if_later_authorized": {
+    "os_processes": 32,
+    "unique_arm_specific_design_cells": 80,
+    "technical_update_executions": 160,
+    "target_identity_evaluation_cells": 800,
+    "scientific_top_level_clusters": 2,
+    "scientific_cluster_definition": "task pair"
+  },
+  "authorization": {
+    "cpu_static_implementation": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

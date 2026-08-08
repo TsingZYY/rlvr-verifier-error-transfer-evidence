@@ -1,0 +1,386 @@
+{
+  "schema_version": "same-source-diagnostic-mvp-result-v1",
+  "run_label": "DIAGNOSTIC_MVP_NOT_FORMAL",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "created_at_utc": "2026-08-04T05:29:36.595071+00:00",
+  "config_path": "C:\\Users\\24306\\Documents\\相同假阳性率，不同迁移风险：RLVR 中 Verifier 错误的跨任务结构\\GPT_PRO_REVIEW_RLVR_V1\\mvp_same_source_v1\\MVP_CONFIG_V1.json",
+  "config_sha256": "bb137abc2307651adfe482785e15c637a83de9bcb47b2c967f8c6cfea23b5207",
+  "model_path": "C:\\Users\\24306\\Documents\\相同假阳性率，不同迁移风险：RLVR 中 Verifier 错误的跨任务结构\\models\\SmolLM2-360M-Instruct-a10cc151",
+  "model_weight_sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e",
+  "tokenizer_sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+  "source_bundles_sha256": "4525206739ec6483a69a72e147d7d3f543f1c7005248a82c7aa80e366696b27f",
+  "target_calibration_sha256": "4aa2e45f6ab76ca2b5faf1934b5b918a62e528fe17401ec85ed9a4e24db1899f",
+  "mapping_stack_id": "TP1-M0-A_TO_B",
+  "source_row_count": 14,
+  "target_row_count": 7,
+  "source_rows_commitment": "2a96b549963f3d33b9730fd706a9d8c07711f7f7e75e6c4be6f334e0c7c36e76",
+  "target_rows_commitment": "29cdb249ad281e1488bbd48879e246556e7acf0c50e68ecc2b5e429f28c27d8f",
+  "trainable_parameters": 409600,
+  "initial_trainable_hash": "89a1caa788cd3433c2f1d4cbfdc8ec8a2a077dda13389821024f5e0e3ecaa998",
+  "candidate_supervised_token_count_min": 7,
+  "candidate_supervised_token_count_max": 7,
+  "candidate_supervised_token_count_range": 0,
+  "base_source_gate_metrics": {
+    "Z7_PLUS1": {
+      "mean_wrong_probability_mass": 0.1408103784280164,
+      "mean_gold_probability_mass": 0.15534098579415254,
+      "mean_accepted_probability_mass": 0.2961513642221689,
+      "mean_wrong_relative_advantage": 0.7038486357778311,
+      "mean_candidate_entropy_nats": 1.8039899468421936
+    },
+    "Z7_PLUS2": {
+      "mean_wrong_probability_mass": 0.1352908949234656,
+      "mean_gold_probability_mass": 0.15534098579415254,
+      "mean_accepted_probability_mass": 0.29063188071761814,
+      "mean_wrong_relative_advantage": 0.7093681192823819,
+      "mean_candidate_entropy_nats": 1.8039899468421936
+    },
+    "Z7_PLUS3": {
+      "mean_wrong_probability_mass": 0.16830503541444028,
+      "mean_gold_probability_mass": 0.15534098579415254,
+      "mean_accepted_probability_mass": 0.3236460212085928,
+      "mean_wrong_relative_advantage": 0.6763539787914071,
+      "mean_candidate_entropy_nats": 1.8039899468421936
+    },
+    "Z7_PLUS4": {
+      "mean_wrong_probability_mass": 0.12489882430859975,
+      "mean_gold_probability_mass": 0.15534098579415254,
+      "mean_accepted_probability_mass": 0.2802398101027523,
+      "mean_wrong_relative_advantage": 0.7197601898972478,
+      "mean_candidate_entropy_nats": 1.8039899468421936
+    },
+    "Z7_PLUS5": {
+      "mean_wrong_probability_mass": 0.14137758873403072,
+      "mean_gold_probability_mass": 0.15534098579415254,
+      "mean_accepted_probability_mass": 0.29671857452818323,
+      "mean_wrong_relative_advantage": 0.7032814254718167,
+      "mean_candidate_entropy_nats": 1.8039899468421936
+    }
+  },
+  "base_target_metrics": {
+    "Z7_PLUS1": 0.062282868794032505,
+    "Z7_PLUS2": -0.18793882642473494,
+    "Z7_PLUS3": -0.20187943322317942,
+    "Z7_PLUS4": 0.0489386831011091,
+    "Z7_PLUS5": -0.19530848094395228
+  },
+  "diagnostic_gate_status": "PASS",
+  "diagnostic_gate_failures": [],
+  "source_updates": [
+    {
+      "source_rule_identity": "Z7_PLUS1",
+      "source_update_hash": "060fdc2abd0be987f7db93412bab24d53acd31dabd3d83cd89f9533dcfb48e4a",
+      "mean_pre_update_expected_reward": 0.2961513538445745,
+      "raw_gradient_norm": 0.049473002552986145,
+      "clip_grad_norm_return": 0.049473002552986145,
+      "realized_update_norm": 0.004947300663201917,
+      "diagonal_excess": 0.021374668393816257
+    },
+    {
+      "source_rule_identity": "Z7_PLUS2",
+      "source_update_hash": "7e21f67731ea050a9618d4f2b710af31733330c5649d2f152c0b7fc1521d156f",
+      "mean_pre_update_expected_reward": 0.2906318647520883,
+      "raw_gradient_norm": 0.04690641164779663,
+      "clip_grad_norm_return": 0.04690640792250633,
+      "realized_update_norm": 0.004690640672349183,
+      "diagonal_excess": -0.012390409197126112
+    },
+    {
+      "source_rule_identity": "Z7_PLUS3",
+      "source_update_hash": "2a2d3b99cdcc76957195fc0853149ced4da0497f59e78a674917886d359f3150",
+      "mean_pre_update_expected_reward": 0.3236460025821413,
+      "raw_gradient_norm": 0.07940881699323654,
+      "clip_grad_norm_return": 0.07940881699323654,
+      "realized_update_norm": 0.007940881789199756,
+      "diagonal_excess": 0.008839658328465047
+    },
+    {
+      "source_rule_identity": "Z7_PLUS4",
+      "source_update_hash": "a7924ae68b84ec3de213a206e6bffb5b512997e0a842231d671c815d8196dd94",
+      "mean_pre_update_expected_reward": 0.28023979493549894,
+      "raw_gradient_norm": 0.04091741889715195,
+      "clip_grad_norm_return": 0.04091741517186165,
+      "realized_update_norm": 0.004091741687826834,
+      "diagonal_excess": -0.04692210469927108
+    },
+    {
+      "source_rule_identity": "Z7_PLUS5",
+      "source_update_hash": "3e0bde63423e8b9bb62f82cc1cbc4247e57157a40580e1c65b23d5b204bc02c6",
+      "mean_pre_update_expected_reward": 0.29671855749828474,
+      "raw_gradient_norm": 0.06322470307350159,
+      "clip_grad_norm_return": 0.06322469562292099,
+      "realized_update_norm": 0.006322469975915808,
+      "diagonal_excess": 0.036273785999843045
+    }
+  ],
+  "evaluation_cells": [
+    {
+      "source_rule_identity": "Z7_PLUS1",
+      "target_rule_identity": "Z7_PLUS1",
+      "source_update_hash": "060fdc2abd0be987f7db93412bab24d53acd31dabd3d83cd89f9533dcfb48e4a",
+      "same_update_reference": true,
+      "pre_target_metric": 0.062282868794032505,
+      "post_target_metric": 0.051980938230242045,
+      "effect": -0.01030193056379046,
+      "is_diagonal": true
+    },
+    {
+      "source_rule_identity": "Z7_PLUS1",
+      "target_rule_identity": "Z7_PLUS2",
+      "source_update_hash": "060fdc2abd0be987f7db93412bab24d53acd31dabd3d83cd89f9533dcfb48e4a",
+      "same_update_reference": true,
+      "pre_target_metric": -0.18793882642473494,
+      "post_target_metric": -0.23500585556030273,
+      "effect": -0.04706702913556779,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS1",
+      "target_rule_identity": "Z7_PLUS3",
+      "source_update_hash": "060fdc2abd0be987f7db93412bab24d53acd31dabd3d83cd89f9533dcfb48e4a",
+      "same_update_reference": true,
+      "pre_target_metric": -0.20187943322317942,
+      "post_target_metric": -0.21578127997262136,
+      "effect": -0.013901846749441948,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS1",
+      "target_rule_identity": "Z7_PLUS4",
+      "source_update_hash": "060fdc2abd0be987f7db93412bab24d53acd31dabd3d83cd89f9533dcfb48e4a",
+      "same_update_reference": true,
+      "pre_target_metric": 0.0489386831011091,
+      "post_target_metric": 0.014770235334123884,
+      "effect": -0.034168447766985216,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS1",
+      "target_rule_identity": "Z7_PLUS5",
+      "source_update_hash": "060fdc2abd0be987f7db93412bab24d53acd31dabd3d83cd89f9533dcfb48e4a",
+      "same_update_reference": true,
+      "pre_target_metric": -0.19530848094395228,
+      "post_target_metric": -0.2268775531223842,
+      "effect": -0.03156907217843191,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS2",
+      "target_rule_identity": "Z7_PLUS1",
+      "source_update_hash": "7e21f67731ea050a9618d4f2b710af31733330c5649d2f152c0b7fc1521d156f",
+      "same_update_reference": true,
+      "pre_target_metric": 0.062282868794032505,
+      "post_target_metric": 0.010538748332432337,
+      "effect": -0.051744120461600165,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS2",
+      "target_rule_identity": "Z7_PLUS2",
+      "source_update_hash": "7e21f67731ea050a9618d4f2b710af31733330c5649d2f152c0b7fc1521d156f",
+      "same_update_reference": true,
+      "pre_target_metric": -0.18793882642473494,
+      "post_target_metric": -0.24966069630214147,
+      "effect": -0.06172186987740652,
+      "is_diagonal": true
+    },
+    {
+      "source_rule_identity": "Z7_PLUS2",
+      "target_rule_identity": "Z7_PLUS3",
+      "source_update_hash": "7e21f67731ea050a9618d4f2b710af31733330c5649d2f152c0b7fc1521d156f",
+      "same_update_reference": true,
+      "pre_target_metric": -0.20187943322317942,
+      "post_target_metric": -0.22829110281808035,
+      "effect": -0.026411669594900933,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS2",
+      "target_rule_identity": "Z7_PLUS4",
+      "source_update_hash": "7e21f67731ea050a9618d4f2b710af31733330c5649d2f152c0b7fc1521d156f",
+      "same_update_reference": true,
+      "pre_target_metric": 0.0489386831011091,
+      "post_target_metric": -0.031526429312569756,
+      "effect": -0.08046511241367885,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS2",
+      "target_rule_identity": "Z7_PLUS5",
+      "source_update_hash": "7e21f67731ea050a9618d4f2b710af31733330c5649d2f152c0b7fc1521d156f",
+      "same_update_reference": true,
+      "pre_target_metric": -0.19530848094395228,
+      "post_target_metric": -0.23401342119489396,
+      "effect": -0.03870494025094168,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS3",
+      "target_rule_identity": "Z7_PLUS1",
+      "source_update_hash": "2a2d3b99cdcc76957195fc0853149ced4da0497f59e78a674917886d359f3150",
+      "same_update_reference": true,
+      "pre_target_metric": 0.062282868794032505,
+      "post_target_metric": 0.018296480178833008,
+      "effect": -0.0439863886151995,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS3",
+      "target_rule_identity": "Z7_PLUS2",
+      "source_update_hash": "2a2d3b99cdcc76957195fc0853149ced4da0497f59e78a674917886d359f3150",
+      "same_update_reference": true,
+      "pre_target_metric": -0.18793882642473494,
+      "post_target_metric": -0.22393417358398438,
+      "effect": -0.03599534715924943,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS3",
+      "target_rule_identity": "Z7_PLUS3",
+      "source_update_hash": "2a2d3b99cdcc76957195fc0853149ced4da0497f59e78a674917886d359f3150",
+      "same_update_reference": true,
+      "pre_target_metric": -0.20187943322317942,
+      "post_target_metric": -0.22296013150896346,
+      "effect": -0.021080698285784044,
+      "is_diagonal": true
+    },
+    {
+      "source_rule_identity": "Z7_PLUS3",
+      "target_rule_identity": "Z7_PLUS4",
+      "source_update_hash": "2a2d3b99cdcc76957195fc0853149ced4da0497f59e78a674917886d359f3150",
+      "same_update_reference": true,
+      "pre_target_metric": 0.0489386831011091,
+      "post_target_metric": -0.0014663423810686385,
+      "effect": -0.050405025482177734,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS3",
+      "target_rule_identity": "Z7_PLUS5",
+      "source_update_hash": "2a2d3b99cdcc76957195fc0853149ced4da0497f59e78a674917886d359f3150",
+      "same_update_reference": true,
+      "pre_target_metric": -0.19530848094395228,
+      "post_target_metric": -0.184603146144322,
+      "effect": 0.01070533479963029,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS4",
+      "target_rule_identity": "Z7_PLUS1",
+      "source_update_hash": "a7924ae68b84ec3de213a206e6bffb5b512997e0a842231d671c815d8196dd94",
+      "same_update_reference": true,
+      "pre_target_metric": 0.062282868794032505,
+      "post_target_metric": 0.04930050032479422,
+      "effect": -0.012982368469238281,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS4",
+      "target_rule_identity": "Z7_PLUS2",
+      "source_update_hash": "a7924ae68b84ec3de213a206e6bffb5b512997e0a842231d671c815d8196dd94",
+      "same_update_reference": true,
+      "pre_target_metric": -0.18793882642473494,
+      "post_target_metric": -0.14360291617257254,
+      "effect": 0.04433591025216241,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS4",
+      "target_rule_identity": "Z7_PLUS3",
+      "source_update_hash": "a7924ae68b84ec3de213a206e6bffb5b512997e0a842231d671c815d8196dd94",
+      "same_update_reference": true,
+      "pre_target_metric": -0.20187943322317942,
+      "post_target_metric": -0.18102421079363143,
+      "effect": 0.020855222429547987,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS4",
+      "target_rule_identity": "Z7_PLUS4",
+      "source_update_hash": "a7924ae68b84ec3de213a206e6bffb5b512997e0a842231d671c815d8196dd94",
+      "same_update_reference": true,
+      "pre_target_metric": 0.0489386831011091,
+      "post_target_metric": 0.024260384695870534,
+      "effect": -0.024678298405238563,
+      "is_diagonal": true
+    },
+    {
+      "source_rule_identity": "Z7_PLUS4",
+      "target_rule_identity": "Z7_PLUS5",
+      "source_update_hash": "a7924ae68b84ec3de213a206e6bffb5b512997e0a842231d671c815d8196dd94",
+      "same_update_reference": true,
+      "pre_target_metric": -0.19530848094395228,
+      "post_target_metric": -0.15854201998029435,
+      "effect": 0.03676646096365793,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS5",
+      "target_rule_identity": "Z7_PLUS1",
+      "source_update_hash": "3e0bde63423e8b9bb62f82cc1cbc4247e57157a40580e1c65b23d5b204bc02c6",
+      "same_update_reference": true,
+      "pre_target_metric": 0.062282868794032505,
+      "post_target_metric": 0.0719313280923026,
+      "effect": 0.009648459298270094,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS5",
+      "target_rule_identity": "Z7_PLUS2",
+      "source_update_hash": "3e0bde63423e8b9bb62f82cc1cbc4247e57157a40580e1c65b23d5b204bc02c6",
+      "same_update_reference": true,
+      "pre_target_metric": -0.18793882642473494,
+      "post_target_metric": -0.19831970759800502,
+      "effect": -0.010380881173270073,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS5",
+      "target_rule_identity": "Z7_PLUS3",
+      "source_update_hash": "3e0bde63423e8b9bb62f82cc1cbc4247e57157a40580e1c65b23d5b204bc02c6",
+      "same_update_reference": true,
+      "pre_target_metric": -0.20187943322317942,
+      "post_target_metric": -0.22674506051199778,
+      "effect": -0.02486562728881836,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS5",
+      "target_rule_identity": "Z7_PLUS4",
+      "source_update_hash": "3e0bde63423e8b9bb62f82cc1cbc4247e57157a40580e1c65b23d5b204bc02c6",
+      "same_update_reference": true,
+      "pre_target_metric": 0.0489386831011091,
+      "post_target_metric": 0.017895971025739397,
+      "effect": -0.0310427120753697,
+      "is_diagonal": false
+    },
+    {
+      "source_rule_identity": "Z7_PLUS5",
+      "target_rule_identity": "Z7_PLUS5",
+      "source_update_hash": "3e0bde63423e8b9bb62f82cc1cbc4247e57157a40580e1c65b23d5b204bc02c6",
+      "same_update_reference": true,
+      "pre_target_metric": -0.19530848094395228,
+      "post_target_metric": -0.17319488525390625,
+      "effect": 0.022113595690046034,
+      "is_diagonal": true
+    }
+  ],
+  "stack_summary": {
+    "mean_diagonal_excess": 0.0014351197651454317,
+    "positive_diagonal_excess_count": 3,
+    "source_rule_count": 5
+  },
+  "restore_max_abs_target_score_error": 0.0,
+  "unique_source_update_hash_count": 5,
+  "run_status": "MVP_COMPLETED_DIAGNOSTIC_ONLY",
+  "runtime_seconds": 81.3545252000331,
+  "peak_gpu_memory_gib": 3.7496871948242188,
+  "claim_boundary": [
+    "Not a formal run and not confirmatory evidence.",
+    "One mapping stack is not the eight-stack mechanism screen.",
+    "Fixed-candidate exact expected-reward optimization is an RLVR surrogate, not sampled RLVR.",
+    "Calibration-only readouts are development data and cannot be reported as hidden audit performance.",
+    "A pass only justifies implementing the full frozen G1 and eight-stack run."
+  ]
+}

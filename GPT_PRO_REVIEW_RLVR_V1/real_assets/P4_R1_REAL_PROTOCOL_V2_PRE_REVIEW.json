@@ -1,0 +1,635 @@
+{
+  "schema_version": "p4-r1-real-protocol-v2-pre-review",
+  "created_local_date": "2026-07-30",
+  "protocol_status": "PRE_REVIEW",
+  "experiment_status": "NOT_RUN",
+  "human_review_status": "PENDING_HUMAN_REVIEW",
+  "run_eligible": false,
+  "authoritative_preregistration": false,
+  "real_assets_bound": false,
+  "scientific_evidence": false,
+  "decision_source": {
+    "type": "second_gpt_pro_task_pair_asset_selection_verdict",
+    "human_acceptance_status": "PENDING_HUMAN_REVIEW"
+  },
+  "scope": {
+    "question": "Under preregistered opportunity matching, does a verifier error shared across task-disjoint source and target tasks produce a larger target update-effect than a verifier error confined to the source task?",
+    "supported_estimand_label": "general_sharedness_update_effect",
+    "forbidden_claims": [
+      "selection_adjusted_effect",
+      "selection_exposure_causal_decomposition",
+      "general_verifier_risk",
+      "semantic_specific_transfer",
+      "confirmed_effect_from_pre_review_design",
+      "confirmed_effect_from_8_stack_screen"
+    ]
+  },
+  "task_disjointness_contract": {
+    "definition": "Source and target must use non-interchangeable input semantics, independently specified generators and independently implemented clean-answer oracles. Sharing only the latent Z7 answer domain, the seven-candidate output interface, and the preregistered verifier-error construction does not make the tasks identical.",
+    "database_disjoint_only_is_sufficient": false,
+    "different_template_only_is_sufficient": false,
+    "same_generator_with_new_lineage_only_is_sufficient": false,
+    "pairing_status": "FIXED_FOR_PRE_REVIEW"
+  },
+  "task_interface": {
+    "latent_answer_domain": "Z7",
+    "latent_values": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "output_grammar": "FINAL=Kj",
+    "candidate_count_per_row": 7,
+    "wrong_candidate_count_per_row": 6,
+    "candidate_order": [
+      "FINAL=K0",
+      "FINAL=K1",
+      "FINAL=K2",
+      "FINAL=K3",
+      "FINAL=K4",
+      "FINAL=K5",
+      "FINAL=K6"
+    ],
+    "gold_candidate_formula": "FINAL=K[f(mapping_id, task_role, z)]",
+    "shared_wrong_candidate_formula": "FINAL=K[f(mapping_id, task_role, (z+1) mod 7)]",
+    "local_wrong_candidate_formula": "FINAL=K[f(mapping_id, task_role, (z+local_shift[task_id]) mod 7)]",
+    "all_candidates_required_on_every_row": true,
+    "candidate_identity_and_order_frozen_within_stack": true
+  },
+  "tasks": [
+    {
+      "task_id": "MOD7_SUM_V1",
+      "task_pair_id": "TP1_MOD7SUM_DFA7",
+      "task_role": "A",
+      "input_semantics": "exactly two integers a,b with a,b in 0..20",
+      "latent_answer_formula": "z=(a+b) mod 7",
+      "clean_oracle_family": "integer_modular_arithmetic",
+      "local_rule_id": "L_MOD7_PLUS2",
+      "local_shift_mod7": 2
+    },
+    {
+      "task_id": "DFA7_FINAL_V1",
+      "task_pair_id": "TP1_MOD7SUM_DFA7",
+      "task_role": "B",
+      "input_semantics": "symbol sequence evaluated by a fully specified deterministic seven-state automaton",
+      "latent_answer_formula": "z=encoded_final_state_after_full_input",
+      "clean_oracle_family": "deterministic_finite_automaton_execution",
+      "local_rule_id": "L_DFA7_PLUS3",
+      "local_shift_mod7": 3
+    },
+    {
+      "task_id": "MARKED_RANK7_V1",
+      "task_pair_id": "TP2_RANK7_PARENDEPTH7",
+      "task_role": "A",
+      "input_semantics": "ordered seven-item sequence containing exactly one marked item",
+      "latent_answer_formula": "z=zero_based_rank_of_marked_item",
+      "clean_oracle_family": "marked_position_extraction",
+      "local_rule_id": "L_RANK7_PLUS4",
+      "local_shift_mod7": 4
+    },
+    {
+      "task_id": "PAREN_MAX_DEPTH7_V1",
+      "task_pair_id": "TP2_RANK7_PARENDEPTH7",
+      "task_role": "B",
+      "input_semantics": "well-formed parenthesis sequence",
+      "latent_answer_formula": "z=maximum_nesting_depth-1, with maximum_nesting_depth in 1..7",
+      "clean_oracle_family": "parenthesis_stack_depth",
+      "local_rule_id": "L_PAREN7_PLUS5",
+      "local_shift_mod7": 5
+    }
+  ],
+  "task_pairs": [
+    {
+      "task_pair_id": "TP1_MOD7SUM_DFA7",
+      "task_A": "MOD7_SUM_V1",
+      "task_B": "DFA7_FINAL_V1",
+      "task_disjointness_basis": "modular arithmetic over integer sequences versus deterministic automaton execution over symbol sequences",
+      "mirrors": [
+        "A_TO_B",
+        "B_TO_A"
+      ],
+      "A_TO_B_and_B_TO_A_are": "two_directional_mirrors_of_one_task_pair"
+    },
+    {
+      "task_pair_id": "TP2_RANK7_PARENDEPTH7",
+      "task_A": "MARKED_RANK7_V1",
+      "task_B": "PAREN_MAX_DEPTH7_V1",
+      "task_disjointness_basis": "marked-item rank extraction versus syntactic nesting-depth computation",
+      "mirrors": [
+        "A_TO_B",
+        "B_TO_A"
+      ],
+      "A_TO_B_and_B_TO_A_are": "two_directional_mirrors_of_one_task_pair"
+    }
+  ],
+  "mappings": [
+    {
+      "mapping_id": "mapping_0",
+      "task_role_A": {
+        "formula": "f_A(z)=z mod 7",
+        "multiplier": 1,
+        "offset": 0
+      },
+      "task_role_B": {
+        "formula": "f_B(z)=(2*z+1) mod 7",
+        "multiplier": 2,
+        "offset": 1
+      },
+      "bijective_over_Z7": true
+    },
+    {
+      "mapping_id": "mapping_1",
+      "task_role_A": {
+        "formula": "f_A(z)=(3*z+2) mod 7",
+        "multiplier": 3,
+        "offset": 2
+      },
+      "task_role_B": {
+        "formula": "f_B(z)=(5*z+4) mod 7",
+        "multiplier": 5,
+        "offset": 4
+      },
+      "bijective_over_Z7": true
+    }
+  ],
+  "verifier_error_rules": {
+    "shared": {
+      "rule_id": "S_Z7_PLUS1",
+      "scope": [
+        "MOD7_SUM_V1",
+        "DFA7_FINAL_V1",
+        "MARKED_RANK7_V1",
+        "PAREN_MAX_DEPTH7_V1"
+      ],
+      "latent_transform": "z_wrong=(z+1) mod 7",
+      "application_order": "transform_latent_z_then_apply_task_role_mapping",
+      "accepted_wrong_count_per_seven_candidate_row": 1,
+      "stable_across_all_tasks": true
+    },
+    "local": [
+      {
+        "rule_id": "L_MOD7_PLUS2",
+        "task_id": "MOD7_SUM_V1",
+        "latent_transform": "z_wrong=(z+2) mod 7",
+        "accepted_wrong_count_per_seven_candidate_row": 1
+      },
+      {
+        "rule_id": "L_DFA7_PLUS3",
+        "task_id": "DFA7_FINAL_V1",
+        "latent_transform": "z_wrong=(z+3) mod 7",
+        "accepted_wrong_count_per_seven_candidate_row": 1
+      },
+      {
+        "rule_id": "L_RANK7_PLUS4",
+        "task_id": "MARKED_RANK7_V1",
+        "latent_transform": "z_wrong=(z+4) mod 7",
+        "accepted_wrong_count_per_seven_candidate_row": 1
+      },
+      {
+        "rule_id": "L_PAREN7_PLUS5",
+        "task_id": "PAREN_MAX_DEPTH7_V1",
+        "latent_transform": "z_wrong=(z+5) mod 7",
+        "accepted_wrong_count_per_seven_candidate_row": 1
+      }
+    ],
+    "task_by_bug_rule_incidence": {
+      "columns": [
+        "MOD7_SUM_V1",
+        "DFA7_FINAL_V1",
+        "MARKED_RANK7_V1",
+        "PAREN_MAX_DEPTH7_V1"
+      ],
+      "rows": [
+        {
+          "rule_id": "S_Z7_PLUS1",
+          "incidence": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "rule_id": "L_MOD7_PLUS2",
+          "incidence": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "rule_id": "L_DFA7_PLUS3",
+          "incidence": [
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "rule_id": "L_RANK7_PLUS4",
+          "incidence": [
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "rule_id": "L_PAREN7_PLUS5",
+          "incidence": [
+            0,
+            0,
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    "online_FPR": {
+      "definition": "accepted_wrong/all_wrong",
+      "accepted_wrong": 1,
+      "all_wrong": 6,
+      "exact_value": "1/6",
+      "applies_to": [
+        "shared_leaky",
+        "local_leaky",
+        "shared_frozen_probe_control",
+        "local_frozen_probe_control"
+      ],
+      "status": "CPU_STATIC_CONSTRUCTION_CONTRACT_NOT_EMPIRICAL_RESULT"
+    }
+  },
+  "row_and_panel_contract": {
+    "per_stack": {
+      "source_rows": 14,
+      "target_calibration_rows": 7,
+      "target_audit_rows": 14
+    },
+    "latent_class_balance": {
+      "source_rows_per_z": 2,
+      "target_calibration_rows_per_z": 1,
+      "target_audit_rows_per_z": 2
+    },
+    "candidate_panel_per_row": [
+      "FINAL=K0",
+      "FINAL=K1",
+      "FINAL=K2",
+      "FINAL=K3",
+      "FINAL=K4",
+      "FINAL=K5",
+      "FINAL=K6"
+    ],
+    "source_calibration_audit_lineage_overlap_allowed": false,
+    "target_audit_use_for_calibration_or_selection_allowed": false,
+    "audit_seal_required_before_any_future_model_action": true
+  },
+  "arms": [
+    {
+      "arm_id": "clean",
+      "role": "capability_and_optimizer_drift_guardrail",
+      "current_parameter_update": false,
+      "parameter_update_authorized": false,
+      "future_update_semantics": null,
+      "blocking_decision": "CLEAN_ARM_UPDATE_SEMANTICS"
+    },
+    {
+      "arm_id": "shared_leaky",
+      "role": "future_shared_verifier_error_update_if_separately_authorized",
+      "verifier_rule_id": "S_Z7_PLUS1",
+      "current_parameter_update": false,
+      "parameter_update_authorized": false,
+      "future_update_recipe": null,
+      "blocking_decision": "ONE_STEP_UPDATE_RECIPE"
+    },
+    {
+      "arm_id": "local_leaky",
+      "role": "future_task_local_verifier_error_update_if_separately_authorized",
+      "verifier_rule_selection": "task_specific_local_rule",
+      "current_parameter_update": false,
+      "parameter_update_authorized": false,
+      "future_update_recipe": null,
+      "blocking_decision": "ONE_STEP_UPDATE_RECIPE"
+    },
+    {
+      "arm_id": "shared_frozen_probe_control",
+      "role": "frozen_measurement_control",
+      "verifier_rule_id": "S_Z7_PLUS1",
+      "current_parameter_update": false,
+      "parameter_update_authorized": false,
+      "selection_exposure_adjustment": false
+    },
+    {
+      "arm_id": "local_frozen_probe_control",
+      "role": "frozen_measurement_control",
+      "verifier_rule_selection": "task_specific_local_rule",
+      "current_parameter_update": false,
+      "parameter_update_authorized": false,
+      "selection_exposure_adjustment": false
+    }
+  ],
+  "scientific_unit": {
+    "unit": "mapping_stack",
+    "screen_layout": "2 task_pairs x 2 mappings x 2 mirrors",
+    "screen_stack_count": 8,
+    "direction_is_mirror_not_new_task_pair": true,
+    "prompts_candidates_and_rows_are_independent_units": false,
+    "technical_seeds_are_independent_units": false
+  },
+  "mapping_stacks": [
+    {
+      "stack_id": "TP1-M0-A_TO_B",
+      "task_pair_id": "TP1_MOD7SUM_DFA7",
+      "mapping_id": "mapping_0",
+      "mirror": "A_TO_B",
+      "source_task": "MOD7_SUM_V1",
+      "target_task": "DFA7_FINAL_V1",
+      "source_rows": 14,
+      "target_calibration_rows": 7,
+      "target_audit_rows": 14,
+      "status": "NOT_RUN"
+    },
+    {
+      "stack_id": "TP1-M0-B_TO_A",
+      "task_pair_id": "TP1_MOD7SUM_DFA7",
+      "mapping_id": "mapping_0",
+      "mirror": "B_TO_A",
+      "source_task": "DFA7_FINAL_V1",
+      "target_task": "MOD7_SUM_V1",
+      "source_rows": 14,
+      "target_calibration_rows": 7,
+      "target_audit_rows": 14,
+      "status": "NOT_RUN"
+    },
+    {
+      "stack_id": "TP1-M1-A_TO_B",
+      "task_pair_id": "TP1_MOD7SUM_DFA7",
+      "mapping_id": "mapping_1",
+      "mirror": "A_TO_B",
+      "source_task": "MOD7_SUM_V1",
+      "target_task": "DFA7_FINAL_V1",
+      "source_rows": 14,
+      "target_calibration_rows": 7,
+      "target_audit_rows": 14,
+      "status": "NOT_RUN"
+    },
+    {
+      "stack_id": "TP1-M1-B_TO_A",
+      "task_pair_id": "TP1_MOD7SUM_DFA7",
+      "mapping_id": "mapping_1",
+      "mirror": "B_TO_A",
+      "source_task": "DFA7_FINAL_V1",
+      "target_task": "MOD7_SUM_V1",
+      "source_rows": 14,
+      "target_calibration_rows": 7,
+      "target_audit_rows": 14,
+      "status": "NOT_RUN"
+    },
+    {
+      "stack_id": "TP2-M0-A_TO_B",
+      "task_pair_id": "TP2_RANK7_PARENDEPTH7",
+      "mapping_id": "mapping_0",
+      "mirror": "A_TO_B",
+      "source_task": "MARKED_RANK7_V1",
+      "target_task": "PAREN_MAX_DEPTH7_V1",
+      "source_rows": 14,
+      "target_calibration_rows": 7,
+      "target_audit_rows": 14,
+      "status": "NOT_RUN"
+    },
+    {
+      "stack_id": "TP2-M0-B_TO_A",
+      "task_pair_id": "TP2_RANK7_PARENDEPTH7",
+      "mapping_id": "mapping_0",
+      "mirror": "B_TO_A",
+      "source_task": "PAREN_MAX_DEPTH7_V1",
+      "target_task": "MARKED_RANK7_V1",
+      "source_rows": 14,
+      "target_calibration_rows": 7,
+      "target_audit_rows": 14,
+      "status": "NOT_RUN"
+    },
+    {
+      "stack_id": "TP2-M1-A_TO_B",
+      "task_pair_id": "TP2_RANK7_PARENDEPTH7",
+      "mapping_id": "mapping_1",
+      "mirror": "A_TO_B",
+      "source_task": "MARKED_RANK7_V1",
+      "target_task": "PAREN_MAX_DEPTH7_V1",
+      "source_rows": 14,
+      "target_calibration_rows": 7,
+      "target_audit_rows": 14,
+      "status": "NOT_RUN"
+    },
+    {
+      "stack_id": "TP2-M1-B_TO_A",
+      "task_pair_id": "TP2_RANK7_PARENDEPTH7",
+      "mapping_id": "mapping_1",
+      "mirror": "B_TO_A",
+      "source_task": "PAREN_MAX_DEPTH7_V1",
+      "target_task": "MARKED_RANK7_V1",
+      "source_rows": 14,
+      "target_calibration_rows": 7,
+      "target_audit_rows": 14,
+      "status": "NOT_RUN"
+    }
+  ],
+  "primary_outcome": {
+    "name": "sealed_target_mean_bug_minus_gold_log_probability",
+    "formula": "L[s,m,t]=(1/N[s])*sum_i(log_p(theta[t],bug[s,m,i]|x[s,i])-log_p(theta[t],gold[s,i]|x[s,i]))",
+    "normalization": null,
+    "sequence_scoring": null,
+    "missing_value_rule": null,
+    "blocking": true,
+    "blocking_decisions": [
+      "MODEL_IDENTIFIER",
+      "TOKENIZER_IDENTIFIER",
+      "TARGET_SEQUENCE_AND_TOKEN_NORMALIZATION",
+      "TARGET_AGGREGATION",
+      "MISSING_VALUE_RULE"
+    ]
+  },
+  "primary_estimand": {
+    "leaky_change_formula": "Delta_leaky[s,m]=L_leaky[s,m,post]-L_leaky[s,m,pre]",
+    "tau_formula": "tau[s]=Delta_leaky[s,shared]-Delta_leaky[s,local]",
+    "frozen_controls_enter_tau_subtraction": false,
+    "decision_unit": "tau[s] at mapping_stack level",
+    "status": "NOT_RUN"
+  },
+  "frozen_replay_gate": {
+    "D_formula": "D[s]=max_m(abs(L_frozen[s,m,post]-L_frozen[s,m,pre]))",
+    "pass_rule": "D[s] <= epsilon_replay",
+    "epsilon_replay": null,
+    "blocking": true,
+    "blocking_decision": "EPSILON_REPLAY",
+    "status": "NOT_RUN"
+  },
+  "g1_opportunity_matching": {
+    "treatment_time": "before_any_model_update",
+    "cpu_static_contracts": {
+      "online_FPR_shared": "1/6",
+      "online_FPR_local": "1/6",
+      "accepted_wrong_per_row_shared": 1,
+      "accepted_wrong_per_row_local": 1,
+      "all_wrong_per_row": 6,
+      "positive_candidate_count_including_gold_shared": 2,
+      "positive_candidate_count_including_gold_local": 2,
+      "candidate_panel_identical_between_arms": true,
+      "wrong_label_multiset_balance_required_by_construction": true,
+      "source_prompt_identity_required_within_stack": true,
+      "candidate_identity_and_order_required_within_stack": true
+    },
+    "model_dependent_fields": {
+      "base_logits": {
+        "value": null,
+        "blocking": true
+      },
+      "accepted_wrong_reward_mass": {
+        "value": null,
+        "blocking": true
+      },
+      "initial_wrong_target_reachability": {
+        "value": null,
+        "blocking": true
+      },
+      "relative_advantage": {
+        "value": null,
+        "blocking": true
+      },
+      "candidate_exposure_or_selection_distribution": {
+        "value": null,
+        "blocking": true
+      },
+      "tokenizer_level_balance": {
+        "value": null,
+        "blocking": true
+      },
+      "base_logit_identity": {
+        "value": null,
+        "blocking": true
+      },
+      "initial_state_identity": {
+        "value": null,
+        "blocking": true
+      },
+      "optimizer_and_budget_identity": {
+        "value": null,
+        "blocking": true
+      }
+    },
+    "exact_model_dependent_metric_definitions": null,
+    "model_dependent_balance_thresholds": null,
+    "pass": null,
+    "blocking": true,
+    "status": "NOT_RUN",
+    "post_treatment_matching": false,
+    "outcome_conditioned_stack_deletion": false,
+    "adaptive_mapping_revision": false
+  },
+  "human_review": {
+    "status": "PENDING_HUMAN_REVIEW",
+    "blocking": true,
+    "required_checks": [
+      "task_prompt_is_unambiguous",
+      "clean_oracle_and_latent_z_are_correct",
+      "all_seven_candidates_are_well_formed",
+      "gold_candidate_is_unique",
+      "shared_wrong_candidate_is_wrong_and_matches_S_Z7_PLUS1",
+      "local_wrong_candidate_is_wrong_and_matches_task_local_shift",
+      "source_calibration_and_audit_rows_have_no_lineage_overlap",
+      "target_audit_has_not_been_used_for_calibration_selection_or_model_evaluation"
+    ],
+    "completed_checks": []
+  },
+  "blocking_decisions": {
+    "MODEL_IDENTIFIER": {
+      "value": null,
+      "blocking": true
+    },
+    "TOKENIZER_IDENTIFIER": {
+      "value": null,
+      "blocking": true
+    },
+    "ONE_STEP_UPDATE_RECIPE": {
+      "value": null,
+      "blocking": true
+    },
+    "CLEAN_ARM_UPDATE_SEMANTICS": {
+      "value": null,
+      "blocking": true
+    },
+    "EPSILON_REPLAY": {
+      "value": null,
+      "blocking": true
+    },
+    "G1_MODEL_DEPENDENT_METRIC_DEFINITIONS": {
+      "value": null,
+      "blocking": true
+    },
+    "G1_MODEL_DEPENDENT_BALANCE_THRESHOLDS": {
+      "value": null,
+      "blocking": true
+    },
+    "TARGET_SEQUENCE_AND_TOKEN_NORMALIZATION": {
+      "value": null,
+      "blocking": true
+    },
+    "TARGET_AGGREGATION": {
+      "value": null,
+      "blocking": true
+    },
+    "MISSING_VALUE_RULE": {
+      "value": null,
+      "blocking": true
+    },
+    "HUMAN_REVIEW": {
+      "value": null,
+      "blocking": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    }
+  },
+  "stop_rules": [
+    "STOP_IF_HUMAN_REVIEW_IS_NOT_COMPLETE",
+    "STOP_IF_ANY_REQUIRED_REAL_ROW_OR_CANDIDATE_PANEL_IS_MISSING",
+    "STOP_IF_SOURCE_CALIBRATION_OR_AUDIT_LINEAGE_OVERLAPS",
+    "STOP_IF_TARGET_AUDIT_WAS_USED_FOR_CALIBRATION_SELECTION_OR_PRIOR_MODEL_EVALUATION",
+    "STOP_IF_ANY_TASK_ORACLE_SHARED_RULE_OR_LOCAL_RULE_CHECK_FAILS",
+    "STOP_IF_ANY_MAPPING_IS_CHANGED_AFTER_ASSET_FREEZE",
+    "STOP_IF_ANY_MODEL_TOKENIZER_UPDATE_EPSILON_OR_G1_BLOCKER_IS_NULL",
+    "STOP_IF_HASH_LINEAGE_SEAL_OR_RANDOMIZATION_CHECK_FAILS",
+    "STOP_IF_G1_PRETREATMENT_EXCHANGEABILITY_FAILS",
+    "INVALIDATE_IF_POSTTREATMENT_MAPPING_SELECTION_STACK_DELETION_THRESHOLD_CHANGE_OR_REMATCHING_OCCURS",
+    "INVALIDATE_STACK_OR_RUN_IF_D_EXCEEDS_EPSILON_REPLAY",
+    "STOP_IF_ANY_OF_THE_EIGHT_MAPPING_STACKS_IS_MISSING",
+    "STOP_IF_TECHNICAL_SEEDS_ARE_TREATED_AS_INDEPENDENT_UNITS",
+    "STOP_WITHOUT_A_NEW_EXPLICIT_MODEL_RUN_AUTHORIZATION_RECEIPT"
+  ],
+  "authorization": {
+    "construct_cpu_only_task_rows_candidate_panels_manifests_and_seals": true,
+    "cpu_schema_hash_lineage_overlap_and_bijection_checks": true,
+    "cpu_clean_oracle_and_verifier_fpr_checks_after_human_review": true,
+    "human_review_required": true,
+    "gpu": false,
+    "model_weight_load": false,
+    "tokenizer_load": false,
+    "model_inference": false,
+    "model_generation": false,
+    "model_forward": false,
+    "backward": false,
+    "gradient": false,
+    "optimizer": false,
+    "optimizer_step": false,
+    "parameter_update": false,
+    "training": false,
+    "rl": false,
+    "rlvr": false,
+    "one_stack_methodology_pilot": false,
+    "eight_stack_screen": false,
+    "scientific_go_stop_decision": false
+  }
+}

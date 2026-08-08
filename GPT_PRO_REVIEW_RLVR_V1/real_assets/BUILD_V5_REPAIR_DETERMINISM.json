@@ -1,0 +1,11 @@
+{
+  "byte_identical": true,
+  "file_count_a": 574,
+  "file_count_b": 574,
+  "only_in_a": [],
+  "only_in_b": [],
+  "schema_version": "p4-r1a-deterministic-tree-comparison-v1",
+  "sha256_mismatches": [],
+  "tree_a": "build_v5_repair_a",
+  "tree_b": "build_v5_repair_b"
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "r11-static-freeze-manifest-r1",
+  "status": "FROZEN_STATIC_ONLY",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "run_eligible": false,
+  "model_execution_performed": false,
+  "model_execution_authorized": false,
+  "decision": "R10_BUG_REUSE_PATH_NOT_RUN_ELIGIBLE",
+  "artifacts": {
+    "analyze_r10_g1_development.py": "96cc0df835b54ea02bc8c9a0dc63b6ad033116ff51eb053220cd33a6fad18a3f",
+    "test_analyze_r10_g1_development.py": "b393e2d7cb1d536bf44db4405447be3906508867ae57eaa9629562c9c1d728a8",
+    "R10_G1_DEVELOPMENT_REPLAY_PREREG_R1.json": "01985c3e5d96dd627fd984a7f44822ae172ee99243a6e6190dce53f5092b83d4",
+    "R10_G1_DEVELOPMENT_REPLAY_RESULT_R1.json": "3e51f788dfad694252b2fe9572dd4e7ba80cdc3482c7a841c2c9e4d730f5cd47",
+    "R11_GOLD_ONLY_DID_BRIDGE_PROTOCOL_R2.json": "c9015c8d04da3b95d43162ab087e5fe4b4dcf1c4a5e689f2df610d2e379efd78",
+    "R11_GPT_PRO_REVIEW_RESULTS_R1.md": "b6b0f1cab1afc64dc843b147375be6d381cb22f9026acd8f3df1416c7ce007b9",
+    "audit_r11_bridge_reuse_eligibility.py": "e6e160576aec842aece9181fdea563081aecce412244fe9364b526f10ae6782a",
+    "test_audit_r11_bridge_reuse_eligibility.py": "fde2ce4b6573d4a33fb30c2d5ca92d52528dbb9ad1a56d0ad52245c4085bb01a",
+    "R11_BRIDGE_REUSE_PREFLIGHT_R1.json": "e5769df0136f57150048674362506846f7155b91eaf026694ccf28fb23964571"
+  },
+  "parent_bindings": {
+    "r10_run_index_sha256": "9d7a13df6c84ddcdf554e26a82f62e4d65d19105a34b16a1805df1f88bf35a3f",
+    "r10_completion_sha256": "2a70a66ed936307e4d4ef9ad7b8bd59315fa6319c55f809e2b4d9a5f9d3b009f",
+    "r10_runner_sha256": "439cc675cf8b53c1c0ec2e70a85866a6b87a1a9eaf3539478fe087ded35c6f4d"
+  },
+  "verification": {
+    "json_artifacts_parse": true,
+    "unit_tests_passed": 12,
+    "unit_tests_total": 12,
+    "r10_process_results_checked": 16,
+    "r10_process_results_passed": 16,
+    "r10_unique_source_update_cells_per_replicate": 40,
+    "low_cost_16_process_reuse_eligible": false,
+    "clean_fallback_os_processes": 32,
+    "clean_fallback_technical_update_executions": 160
+  },
+  "next_stage_gate": {
+    "required_static_work": "Implement and freeze one arm-parameterized BUG/GOLD_ONLY runner and its fail-closed bridge validator.",
+    "required_execution_authority": "A new action-specific authorization is required after the static package passes; this manifest grants none.",
+    "automatic_sampled_rlvr_progression": false
+  },
+  "authorization": {
+    "cpu_static_work": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

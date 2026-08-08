@@ -1,0 +1,30 @@
+{
+  "asset_bindings": {
+    "manifest_relpath": "R13_MATCHED_TARGET_PANEL_MANIFEST_R1.json",
+    "manifest_sha256": "bfeb41a94313a5efef342dada7120c7312de00d6c73757006a258f06a4dcf0bd",
+    "panel_jsonl_relpath": "R13_MATCHED_TARGET_PANELS_R1.jsonl",
+    "panel_jsonl_sha256": "ddd77e19970f96d5dd68e2c4915f4df31a697f7e2af0530d3cefa0ff0c84af8c",
+    "raw_inventory_commitment_sha256": "ec79d18f65f8542ec9c44557d9296ed885d751caec0ba8dfba297395c4142dd7"
+  },
+  "completion_rule": "A reviewer must create a separate completed receipt, bind these exact hashes, fill every reviewer field, record PASS or REJECT, and provide a real externally verifiable signature. Editing this template in place is forbidden.",
+  "decision": null,
+  "required_checks": [
+    "independently compare all 28 H0/H1 prompt pairs and confirm only the CODEBOOK line differs",
+    "independently compare all 28 H0/H1 raw-row pairs and confirm only allowlisted mechanically implied leaves differ",
+    "confirm every H0 prompt and raw row is byte-identical to its bound build_v5_repair_a original",
+    "confirm K0..K6 candidate bijection and mechanically implied gold/shared/local labels in every row",
+    "confirm q_H0 and q_H1 tables and r/q_H0/q_H1 distinctness for r=1..5"
+  ],
+  "review_completed": false,
+  "review_method": null,
+  "review_notes": null,
+  "reviewed_at_utc": null,
+  "reviewer_affiliation_or_role": null,
+  "reviewer_name": null,
+  "schema_version": "r13-matched-target-panel-human-review-receipt-template-r1",
+  "signature": null,
+  "signature_algorithm": null,
+  "signature_key_id": null,
+  "status": "UNCOMPLETED_TEMPLATE_NOT_A_REVIEW_RECEIPT",
+  "template_only": true
+}

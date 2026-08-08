@@ -1,0 +1,29 @@
+{
+  "authorization_boundary": "Machine allowlist validation is not independent human review and grants no model execution authority.",
+  "bindings": {
+    "human_review_template_sha256": "32e4d4e27a196e7fe6f57b4d0a3ddbb0b2af91746a2df85a5df711adf1b5579d",
+    "manifest_sha256": "bfeb41a94313a5efef342dada7120c7312de00d6c73757006a258f06a4dcf0bd",
+    "panel_jsonl_sha256": "ddd77e19970f96d5dd68e2c4915f4df31a697f7e2af0530d3cefa0ff0c84af8c",
+    "protocol_sha256": "9e5c5aa889beecb5d66cd5a1920c9aa86ed3040586ec744cbb069216e20c06ab",
+    "raw_inventory_commitment_sha256": "ec79d18f65f8542ec9c44557d9296ed885d751caec0ba8dfba297395c4142dd7",
+    "source_panel_sha256": "5df581f7ff10180d36fd57f3d7ab2df8bee8f3c6dc449af2fa4972062960a55d"
+  },
+  "human_review_completed": false,
+  "implementation_bindings": {
+    "generator_relpath": "r13_matched_panels_generate_r1.py",
+    "generator_sha256": "4f32aa5bdbef2a863b8d13d25bb7db4aa045647a3b6249ed9fdc4da75609627a",
+    "validator_relpath": "r13_matched_panels_validate_r1.py",
+    "validator_sha256": "efdeabaa961177d2f25925e7326c931f16c65cc2e80ad72b92e4ce01d2cd7926"
+  },
+  "model_actions": 0,
+  "model_execution_authorized": false,
+  "model_execution_performed": false,
+  "run_eligible": false,
+  "schema_version": "r13-matched-target-panel-allowlist-validation-r1",
+  "scientific_evidence": false,
+  "validated_pairs": 28,
+  "validated_raw_files": 112,
+  "validated_rows": 56,
+  "validated_stacks": 4,
+  "verdict": "PASS_STATIC_MATCHED_PANEL_ALLOWLIST_ONLY"
+}

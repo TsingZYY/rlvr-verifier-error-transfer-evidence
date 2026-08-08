@@ -1,0 +1,44 @@
+{
+  "schema_version": "r11-static-freeze-manifest-r3",
+  "status": "FROZEN_RUNNER_AND_RESULT_VALIDATOR_NOT_RUN_ELIGIBLE",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "run_eligible": false,
+  "model_execution_performed": false,
+  "model_execution_authorized": false,
+  "parent_manifest_sha256": "1694d6c5f6da0bc0128816f0d4d57e8c3be02b2b721ee904f9a27f6ae4292331",
+  "decision": "R11_SCIENTIFIC_AND_RESULT_ANALYSIS_CONTRACTS_STATICALLY_IMPLEMENTED_RELEASE_AND_AUTHORIZATION_STILL_ABSENT",
+  "artifacts": {
+    "R11_STATIC_FREEZE_MANIFEST_R2.json": "1694d6c5f6da0bc0128816f0d4d57e8c3be02b2b721ee904f9a27f6ae4292331",
+    "validate_r11_bridge_results.py": "73f029c4e79d713e01c9fb30c883c5731a27c8559bb5bce41d4e1c1c0850f9c3",
+    "test_validate_r11_bridge_results.py": "60884b63e47d9eee1fff7b8f4becd9276af5d0f301fc27c5d6de17cc6d087381",
+    "R11_RESULT_VALIDATOR_STATIC_AUDIT_R1.json": "8c1fc8acd1c9fe60d605e07c55f6ee572582860e962cbaca7e3ee0ede59722dd"
+  },
+  "verification": {
+    "result_validator_python_compile": "PASS",
+    "result_validator_and_related_tests_passed": 20,
+    "result_validator_and_related_tests_total": 20,
+    "arm_runner_and_parent_regression_tests_passed": 39,
+    "arm_runner_and_parent_regression_tests_total": 39,
+    "total_reported_static_tests_passed": 59,
+    "model_action_count": 0
+  },
+  "remaining_before_run_eligibility": {
+    "completed_arm_contracts": "0/32",
+    "completed_execution_manifests": "0/32",
+    "completed_run_index": false,
+    "independent_portable_package_audit": false,
+    "external_action_specific_authorization": false,
+    "run_eligible": false
+  },
+  "authorization": {
+    "cpu_static_work": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

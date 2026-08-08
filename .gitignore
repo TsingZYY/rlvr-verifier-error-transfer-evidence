@@ -1,0 +1,38 @@
+# Local environments and caches
+.mvp-venv/
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.cache/
+
+# Model weights are referenced by inventory and hashes, not redistributed
+models/
+*.safetensors
+
+# Third-party papers remain local; publish indexes, sources, and validation only
+literature/**/*.pdf
+literature/README.md
+
+# Generated archives and duplicate snapshots
+*.zip
+GPT_PRO_REVIEW_RLVR_CODE_SNAPSHOT_V1/
+GPT_PRO_REVIEW_RLVR_V1/_packet_*/
+GPT_PRO_REVIEW_RLVR_V1/_r11_portable_clean_test_r1/
+GPT_PRO_REVIEW_RLVR_V1/r11_gpt_pro_packet_r1/
+GPT_PRO_REVIEW_RLVR_V1/latin_square_pro_round_v1/
+
+# Large generated real-asset trees; retain generators, manifests, and validators
+GPT_PRO_REVIEW_RLVR_V1/real_assets/build_*/
+GPT_PRO_REVIEW_RLVR_V1/real_assets/release_*/
+GPT_PRO_REVIEW_RLVR_V1/real_assets/latin_square_pilot*/
+
+# Machine-local and internal AI-review artifacts
+GPT_PRO_REVIEW_RLVR_V1/formal_g1_development_r1/R13_LOCAL_RUNTIME_PREFLIGHT_RECEIPT_R1.json
+GPT_PRO_REVIEW_RLVR_V1/formal_g1_development_r1/R11_GPT_PRO_REVIEW_RESULTS_R1.md
+GPT_PRO_REVIEW_RLVR_V1/formal_g1_development_r1/R11_GPT_PRO_10_THREAD_SYNTHESIS_R1.md
+GPT_PRO_REVIEW_RLVR_V1/**/*RAW_RESPONSE*.md
+GPT_PRO_REVIEW_RLVR_V1/**/PRO_UPLOAD_*.md
+GPT_PRO_REVIEW_RLVR_V1/00_START_HERE.md
+GPT_PRO_REVIEW_RLVR_V1/02_FINAL_REVIEW_DECISION.md
+GPT_PRO_REVIEW_RLVR_V1/03_GPT_PRO_DIRECTION_VERDICT.md
+GPT_PRO_REVIEW_RLVR_V1/10_GPT_PRO_POST_BUILD_CPU_ASSET_VERDICT.md

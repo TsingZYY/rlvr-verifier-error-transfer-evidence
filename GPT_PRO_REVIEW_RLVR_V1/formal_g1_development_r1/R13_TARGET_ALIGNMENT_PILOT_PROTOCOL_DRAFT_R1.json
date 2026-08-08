@@ -1,0 +1,222 @@
+{
+  "schema_version": "r13-fixed-update-target-alignment-pilot-draft-r1",
+  "status": "DRAFT_STATIC_DESIGN_NOT_AUTHORIZED_NO_MODEL_RUN",
+  "run_eligible": false,
+  "model_execution_authorized": false,
+  "model_execution_performed": false,
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "formal_confirmatory": false,
+  "purpose": "Hold each source BUG update fixed and evaluate that exact same updated parameter state on two matched target panels whose codebook alignment differs, to test whether the relative transfer hotspot follows the target surface-code displacement.",
+  "mechanism_scope": {
+    "frozen_prior_family": "AFFINE_CODEBOOKS_OVER_Z7_ONLY",
+    "identified_competitor": "R13 can discriminate the frozen latent-offset location from the old and switched affine surface-code displacement locations within the matched M0 panels.",
+    "non_affine_boundary": "Non-affine permutations, semantic aliases, formatting channels, and other surface mechanisms are outside this pilot. They may be introduced only in a later, separately frozen broader mechanism gate; failure here does not exclude them and success here does not generalize to them."
+  },
+  "motivation_and_outcome_awareness": {
+    "r10_diagnostic": "R10_LATENT_VS_SURFACE_DIAGNOSTIC_RESULT_R1.json",
+    "observed_before_r13_design": true,
+    "observed_r10_pattern": "The model-free diagnostic failed latent-greater-than-surface in all four M0 stacks and passed it in all four M1 stacks.",
+    "consequence": "The uniform shared-latent-identity claim remains stopped. R13 is a new outcome-aware development mechanism diagnostic; it cannot rescue or relabel R10 as confirmatory.",
+    "nonredundancy_relative_to_r12": "R13 does not create reward arms that enumerate the same five updates under different labels. Each source update is executed once and the intervention occurs only in the matched target panel presented to that fixed update.",
+    "freeze_rule": "Any change to source stacks, target codebooks, panel matching, source update recipe, identities, estimands, counts, tolerances, gates, or claim boundary requires a new protocol version before authorization."
+  },
+  "model_contract": {
+    "repository": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+    "precision": "base_bfloat16_lora_float32",
+    "local_model_inventory_must_be_hash_bound": true
+  },
+  "fixed_source_stacks": {
+    "ordered_stack_ids": [
+      "TP1-M0-A_TO_B",
+      "TP1-M0-B_TO_A",
+      "TP2-M0-A_TO_B",
+      "TP2-M0-B_TO_A"
+    ],
+    "selection_reason": "These are the complete four M0 stacks that failed the frozen R10 latent-versus-surface diagnostic; no M0 direction or task pair is subsetted.",
+    "top_level_scientific_clusters": 2,
+    "cluster_definition": "task pair",
+    "development_only": true
+  },
+  "fixed_source_update_contract": {
+    "source_identities": [1, 2, 3, 4, 5],
+    "reward_rule": "For source identity r, reward the gold candidate and the frozen wrong candidate at latent offset r; reward all other candidates zero.",
+    "candidate_panel_size": 7,
+    "design_candidate_panel_fpr": "1/6",
+    "binary_reward_mass_per_row": 2,
+    "fpr_boundary": "This is an unweighted fixed-panel design FPR, not empirical, natural, or policy-weighted FPR.",
+    "update_recipe": "The frozen R10 one-step exact-expected-reward LoRA update, with a fresh reset to the identical initial trainable snapshot before every r.",
+    "target_blindness": "Neither target-panel arm, target codebook, target rows, target scores, nor target evaluation order may enter the source update function, seed, row order, reward mask, gradient, or parameter update.",
+    "unique_update_unit": "U(k,s,r), one source update for each technical replicate k, stack s, and identity r.",
+    "same_update_for_both_target_arms": "For a fixed (k,s,r), compute U exactly once, record one trainable-parameter hash, then evaluate both target panels without any intervening gradient, optimizer action, parameter restore, cache mutation, or state mutation.",
+    "gold_control": "NOT_INCLUDED. Pre-versus-post target effects identify representation of this fixed BUG update; they do not decompose BUG from Gold-only learning."
+  },
+  "target_alignment_intervention": {
+    "ordered_arms": [
+      "H0_ORIGINAL_M0_TARGET",
+      "H1_SWITCHED_TARGET"
+    ],
+    "surface_alignment_formula": "q_h(r) = inverse_mod7(a_target_h) * a_source * r mod 7; affine intercepts cancel because q is a displacement from each row's gold latent z.",
+    "H0_ORIGINAL_M0_TARGET": {
+      "role": "Reuse the exact frozen M0 target-calibration panel.",
+      "A_TO_B": {
+        "source_codebook": "K((1*z+0) mod 7)",
+        "target_codebook": "K((2*z+1) mod 7)",
+        "surface_factor": 4,
+        "q_surface_by_r": {"1": 4, "2": 1, "3": 5, "4": 2, "5": 6}
+      },
+      "B_TO_A": {
+        "source_codebook": "K((2*z+1) mod 7)",
+        "target_codebook": "K((1*z+0) mod 7)",
+        "surface_factor": 2,
+        "q_surface_by_r": {"1": 2, "2": 4, "3": 6, "4": 1, "5": 3}
+      }
+    },
+    "H1_SWITCHED_TARGET": {
+      "role": "Use the same canonical target instances but switch the target multiplier so the source surface displacement maps to q=3r in both directions.",
+      "A_TO_B": {
+        "source_codebook": "K((1*z+0) mod 7)",
+        "target_codebook": "K((5*z+1) mod 7)",
+        "surface_factor": 3,
+        "q_surface_by_r": {"1": 3, "2": 6, "3": 2, "4": 5, "5": 1}
+      },
+      "B_TO_A": {
+        "source_codebook": "K((2*z+1) mod 7)",
+        "target_codebook": "K((3*z+0) mod 7)",
+        "surface_factor": 3,
+        "q_surface_by_r": {"1": 3, "2": 6, "3": 2, "4": 5, "5": 1}
+      }
+    },
+    "distinctness_gate": "For every stack and r in 1..5, r, q_H0(r), and q_H1(r) must be three distinct nonzero elements of Z7.",
+    "q6_required": true,
+    "q6_rule": "Read q=6 from the sixth non-gold target offset using all seven bound candidate scores; never extrapolate from q=1..5.",
+    "matched_panel_contract": [
+      "H0 and H1 contain the same seven canonical target instances per stack, in the same order, with identical task id, task input, canonical z, panel role, candidate set, answer format, prompt template, and non-codebook text bytes.",
+      "Only the target codebook id/formula/multiplier/latent-to-candidate permutation, the CODEBOOK text segment, and mechanically implied gold/candidate labels and lineage commitments may differ.",
+      "The target-arm rows must be generated before authorization, independently human-reviewed, byte-hash bound, and rejected if any non-allowlisted field differs.",
+      "Both arms use the same seven surface candidate strings FINAL=K0..FINAL=K6 exactly once per row."
+    ]
+  },
+  "potential_outcomes_and_estimands": {
+    "raw_effect": "E(k,s,h,r,q)=[post log P_h(z+q)-post log P_h(z)]-[pre log P_h(z+q)-pre log P_h(z)], averaged over the seven matched target rows.",
+    "target_identities": [1, 2, 3, 4, 5, 6],
+    "double_centering": "Within each exact (k,s,h), R(r,q)=E(r,q)-mean_q E(r,q)-mean_r E(r,q)+mean_all E over the frozen 5x6 grid.",
+    "surface_location": "q_h(r) is the arm-specific surface alignment defined by the bound codebook multipliers.",
+    "surface_advantage_by_arm": "G(k,s,h,r)=R(k,s,h,r,q_h(r))-R(k,s,h,r,r). Positive G means the arm-specific surface location exceeds the latent location.",
+    "primary_alignment_switch_interaction": "F(k,s,r)=[R(H1,r,q_H1)-R(H1,r,q_H0)]-[R(H0,r,q_H1)-R(H0,r,q_H0)]. Positive F means the relative hotspot moves from the old surface location toward the new surface location when only target alignment switches.",
+    "latent_minus_surface_by_arm": "C(k,s,h,r)=-G(k,s,h,r).",
+    "aggregation_order": [
+      "compute E, R, G, F, and C within the same technical replicate and exact stack/identity",
+      "under A/B, pass raw arm-wise and order-wise reproducibility before averaging",
+      "equal-average the five fixed r values within each stack",
+      "report all four M0 stacks and both task pairs separately before any descriptive overall mean",
+      "never treat identities, target cells, processes, panels, or technical replicates as independent task samples"
+    ]
+  },
+  "execution_variants": {
+    "MINIMAL_4_PROCESS_A": {
+      "status": "DRAFT_OPTION_NOT_SELECTED",
+      "replicates": ["A"],
+      "os_processes": 4,
+      "process_formula": "4 M0 stacks x 1 technical replicate; each process evaluates both target arms.",
+      "unique_design_source_updates": 20,
+      "technical_update_executions": 20,
+      "pre_target_vectors": 8,
+      "pre_target_identity_reads": 48,
+      "post_target_vectors": 40,
+      "post_target_identity_reads": 240,
+      "total_target_identity_metric_cells": 288,
+      "count_check": "4 stacks x 5 updates = 20; 20 x 2 target arms x 6 identities = 240 post cells; 4 x 2 x 6 = 48 pre cells."
+    },
+    "REPRODUCIBILITY_8_PROCESS_AB": {
+      "status": "DRAFT_OPTION_NOT_SELECTED",
+      "replicates": ["A", "B"],
+      "os_processes": 8,
+      "process_formula": "4 M0 stacks x 2 technical replicates; each process evaluates both target arms.",
+      "unique_design_source_updates": 20,
+      "technical_update_executions": 40,
+      "pre_target_vectors": 16,
+      "pre_target_identity_reads": 96,
+      "post_target_vectors": 80,
+      "post_target_identity_reads": 480,
+      "total_target_identity_metric_cells": 576,
+      "evaluation_order": {"A": ["H0_ORIGINAL_M0_TARGET", "H1_SWITCHED_TARGET"], "B": ["H1_SWITCHED_TARGET", "H0_ORIGINAL_M0_TARGET"]},
+      "replicates_are_scientific_samples": false,
+      "count_check": "20 design updates x 2 replicates = 40 executions; 40 x 2 target arms x 6 identities = 480 post cells; 8 x 2 x 6 = 96 pre cells."
+    },
+    "preauthorization_choice_rule": "Select and freeze exactly one variant before authorization. Inspecting A and then adding B is forbidden."
+  },
+  "numerical_contract": {
+    "technical_absolute_tolerance": 1e-12,
+    "directional_dead_zone_epsilon": 1e-10,
+    "epsilon_is_not_a_practical_margin": true,
+    "non_finite_or_clipping_action": "TECHNICAL_STOP_NO_SCIENTIFIC_INTERPRETATION"
+  },
+  "technical_pass_requires_all": [
+    "complete the exact selected 4-process or 8-process cell set and all frozen counts",
+    "bind the exact source rows, both matched target panels, codebooks, model revision/inventory, runner, validator, authorization, invocation plan, and output paths",
+    "verify the matched-panel allowlist and independent human-review receipts before model authorization",
+    "reset to the identical initial trainable snapshot before every source identity update",
+    "for each (k,s,r), execute exactly one target-blind source update and use its one parameter hash for both target arms",
+    "perform target readout without gradient or parameter/state mutation; verify the parameter hash before and after each arm and across arm order",
+    "reconstruct q=1..6 from all seven raw candidate scores and reject missing, duplicated, reordered, or unbound rows",
+    "verify r, q_H0(r), and q_H1(r) are pairwise distinct for all frozen cells",
+    "all values finite, no realized clipping, and no adaptive retry",
+    "under A/B, source update hashes and every raw E matrix match within the frozen tolerance despite reversed target-arm evaluation order"
+  ],
+  "development_decision_rule": {
+    "surface_alignment_switch_pass_requires_all": [
+      "technical pass",
+      "for each of the four M0 stacks, mean_r F(s,r) > epsilon",
+      "for each of the four M0 stacks, mean_r G(s,H0,r) > epsilon",
+      "for each of the four M0 stacks, mean_r G(s,H1,r) > epsilon",
+      "both task-pair descriptive means and the descriptive overall means of F, G_H0, and G_H1 are positive"
+    ],
+    "pass_label": "R13_DEVELOPMENT_SURFACE_ALIGNMENT_SWITCH_PASS_ONLY",
+    "interpretation_if_passed": "Within the four frozen M0 development stacks, changing only the target codebook alignment moved relative transfer toward the new surface-aligned target location while the exact source update was held fixed. This supports target-interface surface alignment as a mechanism for the M0 pattern, not semantic sharedness.",
+    "failure_labels": {
+      "F_GATE_FAILURE": "The target alignment switch did not consistently reposition the relative hotspot; stop the target-alignment causal mechanism claim.",
+      "G_H1_GATE_FAILURE": "The new arm did not place its surface location above the latent location; report mixed or inconclusive representation evidence.",
+      "TECHNICAL_GATE_FAILURE": "No scientific interpretation; a repaired design requires a new frozen version before any rerun.",
+      "DEAD_ZONE": "A value with absolute magnitude at or below epsilon is not directional evidence."
+    },
+    "identity_heterogeneity": "Report all 20 stack-by-identity F values and all 40 stack-by-arm-by-identity G values. They are fixed nested contrasts, not independent samples.",
+    "no_latent_claim_resurrection": "R13 cannot turn the already failed uniform R10 latent-greater-than-surface screen into a pass. A failure of the surface-switch mechanism is inconclusive about other mechanisms, not evidence for latent sharedness.",
+    "automatic_progression": false,
+    "stop_rule": "Any technical failure or any required stack-level directional failure stops this version. Do not change a target multiplier, stack, identity, epsilon, evaluation order, or update recipe after inspecting outcomes."
+  },
+  "result_validator_minimum_requirements": [
+    "validate strict JSON, exact protocol and asset hashes, exact coverage, and no duplicate keys or non-finite values",
+    "recompute both target codebooks, q_H0, q_H1, pairwise distinctness, q6, all E matrices, double-centering, G, F, C, counts, and gates from raw seven-candidate traces",
+    "verify the same source-update parameter hash is used by both target arms and is unchanged by either readout",
+    "under A/B, validate each target arm and reversed evaluation order separately before averaging",
+    "reject any non-allowlisted H0/H1 row or prompt difference",
+    "label every result post-hoc, development-only, non-inferential, and not sampled RLVR"
+  ],
+  "claim_boundary": {
+    "can_support_if_passed": "Development-only evidence in four fixed affine M0 stacks that a target codebook alignment switch causally repositions the relative readout of an exactly fixed one-step source BUG update toward the new surface-aligned target location.",
+    "cannot_support": [
+      "causal proof of shared semantic identity",
+      "a general latent-versus-surface theory outside these matched panels",
+      "same empirical, natural, or policy-weighted FPR",
+      "BUG-versus-Gold decomposition",
+      "sampled or multi-step RLVR transfer",
+      "capability damage or deployment risk",
+      "population task generalization",
+      "formal or confirmatory inference",
+      "a practical-magnitude claim"
+    ],
+    "statistical_boundary": "There are two outcome-aware development task-pair clusters. Processes, directions, identities, panels, readout cells, and A/B repeats do not increase the scientific sample size; no SE, CI, inferential p-value, or population claim is permitted."
+  },
+  "authorization": {
+    "cpu_static_design_and_tests": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "run_r13_target_alignment_pilot": false,
+    "warning": "This draft grants no model execution authority."
+  }
+}

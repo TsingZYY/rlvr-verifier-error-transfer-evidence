@@ -1,0 +1,31 @@
+﻿report_id,company,title,pages,verifier,verifiable_reward,reward_hacking,false_positive,false_negative,generalization,cross_task,grader,unit_test
+AI2-TULU3-TR,Ai2,Tulu 3: Pushing Frontiers in Open Language Model Post-Training,82,8,45,0,0,0,16,1,0,0
+QWEN-QWEN25MATH-TR,Alibaba Qwen,Qwen2.5-Math Technical Report: Toward Mathematical Expert Model via Self-Improvement,39,5,0,0,0,1,0,0,0,0
+QWEN-QWEN3-TR,Alibaba Qwen,Qwen3 Technical Report,35,3,0,1,0,1,1,0,0,0
+ANTHROPIC-CLAUDE37-SC,Anthropic,Claude 3.7 Sonnet System Card,43,0,0,5,2,1,1,0,4,0
+ANTHROPIC-CLAUDE4-SC,Anthropic,Claude 4 System Card,123,0,0,0,0,0,1,0,5,0
+ANTHROPIC-HAIKU45-SC,Anthropic,Claude Haiku 4.5 System Card,39,0,0,0,0,0,0,0,1,0
+ANTHROPIC-SONNET45-SC,Anthropic,Claude Sonnet 4.5 System Card,149,0,0,0,0,0,2,0,8,0
+ANTHROPIC-SONNET46-SC,Anthropic,Claude Sonnet 4.6 System Card,134,0,0,0,0,0,0,0,13,0
+BYTEDANCE-SEED15-TR,ByteDance Seed,Seed-Thinking-v1.5: Advancing Superb Reasoning Models with Reinforcement Learning,19,39,0,1,0,0,3,0,0,3
+DEEPSEEK-MATHV2-TR,DeepSeek,DeepSeekMath-V2: Towards Self-Verifiable Mathematical Reasoning,19,59,0,0,0,0,0,0,0,0
+DEEPSEEK-R1-TR,DeepSeek,DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning,86,5,0,9,0,0,3,0,1,2
+MICROSOFT-PHI4R-TR,Microsoft,Phi-4-Reasoning Technical Report,33,2,0,1,0,0,4,0,0,0
+MINIMAX-M1-TR,MiniMax,MiniMax-M1: Scaling Test-Time Compute Efficiently with Lightning Attention,22,3,0,1,0,0,1,0,0,0
+MOONSHOT-KIMI15-TR,Moonshot AI,Kimi k1.5: Scaling Reinforcement Learning with LLMs,25,2,0,2,1,1,4,0,0,0
+MOONSHOT-KIMIK2-TR,Moonshot AI,Kimi K2: Open Agentic Intelligence,32,2,5,1,0,0,3,0,0,1
+NVIDIA-LLAMA-NEMOTRON-TR,NVIDIA,Llama-Nemotron: Efficient Reasoning Models,24,1,0,0,0,0,2,0,0,0
+NVIDIA-NEMOTRON-CASCADE-TR,NVIDIA,Nemotron-Cascade: Scaling Cascaded Reinforcement Learning for General-Purpose Reasoning Models,60,13,5,2,0,0,2,0,0,5
+OPENAI-O1-PREVIEW-SC,OpenAI,OpenAI o1 System Card,43,0,0,3,0,0,0,0,4,4
+OPENAI-O1-SC,OpenAI,OpenAI o1 System Card (December 2024),52,0,0,2,0,0,0,0,4,4
+OPENAI-COT-MONITORABILITY-TR,OpenAI,Evaluating Chain-of-Thought Monitorability,90,1,0,16,5,1,1,0,0,2
+OPENAI-COT-MONITORING-TR,OpenAI,Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation,39,3,0,36,2,0,0,0,0,38
+OPENAI-O3-O4-SC,OpenAI,OpenAI o3 and o4-mini System Card,33,0,0,2,0,0,0,0,3,4
+OPENAI-GPT52-SC,OpenAI,Update to GPT-5 System Card: GPT-5.2,27,0,0,1,1,0,0,0,5,2
+OPENAI-GPT56-SC,OpenAI,GPT-5.6 Preview System Card,81,4,0,0,0,1,0,0,4,1
+GOOGLE-GEMINI25-TR,Google DeepMind,Gemini 2.5 Technical Report,73,0,1,0,2,0,0,0,0,0
+MISTRAL-MAGISTRAL-TR,Mistral AI,Magistral,23,5,1,0,0,0,3,0,0,0
+NVIDIA-NEMOTRON3NANO-TR,NVIDIA,Nemotron 3 Nano Technical Report,40,4,3,2,0,0,1,0,0,2
+OPENAI-GPT5-SC,OpenAI,GPT-5 System Card,60,0,0,1,1,1,0,0,11,4
+OPENAI-CONFESSIONS-TR,OpenAI,Training LLMs for Honesty via Confessions,33,0,0,21,16,10,3,0,2,3
+META-LLAMA3-TR,Meta,The Llama 3 Herd of Models,92,2,0,0,2,0,9,0,0,4

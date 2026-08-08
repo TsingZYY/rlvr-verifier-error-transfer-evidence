@@ -1,0 +1,76 @@
+{
+  "schema_version": "r10-latent-vs-surface-diagnostic-protocol-r1",
+  "status": "FROZEN_MODEL_FREE_POST_HOC_DEVELOPMENT_DIAGNOSTIC",
+  "frozen_before_diagnostic_execution": true,
+  "new_model_execution_authorized": false,
+  "new_model_execution_performed": false,
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "confirmatory_inference": false,
+  "purpose": "Use already recorded R10 seven-candidate target traces to test whether the observed cross-task pattern is better aligned with latent rule identity or with the same candidate-label displacement across affine source and target codebooks.",
+  "inputs": {
+    "results_root": "../authorized_runs/r10_devcal_20260804T130238Z/results",
+    "mapping_stacks": "../real_assets/build_r4_a/REAL_MAPPING_STACKS_V1.jsonl",
+    "target_calibration": "../real_assets/build_r4_a/TARGET_CALIBRATION_REAL_V1.jsonl",
+    "ordered_stacks": [
+      "TP1-M0-A_TO_B",
+      "TP1-M0-B_TO_A",
+      "TP1-M1-A_TO_B",
+      "TP1-M1-B_TO_A",
+      "TP2-M0-A_TO_B",
+      "TP2-M0-B_TO_A",
+      "TP2-M1-A_TO_B",
+      "TP2-M1-B_TO_A"
+    ],
+    "ordered_replicates": ["A", "B"],
+    "source_identities": [1, 2, 3, 4, 5],
+    "target_identities": [1, 2, 3, 4, 5, 6]
+  },
+  "reconstruction": {
+    "cell_effect": "For each stored source update r and target identity q, recompute mean_row[(post log-score of target codebook candidate z+q minus post log-score of gold) - (the same pre-update log-score difference)].",
+    "q6_policy": "Reconstruct q=6 from the stored seven ordered candidate scores and the bound target codebook; do not extrapolate or run the model.",
+    "double_centering": "R[r,q] = E[r,q] - mean_q E[r,q] - mean_r E[r,q] + mean_all E, using q=1..6 and r=1..5.",
+    "latent_score": "S_latent = mean_r R[r,r].",
+    "surface_alignment": "q_surface(r) = inverse_mod7(a_target) * a_source * r mod 7, where a_source and a_target are the bound affine codebook multipliers.",
+    "surface_score": "S_surface = mean_r R[r,q_surface(r)].",
+    "primary_contrast": "L = S_latent - S_surface."
+  },
+  "technical_gates": {
+    "finite_values_only": true,
+    "exact_stack_and_replicate_coverage": true,
+    "a_b_absolute_tolerance": 1e-12,
+    "directional_dead_zone_epsilon": 1e-10,
+    "require_q_surface_nonzero_and_distinct_from_r": true,
+    "require_bound_trace_rows_and_codebook_candidates": true
+  },
+  "decision_rule": {
+    "continue_to_new_non_affine_intervention_only_if": "L > 1e-10 in all eight fixed stacks, and separately in all four stacks of each of the two task pairs.",
+    "stop_shared_identity_claim_if": "L <= 1e-10 in any fixed stack.",
+    "no_subsetting": "Do not remove a failing mapping, direction, task pair, source identity, or replicate after inspecting results.",
+    "pass_label": "LATENT_ALIGNMENT_DEVELOPMENT_SCREEN_PASS_ONLY",
+    "stop_label": "STOP_SHARED_IDENTITY_CLAIM_SURFACE_COMPETITOR_NOT_DEFEATED"
+  },
+  "evidence_boundary": {
+    "outcome_awareness": "The underlying R10 outcomes were already observed before this diagnostic was proposed. Freezing this analysis prevents further analytic flexibility but cannot make it confirmatory.",
+    "allowed_interpretation": "A pass only defeats this one affine candidate-displacement alternative within the existing development cases and justifies a separately frozen non-affine intervention.",
+    "forbidden_interpretations": [
+      "causal proof of shared semantic identity",
+      "same empirical or policy-weighted FPR",
+      "population task generalization",
+      "sampled RLVR evidence",
+      "hidden-audit evidence",
+      "formal G1 or confirmatory inference"
+    ],
+    "scientific_clusters": 2,
+    "cluster_definition": "task pair",
+    "inferential_p_value": null
+  },
+  "authorization": {
+    "read_existing_json_and_compute_cpu_diagnostic": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false
+  }
+}

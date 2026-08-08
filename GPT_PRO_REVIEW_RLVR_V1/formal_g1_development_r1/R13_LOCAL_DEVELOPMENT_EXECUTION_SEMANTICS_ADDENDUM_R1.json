@@ -1,0 +1,169 @@
+{
+  "schema_version": "r13-local-development-execution-semantics-addendum-r1",
+  "frozen_at_utc": "2026-08-06T03:16:54Z",
+  "status": "SEMANTICS_FROZEN_BEFORE_ANY_R13_MODEL_ACTION_LOCAL_DEVELOPMENT_ONLY",
+  "purpose": "Resolve operational ambiguities needed for an honest local R13 development run without mutating the frozen parent protocol or promoting local custody to paper-grade evidence.",
+  "parent_bindings": {
+    "protocol_path": "R13_TARGET_ALIGNMENT_PILOT_PROTOCOL_DRAFT_R1.json",
+    "protocol_sha256": "9e5c5aa889beecb5d66cd5a1920c9aa86ed3040586ec744cbb069216e20c06ab",
+    "update_recipe_path": "R13_UPDATE_RECIPE_CONTRACT_R1.json",
+    "update_recipe_sha256": "8e2cea0380d995e44b3a94327ed9116849d3152ae1b721642785a955ccf73dbd",
+    "absolute_effect_gate_path": "R13_ABSOLUTE_EFFECT_GATE_ADDENDUM_R1.json",
+    "absolute_effect_gate_sha256": "e0a0300b666280f2bd83408760eb9773e44be491749d5fe4b328cd12f2ddb94b",
+    "hf_reference_backend_path": "../mvp_same_source_v1/r13_hf_backend.py",
+    "hf_reference_backend_sha256": "d3d9894d373f6e2d847cf3ba0da8d698463cba6e3072ba0213cc01b4b70baa88",
+    "runner_core_path": "../mvp_same_source_v1/r13_runner_core.py",
+    "runner_core_sha256": "15b4f7f5606a6c889d92aab4837b8f9cf468e6651db1d4763f3161b57d682f96"
+  },
+  "selected_execution_scope": {
+    "variant": "REPRODUCIBILITY_8_PROCESS_AB",
+    "reason": "Preserve the user-requested frozen eight-process development-calibration scope; do not inspect A and then decide whether to add B.",
+    "ordered_stack_count": 4,
+    "technical_replicates": [
+      "A",
+      "B"
+    ],
+    "os_processes": 8,
+    "technical_update_executions": 40,
+    "unique_design_source_updates": 20,
+    "total_target_identity_metric_cells": 576,
+    "physical_execution": "SERIAL_ONE_GPU_ONE_OS_PROCESS_AT_A_TIME",
+    "parallel_gpu_processes_allowed": false
+  },
+  "gradient_accumulation_resolution": {
+    "selected_semantics": "R10_OPERATIONAL_MICROBATCH_CONTINUITY",
+    "fixed_source_row_order": true,
+    "source_rows": 14,
+    "candidate_panel_size": 7,
+    "per_row_contribution": "negative expected reward divided by 14",
+    "backward_calls": 14,
+    "backward_order": "exact bound source-row order",
+    "optimizer_state": "none",
+    "logical_update_steps": 1,
+    "manual_parameter_steps": 1,
+    "interpretation": "Fourteen deterministic microbatch backward calls accumulate one logical full-source gradient before one manual SGD parameter step. This selects the hash-bound R10 operational behavior over a single retained 14-row graph.",
+    "adaptive_microbatching": false
+  },
+  "gradient_norm_and_clipping_resolution": {
+    "threshold": 1.0,
+    "norm": "global L2 norm over all finite float32 trainable gradients after all 14 contributions",
+    "check_time": "after gradient accumulation and before any parameter mutation",
+    "if_non_finite": "TECHNICAL_STOP_BEFORE_PARAMETER_MUTATION_NO_SCIENTIFIC_INTERPRETATION",
+    "if_raw_norm_greater_than_threshold": "TECHNICAL_STOP_BEFORE_PARAMETER_MUTATION_NO_SCIENTIFIC_INTERPRETATION",
+    "if_raw_norm_at_or_below_threshold": "perform exactly one manual SGD step theta := theta - 0.1 * gradient",
+    "clip_operator_on_passing_path": "not required because the gate proves the clip factor is 1",
+    "clipping_triggered_on_valid_result": false,
+    "failed_cell_retry_under_same_manifest": false
+  },
+  "candidate_scoring_resolution": {
+    "system_prompt": "Follow the task specification exactly. Return exactly one listed candidate and no other text.",
+    "chat_template": "tokenizer.apply_chat_template with a system and user prefix and the candidate as the assistant response",
+    "supervised_tokens": "assistant candidate tokens plus the common assistant terminator; prefix tokens excluded",
+    "prefix_stability_required": true,
+    "candidate_score": "sum of causal token log probabilities over supervised tokens",
+    "candidate_policy": "softmax over the seven candidate scores",
+    "ordered_candidates": [
+      "FINAL=K0",
+      "FINAL=K1",
+      "FINAL=K2",
+      "FINAL=K3",
+      "FINAL=K4",
+      "FINAL=K5",
+      "FINAL=K6"
+    ]
+  },
+  "model_and_update_resolution": {
+    "repository": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+    "local_files_only": true,
+    "base_precision": "bfloat16",
+    "lora_trainable_precision": "float32",
+    "device": "cuda:0",
+    "seed": 20260804,
+    "deterministic_algorithms": true,
+    "cublas_workspace_config": ":4096:8",
+    "lora_rank": 4,
+    "lora_alpha": 8,
+    "lora_dropout": 0.0,
+    "lora_targets": [
+      "q_proj",
+      "v_proj"
+    ],
+    "learning_rate": 0.1,
+    "reset": "restore the exact initial float32 LoRA snapshot before every source identity and verify the same trainable hash"
+  },
+  "target_read_resolution": {
+    "payload_source": "internally validated matched-panel manifest, JSONL, raw row bytes, raw prompt bytes, and allowlist receipt",
+    "caller_supplied_target_rows_allowed": false,
+    "gradient_allowed": false,
+    "optimizer_step_allowed": false,
+    "parameter_or_state_mutation_allowed": false,
+    "same_post_update_hash_for_both_arms": true,
+    "verify_trainable_hash_before_and_after_each_arm": true,
+    "arm_order_A": [
+      "H0_ORIGINAL_M0_TARGET",
+      "H1_SWITCHED_TARGET"
+    ],
+    "arm_order_B": [
+      "H1_SWITCHED_TARGET",
+      "H0_ORIGINAL_M0_TARGET"
+    ]
+  },
+  "technical_canary": {
+    "required_before_batch_manifest": true,
+    "uses_any_r13_scientific_cell": false,
+    "prompt_namespace": "R13_TECHNICAL_CANARY_NOT_A_SCIENTIFIC_CELL_V1",
+    "allowed_outputs": [
+      "dependency_versions",
+      "device_and_dtype_checks",
+      "candidate_token_count_equality",
+      "initial_reset_hash_equality",
+      "finite_score_boolean",
+      "finite_gradient_boolean",
+      "raw_gradient_norm_and_threshold_pass_boolean",
+      "parameter_changed_boolean",
+      "target_read_hash_preserved_boolean",
+      "peak_gpu_memory_bytes",
+      "elapsed_seconds"
+    ],
+    "candidate_scores_must_not_be_released": true,
+    "canary_result_may_change_scientific_cells_or_gates": false,
+    "failure_action": "repair backend and create a new canary record before freezing the scientific batch manifest"
+  },
+  "sealed_batch_rules": {
+    "all_eight_processes_frozen_before_first_scientific_model_action": true,
+    "intermediate_scientific_results_visible_to_decision_maker": false,
+    "intermediate_results_may_change_later_processes": false,
+    "technical_failure_action": "stop the entire manifest and label INVALID_BATCH_NO_SCIENTIFIC_CONCLUSION",
+    "same_manifest_retry": false,
+    "new_attempt_requires": [
+      "new manifest",
+      "new run id",
+      "new empty output root",
+      "documented technical cause fixed without inspecting scientific outcomes"
+    ],
+    "automatic_progression": false
+  },
+  "authorization_and_evidence_boundary": {
+    "authorization_basis": "USER_IN_THREAD_EXPLICIT_AUTHORIZATION_FOR_CODEX_TO_RUN_THE_MVP",
+    "this_addendum_self_authorizes_model_execution": false,
+    "final_local_manifest_required": true,
+    "human_review_completed": false,
+    "panel_review_level": "INDEPENDENT_AGENT_AND_MACHINE_REVIEW_ONLY_NOT_HUMAN",
+    "paper_custody": false,
+    "production_custody": false,
+    "maximum_result_label": "LOCAL_DEVELOPMENT_ONLY_NONCONFIRMATORY",
+    "scientific_evidence_before_complete_validated_batch": false,
+    "formal_or_confirmatory_claim_allowed": false,
+    "shared_semantic_identity_claim_allowed": false,
+    "population_generalization_allowed": false,
+    "same_empirical_or_policy_fpr_claim_allowed": false
+  },
+  "model_actions_when_frozen": {
+    "tokenizer_loads": 0,
+    "model_weight_loads": 0,
+    "model_forwards": 0,
+    "gradient_calls": 0,
+    "manual_parameter_steps": 0
+  }
+}

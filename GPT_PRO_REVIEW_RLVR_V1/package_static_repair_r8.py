@@ -1,0 +1,140 @@
+"""Create a deterministic, portable GPT Pro R8 parser-boundary packet."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+import stat
+import zipfile
+
+
+ROOT = Path(__file__).resolve().parent
+OUTPUT = ROOT / "GPT_PRO_STATIC_REPAIR_PACKET_R8.zip"
+FIXED_TIME = (2026, 8, 4, 0, 0, 0)
+EVIDENCE_BOUNDARY = {
+    "same_fpr_evidence": "NOT_SAME_FPR_EVIDENCE",
+    "rlvr_mode": "NOT_SAMPLED_RLVR",
+    "data_scope": "CALIBRATION_ONLY",
+    "audit_status": "NOT_HIDDEN_AUDIT",
+    "formal_g1_status": "NOT_FORMAL_G1",
+    "scientific_evidence_status": "SCIENTIFIC_EVIDENCE_FALSE",
+    "old_r2_status": "OLD_R2_EXCLUDED",
+}
+
+
+def sha256_bytes(value: bytes) -> str:
+    return hashlib.sha256(value).hexdigest()
+
+
+def add_file(members: dict[str, bytes], relative: str) -> None:
+    path = ROOT / relative
+    if not path.is_file() or path.is_symlink():
+        raise RuntimeError(f"missing or unsafe packet member: {relative}")
+    normalized = Path(relative).as_posix()
+    if normalized.startswith("/") or ".." in Path(normalized).parts:
+        raise RuntimeError(f"unsafe packet path: {relative}")
+    members[normalized] = path.read_bytes()
+
+
+def main() -> int:
+    if OUTPUT.exists():
+        raise RuntimeError(f"refusing to overwrite {OUTPUT}")
+    members: dict[str, bytes] = {}
+    for relative in (
+        "commitment_core.py",
+        "test_portable_packet_r5.py",
+        "34_PRO_REVIEWER_5_R6_RESULT.md",
+        "37_PRO_REVIEWER_5_R7_RESULT.md",
+        "38_CPU_STATIC_REPAIR_REPORT_R8.md",
+        "39_GPT_PRO_STATIC_REAUDIT_REQUEST_R8.md",
+        "package_static_repair_r8.py",
+        "mvp_same_source_v1/MVP_CONFIG_V1.json",
+        "mvp_same_source_v1/MVP_DETERMINISM_ADDENDUM_R2.json",
+        "mvp_same_source_v1/mvp_static_contract.py",
+        "mvp_same_source_v1/run_same_source_mvp.py",
+        "mvp_same_source_v1/validate_mvp_replicates_r3.py",
+        "mvp_same_source_v1/validate_eight_stack_completion.py",
+        "mvp_same_source_v1/freeze_eight_stack_contract.py",
+        "mvp_same_source_v1/freeze_invocation_start_receipt.py",
+        "mvp_same_source_v1/freeze_result_anchor.py",
+        "mvp_same_source_v1/audit_eight_stack_static.py",
+        "mvp_same_source_v1/refresh_eight_stack_completion_contract.py",
+        "mvp_same_source_v1/audit_refreshed_eight_stack_contract.py",
+        "mvp_same_source_v1/test_mvp_static_contract.py",
+        "mvp_same_source_v1/test_validate_mvp_replicates_r3.py",
+        "mvp_same_source_v1/test_validate_eight_stack_completion.py",
+        "mvp_same_source_v1/EIGHT_STACK_STATIC_AUDIT_R8.json",
+        "mvp_same_source_v1/R8_CONTRACT_DETERMINISM.json",
+        "real_assets/P4_R1_REAL_PROTOCOL_V2_PRE_REVIEW.json",
+        "real_assets/src/controlled_tasks.py",
+        "real_assets/scripts/build_controlled_assets.py",
+        "real_assets/scripts/validate_native_controlled_assets.py",
+        "real_assets/tests/test_native_controlled_assets.py",
+        "real_assets/VALIDATION_R5_PORTABLE_A.json",
+        "real_assets/VALIDATION_R5_PORTABLE_B.json",
+        "real_assets/BUILD_R4_DETERMINISM.json",
+        "real_assets/build_r4_a/CONTROLLED_ASSET_BUILD_MANIFEST_V1.json",
+        "real_assets/build_r4_a/REAL_MAPPING_STACKS_V1.jsonl",
+        "real_assets/build_r4_a/REAL_SOURCE_BUNDLES_V1.jsonl",
+        "real_assets/build_r4_a/TARGET_CALIBRATION_REAL_V1.jsonl",
+        "real_assets/build_r4_a/TARGET_AUDIT_SEAL_RECEIPT.json",
+    ):
+        add_file(members, relative)
+    frozen = ROOT / "mvp_same_source_v1" / "frozen_eight_stack_r8"
+    for path in sorted(frozen.iterdir(), key=lambda value: value.name):
+        add_file(members, "mvp_same_source_v1/frozen_eight_stack_r8/" + path.name)
+    payload_manifest = {
+        "schema_version": "gpt-pro-static-repair-packet-manifest-r8",
+        "status": "CPU_STATIC_PARSER_REPAIR_AWAITING_PRO_REAUDIT",
+        "scientific_evidence": False,
+        "formal_experiment": False,
+        "model_execution_performed": False,
+        "model_actions_authorized": False,
+        "evidence_boundary": dict(EVIDENCE_BOUNDARY),
+        "real_model_artifact_included": False,
+        "real_model_omission_reason": (
+            "The frozen manifests retain the recursive exact inventory; R8 "
+            "refreshes only the completion-validator hash chain and reads no model bytes."
+        ),
+        "current_audit_rows_included": False,
+        "current_audit_eligibility": "NOT_HIDDEN_AUDIT",
+        "r7_master_superseded": True,
+        "old_r2_results_included": False,
+        "payload_file_count": len(members),
+        "payload": {
+            name: {"size": len(value), "sha256": sha256_bytes(value)}
+            for name, value in sorted(members.items())
+        },
+    }
+    members["PACKET_MANIFEST_R8.json"] = (
+        json.dumps(payload_manifest, sort_keys=True, separators=(",", ":")) + "\n"
+    ).encode("ascii")
+    with zipfile.ZipFile(OUTPUT, "w", compression=zipfile.ZIP_STORED) as archive:
+        for name, value in sorted(members.items()):
+            info = zipfile.ZipInfo(name, FIXED_TIME)
+            info.create_system = 3
+            info.external_attr = (stat.S_IFREG | 0o444) << 16
+            info.compress_type = zipfile.ZIP_STORED
+            archive.writestr(info, value)
+    with zipfile.ZipFile(OUTPUT, "r") as archive:
+        if archive.testzip() is not None:
+            raise RuntimeError("packet CRC validation failed")
+        if archive.namelist() != sorted(members):
+            raise RuntimeError("packet member ordering drift")
+    print(
+        json.dumps(
+            {
+                "output": str(OUTPUT),
+                "sha256": sha256_bytes(OUTPUT.read_bytes()),
+                "member_count": len(members),
+                "size": OUTPUT.stat().st_size,
+            },
+            sort_keys=True,
+        )
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

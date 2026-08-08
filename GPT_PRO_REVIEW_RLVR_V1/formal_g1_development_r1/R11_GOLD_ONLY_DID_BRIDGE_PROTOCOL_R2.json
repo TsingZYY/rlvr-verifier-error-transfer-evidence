@@ -1,0 +1,212 @@
+{
+  "schema_version": "r11-gold-only-did-bridge-protocol-r2",
+  "status": "FROZEN_DEVELOPMENT_PROTOCOL_STATIC_ONLY",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "formal_confirmatory": false,
+  "run_eligible": false,
+  "model_execution_performed": false,
+  "model_execution_authorized": false,
+  "hidden_audit": false,
+  "sampled_rlvr": false,
+  "purpose": "Test whether the R10 identity-matched transfer structure is specific to rewarding the frozen wrong candidate rather than to gold-only source learning, while preserving a strict development-only evidence boundary.",
+  "provenance": {
+    "parent_r10_run_index_sha256": "9d7a13df6c84ddcdf554e26a82f62e4d65d19105a34b16a1805df1f88bf35a3f",
+    "parent_r10_completion_sha256": "2a70a66ed936307e4d4ef9ad7b8bd59315fa6319c55f809e2b4d9a5f9d3b009f",
+    "parent_r10_development_replay_sha256": "3e51f788dfad694252b2fe9572dd4e7ba80cdc3482c7a841c2c9e4d730f5cd47",
+    "r10_development_decision": "INCONCLUSIVE_SIGN_HETEROGENEITY_DO_NOT_ADVANCE_TO_SAMPLED_RLVR",
+    "outcome_awareness": "This R11 screen was designed after seeing R10 development outcomes and can never be relabelled confirmatory."
+  },
+  "fixed_design": {
+    "ordered_stack_ids": [
+      "TP1-M0-A_TO_B",
+      "TP1-M0-B_TO_A",
+      "TP1-M1-A_TO_B",
+      "TP1-M1-B_TO_A",
+      "TP2-M0-A_TO_B",
+      "TP2-M0-B_TO_A",
+      "TP2-M1-A_TO_B",
+      "TP2-M1-B_TO_A"
+    ],
+    "source_rule_identities": [
+      "Z7_PLUS1",
+      "Z7_PLUS2",
+      "Z7_PLUS3",
+      "Z7_PLUS4",
+      "Z7_PLUS5"
+    ],
+    "target_rule_identities": [
+      "Z7_PLUS1",
+      "Z7_PLUS2",
+      "Z7_PLUS3",
+      "Z7_PLUS4",
+      "Z7_PLUS5"
+    ],
+    "unique_source_update_unit": "stack s x source identity r x arm",
+    "target_outcome_unit": "stack s x source identity r x target identity q x arm",
+    "unique_cells_per_arm": 40,
+    "target_cells_per_arm": 200,
+    "technical_replicates": [
+      "A",
+      "B"
+    ],
+    "top_level_scientific_clusters": 2,
+    "cluster_definition": "task pair",
+    "hidden_audit_access": "FORBIDDEN"
+  },
+  "arms": {
+    "BUG": {
+      "source_rows": "frozen rows for source identity r",
+      "candidate_panel": "the same seven frozen candidates in the same order",
+      "reward_mask": "gold=1 and frozen wrong candidate for r=1",
+      "target_readout": "all five q under the same U_bug(s,r)"
+    },
+    "GOLD_ONLY": {
+      "source_rows": "byte-identical to the corresponding BUG cell for source identity r",
+      "candidate_panel": "byte-identical to the corresponding BUG cell",
+      "reward_mask": "gold=1 only",
+      "target_readout": "all five q under the same U_gold(s,r)"
+    },
+    "only_permitted_treatment_difference": "reward mask",
+    "forbidden_arm_differences": [
+      "source rows",
+      "candidate identities or order",
+      "resampling",
+      "batching",
+      "row order",
+      "checkpoint",
+      "initial trainable state",
+      "optimizer or update recipe",
+      "learning rate",
+      "clipping",
+      "precision",
+      "target panel or evaluator",
+      "identity-specific retry"
+    ],
+    "no_op_required": false,
+    "wrong_only_required": false
+  },
+  "model_and_update_contract": {
+    "model": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "revision": "a10cc1512e82b0c51f9317f4a2a3b8b02b2c6e21",
+    "precision": "BFLOAT16_BASE_FLOAT32_LORA",
+    "lora_rank": 4,
+    "lora_alpha": 8,
+    "lora_targets": [
+      "q_proj",
+      "v_proj"
+    ],
+    "optimizer": "MANUAL_SGD_NO_STATE",
+    "learning_rate": 0.1,
+    "steps": 1,
+    "seed": 20260804,
+    "gradient_clip_norm": 1.0,
+    "fresh_checkpoint_before_each_source_identity": true,
+    "optimizer_state_carryover": false,
+    "adaptive_retry": false,
+    "outcome_dependent_rerun": false,
+    "gradient_norm_policy": "record as treatment dose; do not post-hoc norm-match",
+    "clipping_policy": "any realized clipping invalidates the simple one-step gradient-difference interpretation and fails this frozen screen"
+  },
+  "estimands": {
+    "bug_effect": "B(s,r,q)=post_bug(s,r,q)-pre(s,q)",
+    "gold_effect": "G(s,r,q)=post_gold(s,r,q)-pre(s,q)",
+    "adjusted": "Adj(s,r,q)=B(s,r,q)-G(s,r,q)=post_bug(s,r,q)-post_gold(s,r,q)",
+    "absolute_matched": "A(s,r)=Adj(s,r,r)",
+    "structural_excess": "D(s,r)=Adj(s,r,r)-mean_q_not_equal_r(Adj(s,r,q))",
+    "interpretation": {
+      "A_positive_D_positive": "reward-specification-specific matched-identity amplification within the frozen affine codebook",
+      "A_nonpositive_D_positive": "relative preservation only; not absolute amplification",
+      "A_positive_D_nonpositive": "general bug-vs-gold amplification without identity-specific structure",
+      "A_nonpositive_D_nonpositive": "R10 diagonal-excess interpretation is not rescued"
+    },
+    "aggregation_order": [
+      "pair BUG/GOLD within technical replicate k and cell (s,r,q)",
+      "compute A(k,s,r) and D(k,s,r)",
+      "require replicate consistency under a frozen tolerance",
+      "equal-average technical replicates",
+      "equal-average source identities within stack",
+      "fixed summaries by task pair, direction, and mapping"
+    ]
+  },
+  "development_screen_rule": {
+    "practical_margin": "NOT_CLAIMED",
+    "directional_threshold": 0.0,
+    "why_no_positive_margin": "No outcome-independent external scale for this additive one-step endpoint has yet been justified; log(1.05) is dimensionally unsupported here.",
+    "development_screen_pass_requires_all": [
+      "overall mean A > 0",
+      "overall mean D > 0",
+      "8/8 stack means have A > 0 and D > 0",
+      "5/5 identity means have A > 0 and D > 0",
+      "2/2 task-pair means have A > 0 and D > 0",
+      "2/2 direction means have A > 0 and D > 0",
+      "2/2 mapping means have A > 0 and D > 0",
+      "all bridge, completeness, fresh-start, clipping, and replicate-consistency gates PASS"
+    ],
+    "stop": "Any protocol, hash, cell-completeness, fresh-start, clipping, safety, or replicate-consistency failure.",
+    "inconclusive": "Any scientifically required sign gate not satisfied when all technical gates pass.",
+    "pass_label": "DEVELOPMENT_SCREEN_PASS_ONLY",
+    "automatic_progression": false
+  },
+  "deterministic_specificity_diagnostic": {
+    "enumerate_all_identity_bijections": 120,
+    "matched_definition_frozen_from_r10": true,
+    "inferential_p_value": false,
+    "permutation_randomization_claim": false
+  },
+  "bridge_reuse_gate": {
+    "preferred_low_cost_path": {
+      "description": "Reuse frozen R10 BUG results and run only GOLD_ONLY under an exactly compatible reward-mask interface.",
+      "new_os_processes": 16,
+      "new_unique_gold_cells": 40,
+      "new_gold_technical_update_executions": 80,
+      "eligibility": "MUST_BE_PROVEN_BY_STATIC_AND_RUNTIME BRIDGE VALIDATOR BEFORE AUTHORIZATION"
+    },
+    "fail_closed_fallback": {
+      "trigger": "The R10 runner cannot accept a gold-only mask as data with the same implementation hash, or any cross-generation binding fails.",
+      "action": "Rerun BUG and GOLD_ONLY under one newly frozen arm-parameterized runner.",
+      "new_os_processes": 32,
+      "unique_design_cells_across_arms": 80,
+      "technical_update_executions": 160
+    }
+  },
+  "required_bridge_validator_fields": [
+    "parent_r10_run_index_sha256",
+    "parent_r10_completion_sha256",
+    "parent result and validation hashes per stack",
+    "runner and dependency hashes",
+    "reward definition and reward-mask hashes",
+    "source, candidate, target, checkpoint, tokenizer, config, and environment hashes",
+    "initial trainable hash",
+    "pre-trace compatibility",
+    "40/40 unique (s,r) cells per arm",
+    "200/200 (s,r,q) cells per arm",
+    "fresh reset before every r",
+    "raw gradient norm, clip return, and realized update norm",
+    "A/B substantive reproducibility",
+    "validator-recomputed Adj, A, and D"
+  ],
+  "claim_boundary": {
+    "can_support_if_passed": "A development-only affine-codebook-conditioned causal bridge for reward-specification-specific identity-matched transfer.",
+    "cannot_support": [
+      "same-FPR causal effect",
+      "formal G1",
+      "population-level cross-task generalization",
+      "semantic or codebook-invariant sharedness",
+      "sampled or multi-step RLVR transfer",
+      "hidden-audit performance",
+      "natural-task generalization"
+    ],
+    "non_affine_codebook_gate": "Required before any general sharedness or semantic-mechanism claim, but not for this explicitly affine-conditioned development bridge."
+  },
+  "authorization": {
+    "cpu_static_design_and_validation": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

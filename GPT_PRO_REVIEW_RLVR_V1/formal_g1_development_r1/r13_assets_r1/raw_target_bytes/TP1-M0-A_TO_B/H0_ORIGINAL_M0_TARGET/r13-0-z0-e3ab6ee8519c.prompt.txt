@@ -1,0 +1,9 @@
+TASK=DFA7_FINAL_V1
+CANONICAL_CLASS=z in {0,1,2,3,4,5,6}
+CODEBOOK=z0->K1;z1->K3;z2->K5;z3->K0;z4->K2;z5->K4;z6->K6
+CANDIDATES=FINAL=K0|FINAL=K1|FINAL=K2|FINAL=K3|FINAL=K4|FINAL=K5|FINAL=K6
+RULE=Start at INITIAL_STATE and follow SEQUENCE from left to right.
+INITIAL_STATE=Q3
+SEQUENCE=yyyxxx
+TRANSITIONS=Q0:x->Q2,y->Q4;Q1:x->Q5,y->Q0;Q2:x->Q1,y->Q6;Q3:x->Q6,y->Q2;Q4:x->Q0,y->Q5;Q5:x->Q3,y->Q1;Q6:x->Q4,y->Q3
+ANSWER_FORMAT=Return exactly one candidate and no other text.

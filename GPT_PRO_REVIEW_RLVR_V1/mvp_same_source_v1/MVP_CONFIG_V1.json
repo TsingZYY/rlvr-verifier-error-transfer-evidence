@@ -1,0 +1,87 @@
+{
+  "schema_version": "same-source-diagnostic-mvp-config-v1",
+  "status": "FROZEN_BEFORE_MODEL_FORWARD",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "evidence_boundary": {
+    "same_fpr_evidence": "NOT_SAME_FPR_EVIDENCE",
+    "rlvr_mode": "NOT_SAMPLED_RLVR",
+    "data_scope": "CALIBRATION_ONLY",
+    "audit_status": "NOT_HIDDEN_AUDIT",
+    "formal_g1_status": "NOT_FORMAL_G1",
+    "scientific_evidence_status": "SCIENTIFIC_EVIDENCE_FALSE"
+  },
+  "run_label": "DIAGNOSTIC_MVP_NOT_FORMAL",
+  "purpose": "Low-cost same-source causal-chain smoke test before a formal G1/RLVR run.",
+  "model": {
+    "repository": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+    "local_path": "models/SmolLM2-360M-Instruct-a10cc151",
+    "weight_file": "model.safetensors",
+    "precision": "base_bfloat16_lora_float32"
+  },
+  "runtime": {
+    "python": "3.10.20",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.55.4",
+    "peft": "0.17.1",
+    "accelerate": "1.10.1",
+    "device": "cuda"
+  },
+  "data": {
+    "mapping_stack_id": "TP1-M0-A_TO_B",
+    "source_split": "SOURCE",
+    "target_split": "TARGET_CALIBRATION",
+    "audit_access": "FORBIDDEN",
+    "source_rule_offsets_mod7": [1, 2, 3, 4, 5],
+    "target_rule_offsets_mod7": [1, 2, 3, 4, 5]
+  },
+  "scoring": {
+    "candidate_set": [
+      "FINAL=K0",
+      "FINAL=K1",
+      "FINAL=K2",
+      "FINAL=K3",
+      "FINAL=K4",
+      "FINAL=K5",
+      "FINAL=K6"
+    ],
+    "candidate_score": "sum causal log probability of assistant response tokens including the common assistant terminator",
+    "candidate_policy": "softmax over the seven candidate scores",
+    "target_metric": "mean over target calibration rows of log P(candidate(z+q)) minus log P(gold candidate(z))"
+  },
+  "update": {
+    "target_rule_blind_source_update": true,
+    "reset_to_identical_lora_initialization_per_source_rule": true,
+    "reward": "1 for gold and source-rule wrong candidate; 0 for the other five candidates",
+    "objective": "exact expected reward under the normalized fixed-candidate policy",
+    "steps": 1,
+    "optimizer": "manual_sgd_no_state",
+    "learning_rate": 0.1,
+    "gradient_clip_norm": 1.0,
+    "lora_rank": 4,
+    "lora_alpha": 8,
+    "lora_dropout": 0.0,
+    "lora_targets": ["q_proj", "v_proj"],
+    "seed": 20260804
+  },
+  "diagnostic_gates": {
+    "mean_source_wrong_probability_mass_min": 0.00001,
+    "mean_source_relative_advantage_min": 0.01,
+    "candidate_supervised_token_count_range_max": 1,
+    "all_five_source_rules_must_pass": true,
+    "non_finite_value_action": "STOP"
+  },
+  "estimand": {
+    "cell_effect": "post target metric minus pre target metric",
+    "within_update_diagonal_excess": "effect(r,r) minus mean over q != r of effect(r,q)",
+    "stack_summary": "equal mean over the five source-rule diagonal excess values"
+  },
+  "claim_boundary": [
+    "Not a formal run and not confirmatory evidence.",
+    "The eight-stack fixed-candidate screen is diagnostic development evidence, not a formal G1 result.",
+    "Fixed-candidate exact expected-reward optimization is an RLVR surrogate, not sampled RLVR.",
+    "Calibration-only readouts are development data and cannot be reported as hidden audit performance.",
+    "A pass only justifies the next frozen G1 and sampled-RLVR bridge experiments."
+  ]
+}

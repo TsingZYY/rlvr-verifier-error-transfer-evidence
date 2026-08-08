@@ -1,0 +1,30 @@
+{
+  "schema_version": "same-source-diagnostic-mvp-validation-r5",
+  "validation_status": "PASS",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "evidence_boundary": {
+    "same_fpr_evidence": "NOT_SAME_FPR_EVIDENCE",
+    "rlvr_mode": "NOT_SAMPLED_RLVR",
+    "data_scope": "CALIBRATION_ONLY",
+    "audit_status": "NOT_HIDDEN_AUDIT",
+    "formal_g1_status": "NOT_FORMAL_G1",
+    "scientific_evidence_status": "SCIENTIFIC_EVIDENCE_FALSE"
+  },
+  "mapping_stack_id": "TP1-M0-B_TO_A",
+  "result_anchor_sha256": "a09bd5aa55dab2d23403ec3ce510e18b26ebcd86fe8972935dbed988346f92ee",
+  "substantive_replicates_identical": true,
+  "errors": [],
+  "stack_summary": {
+    "mean_diagonal_excess": -0.01097992828914098,
+    "positive_diagonal_excess_count": 1,
+    "source_rule_count": 5
+  },
+  "norm_evidence_boundary": {
+    "validation_status": "RUNNER_REPORTED_INTERNAL_CONSISTENCY_ONLY",
+    "independent_validation_input": "NOT_AN_INDEPENDENT_VALIDATION_INPUT",
+    "used_for_diagnostic_gates": false,
+    "used_for_scientific_explanation": false
+  },
+  "evidence_label": "CPU_STATIC_REPAIR_VALIDATOR_ONLY_R5"
+}

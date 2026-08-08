@@ -1,0 +1,43 @@
+{
+  "schema_version": "same-source-diagnostic-mvp-validation-r3",
+  "validation_status": "FAIL",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "substantive_replicates_identical": true,
+  "errors": [
+    "A: result schema has missing or extra fields",
+    "A: wrong result schema",
+    "A: determinism did not fail closed",
+    "A: execution manifest hash mismatch",
+    "A: execution manifest binding hash mismatch",
+    "A: provenance mismatch: runner_sha256",
+    "A: provenance mismatch: validator_sha256",
+    "A: provenance mismatch: mapping_stacks_sha256",
+    "A: provenance mismatch: asset_validation_sha256",
+    "A: provenance mismatch: determinism_addendum_sha256",
+    "A: provenance mismatch: source_bundles_sha256",
+    "A: provenance mismatch: target_calibration_sha256",
+    "A: provenance mismatch: model_root_file_sha256",
+    "A: provenance mismatch: chat_template_sha256",
+    "B: result schema has missing or extra fields",
+    "B: wrong result schema",
+    "B: determinism did not fail closed",
+    "B: execution manifest hash mismatch",
+    "B: execution manifest binding hash mismatch",
+    "B: provenance mismatch: runner_sha256",
+    "B: provenance mismatch: validator_sha256",
+    "B: provenance mismatch: mapping_stacks_sha256",
+    "B: provenance mismatch: asset_validation_sha256",
+    "B: provenance mismatch: determinism_addendum_sha256",
+    "B: provenance mismatch: source_bundles_sha256",
+    "B: provenance mismatch: target_calibration_sha256",
+    "B: provenance mismatch: model_root_file_sha256",
+    "B: provenance mismatch: chat_template_sha256"
+  ],
+  "stack_summary": {
+    "mean_diagonal_excess": 0.0014351197651454317,
+    "positive_diagonal_excess_count": 3,
+    "source_rule_count": 5
+  },
+  "evidence_label": "CPU_STATIC_REPAIR_VALIDATOR_ONLY"
+}

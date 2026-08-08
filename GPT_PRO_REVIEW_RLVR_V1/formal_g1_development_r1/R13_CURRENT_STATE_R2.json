@@ -1,0 +1,127 @@
+{
+  "schema_version": "r13-current-state-r2",
+  "frozen_at_utc": "2026-08-06T02:58:02Z",
+  "status": "R13_STATIC_COMPONENTS_GREEN_SCHEMA_BRIDGED_PRODUCTION_EXECUTION_PROOF_NOT_CLOSED_NOT_RUN",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "run_eligible": false,
+  "model_execution_authorized": false,
+  "model_execution_performed": false,
+  "model_action_count": 0,
+  "decision": "KEEP_R13_AS_A_SEALED_DEVELOPMENT_SCREEN_CONTINUE_PRODUCTION_CLOSURE_DO_NOT_RUN_OR_INTERPRET_RESULTS",
+  "method_logic": {
+    "research_program_level": "Test one frozen candidate mechanism, classify the complete valid result, then decide whether a separately versioned next mechanism is warranted.",
+    "within_batch_level": "Cells may run one at a time, but the full schedule, inputs, thresholds, exclusions, retry and stopping rules, and analysis are frozen before the first model action.",
+    "intermediate_outcomes": "Scientific outcomes remain sealed and may not change later cells.",
+    "technical_failure": "Abort and burn the current authorization; any retry requires a fresh pre-frozen signed authorization.",
+    "decision_point": "Open and classify results once, only after the complete batch and all technical gates pass.",
+    "meaning_of_solve": "A passing R13 batch would retain a narrow target-interface mechanism in four fixed development stacks; it would not prove that a shared result caused cross-task transfer."
+  },
+  "evidence_partition": {
+    "existing_evidence": "The frozen R10 model-free diagnostic rejected the old uniform shared-latent-result-identity mechanism on all four M0 stacks.",
+    "reasonable_inference": "The exact M0/M1 split makes target codebook or verifier-surface alignment a plausible controlled development hypothesis.",
+    "unverified_core_hypothesis": "One fixed source-only update changes target wrong-vs-gold log-odds differently under the two frozen target codebook interfaces.",
+    "not_observed": "No R13 tokenizer load, model load, forward pass, gradient, optimizer step, raw model result, or scientific result exists."
+  },
+  "frozen_scientific_design": {
+    "protocol_path": "R13_TARGET_ALIGNMENT_PILOT_PROTOCOL_DRAFT_R1.json",
+    "protocol_sha256": "9e5c5aa889beecb5d66cd5a1920c9aa86ed3040586ec744cbb069216e20c06ab",
+    "absolute_gate_path": "R13_ABSOLUTE_EFFECT_GATE_ADDENDUM_R1.json",
+    "absolute_gate_sha256": "e0a0300b666280f2bd83408760eb9773e44be491749d5fe4b328cd12f2ddb94b",
+    "directional_guard": "A positive relative interface effect with A_aligned<=0 is RELATIVE_PRESERVATION_ONLY_NOT_ABSOLUTE_AMPLIFICATION; 0<A_aligned<=1e-10 is a dead zone.",
+    "scope": "Four frozen outcome-aware M0 affine development stacks in two task-pair clusters."
+  },
+  "new_static_closure_components": {
+    "launch_result_authorization_bridge": {
+      "path": "../r13_launch_result_authorization_bridge_r1.py",
+      "sha256": "6374648b07036b8fc375469c2edf921408ea4d815e36e43430370de82064e0a7",
+      "test_path": "../test_r13_launch_result_authorization_bridge_r1.py",
+      "test_sha256": "0baceb85e316d9d84927d2e1e9a4acd0efaf47296376a49a3b29055ec89f82da",
+      "status": "STATIC_SCHEMA_SIGNATURE_CONTEXT_AND_NONCE_PROJECTION_COMPATIBLE_EXTERNAL_RECEIPTS_MISSING",
+      "nonce_state_machine": "UNSEEN_TO_START_CLAIMED_TO_RESULT_VALIDATION_CLAIMED",
+      "scientific_result_release_authorized": false
+    },
+    "lazy_backend_adapter": {
+      "path": "../mvp_same_source_v1/r13_lazy_backend_adapter.py",
+      "sha256": "889893362e8dceda05dac1186ff70d1436892fe243cbb247162f39ec081fedd7",
+      "test_path": "../mvp_same_source_v1/test_r13_lazy_backend_adapter.py",
+      "test_sha256": "89e7e797d1193d0d91f780dfb3756453488228de802ecd5e6b9526ff504a7df4",
+      "status": "STATIC_ONLY_REAL_INTERFACES_FAIL_CLOSED_SYNTHETIC_ZERO_MODEL_ACTION_SEAM_VERIFIED",
+      "verified_shape": "Source-only 14-row projection, five updates, same post-update hash for two target arms, twelve read-only target reads per process, and A/B source-spec invariance.",
+      "real_model_backend_implemented": false
+    },
+    "runtime_closure_tool": {
+      "path": "../mvp_same_source_v1/r13_runtime_closure.py",
+      "sha256": "38b2e7421dcbc909a103b7aad1d9ee5ffffdf2d944ff2a481c4ad1beb17b11e1",
+      "test_path": "../mvp_same_source_v1/test_r13_runtime_closure.py",
+      "test_sha256": "092881f6fc38d614e07731847b298bb5dd190468f2f7334531ec7c1215b39737",
+      "status": "STATIC_BUILDER_VALIDATOR_AVAILABLE_CURRENT_HYBRID_RUNTIME_NOT_A_PRODUCTION_CLOSURE",
+      "run_eligible_hardcoded": false
+    }
+  },
+  "verification": {
+    "final_regression": {
+      "status": "PASS_195_OF_195_MODEL_FREE_TESTS",
+      "formal_suite_tests": 96,
+      "mvp_r13_suite_tests": 86,
+      "authorization_bridge_tests": 13,
+      "total_tests": 195,
+      "model_actions": 0
+    },
+    "in_memory_compile": "PASS_6_OF_6_NEW_PYTHON_FILES",
+    "runtime_reference_live_check": "CURRENT_RUNTIME_MATCHES_REFERENCE_MODEL_NOT_LOADED",
+    "model_inventory_live_check": "STATIC_BYTES_BOUND_MODEL_NOT_LOADED",
+    "runtime_reference_full_dependency_content_hash_bound": false
+  },
+  "resolved_only_at_static_contract_layer": [
+    "launch-envelope versus flat result-authorization field projection",
+    "signature-context substitution prevention",
+    "one authorization and run nonce lifecycle projection",
+    "sealed-batch no-intermediate-result rule",
+    "backend input and target-read isolation interface",
+    "runtime closure manifest construction and replay specification"
+  ],
+  "fatal_blockers_before_any_model_run": [
+    "No trusted release member manifest proves that the new bridge and adapter are bound into a signed immutable release.",
+    "No repository-external signed start receipt binds run, nonce, batch, executable image, and hardware process.",
+    "No signed terminal receipt binds the actual execution event stream and exact result bytes.",
+    "No trusted sealed-batch collector and atomic scientific-result release decision exists.",
+    "No production signer, durable atomic nonce ledger, or production trust policy exists.",
+    "The current hybrid venv plus external conda runtime is not an immutable content-addressed production image.",
+    "Windows native DLL and delay-load graph, OS and GPU driver bytes, file-ID and ADS checks, and validation-to-launch TOCTOU are not externally attested.",
+    "The real tokenizer/model loader, LoRA initialization, candidate tokenization, forward scoring, loss, backward, clipping, SGD, and target payload resolver are not implemented or validated.",
+    "No production runner and top-level result bundler connects the real backend, trusted launch receipts, and result validator.",
+    "No independently signed human review artifact authorizes the frozen release."
+  ],
+  "future_result_classification": {
+    "technical_gate_failure": "INVALID_BATCH_NO_SCIENTIFIC_CONCLUSION",
+    "relative_interface_gate_failure": "NO_SUPPORT_FOR_TARGET_INTERFACE_DEPENDENCE_IN_FROZEN_STACKS",
+    "relative_positive_absolute_nonpositive": "RELATIVE_PRESERVATION_ONLY_NOT_ABSOLUTE_AMPLIFICATION",
+    "joint_gate_pass": "NARROW_DEVELOPMENT_SUPPORT_ONLY_FOLLOW_WITH_ORTHOGONAL_AND_BROADER_TESTS",
+    "causal_shared_result_claim": "FORBIDDEN"
+  },
+  "gpt_pro_advisory_review": {
+    "synthesis_path": "R13_GPT_PRO_REVIEW_SYNTHESIS_R1.md",
+    "synthesis_sha256": "45f15fa94a7e9bfa9a38648ccb1c98be794a89bce2098a442494eb0323cc4e78",
+    "causal_identification_verdict": "R13_DESIGN_DIRECTION_VALID",
+    "metric_verdict": "DECISION_CAPABLE_DEVELOPMENT_SCREEN",
+    "release_custody_verdict": "REDESIGN_RELEASE_BOUNDARY",
+    "authorization_boundary": "Advisory only; no GPT PRO review authorizes model execution."
+  },
+  "supersedes": {
+    "path": "R13_CURRENT_STATE_R1.json",
+    "sha256": "ea47c5e82c7279ed6fd9cc1e37675b721e9003492d098ec6ad8505d44b392d1a"
+  },
+  "authorization": {
+    "cpu_static_review_design_and_tests": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "r13_target_alignment_pilot": false,
+    "scientific_result_release": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

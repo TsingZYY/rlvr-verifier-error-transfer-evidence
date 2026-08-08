@@ -1,0 +1,70 @@
+{
+  "schema_version": "r11-current-state-r4",
+  "status": "BLOCKED_STATIC_CUSTODY_SCHEMA_NOT_RUN_ELIGIBLE",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "run_eligible": false,
+  "model_execution_performed": false,
+  "model_execution_authorized": false,
+  "scientific_direction": {
+    "verdict": "CONTINUE_WITH_GOLD_ONLY_DID_DEVELOPMENT_BRIDGE",
+    "review_consensus": "Causal and revised statistical reviewers support the 40-cell bridge; implementation review requires fail-closed custody and same-runner arm comparability.",
+    "estimands": [
+      "A(s,r)=Adj(s,r,r)",
+      "D(s,r)=Adj(s,r,r)-mean_q_not_equal_r Adj(s,r,q)"
+    ],
+    "screen_only": true,
+    "confirmatory": false,
+    "automatic_sampled_rlvr_progression": false
+  },
+  "cost_decision": {
+    "sixteen_process_r10_bug_reuse_path": "NOT_RUN_ELIGIBLE",
+    "reason": "The frozen R10 runner cannot generate GOLD_ONLY through a signed reward-mask input.",
+    "clean_target_design": "Rerun BUG and GOLD_ONLY under one new arm-parameterized package.",
+    "os_processes": 32,
+    "unique_arm_specific_design_cells": 80,
+    "technical_update_executions": 160,
+    "target_identity_evaluation_cells": 800
+  },
+  "implemented_and_verified": {
+    "r10_development_replay": "PASS_STATIC_ANALYSIS_INCONCLUSIVE_SCIENCE",
+    "r11_protocol": "FROZEN_DEVELOPMENT_ONLY",
+    "r10_reuse_preflight": "PASS_AUDIT_REUSE_NOT_ELIGIBLE",
+    "reward_mask_and_arm_contract_unit_layer": "PASS",
+    "arm_parameterized_runner_prototype": "PASS_COMPILE_AND_UNIT_FAIL_CUSTODY_INTEGRATION",
+    "independent_result_validator": "PASS_COMPILE_AND_UNIT",
+    "result_validator_tests": "20/20",
+    "runner_and_parent_contract_tests": "39/39",
+    "model_action_count": 0
+  },
+  "current_fatal_blocker": {
+    "id": "R11_STATIC_CONTRACT_SCHEMA_CONFLICT",
+    "description": "The inherited R10 preflight requires exact reconstruction of the old manifest and authorization schemas, while R11 must add arm-contract and protocol bindings. The current runner prototype cannot satisfy both contracts and must not be executed.",
+    "required_solution": "Implement a dedicated R11 static contract, 32-cell master inclusion contract, R11 authorization receipt, and R11 invocation receipt; then run independent negative and portable-package audits."
+  },
+  "authoritative_artifact_hashes": {
+    "R11_GOLD_ONLY_DID_BRIDGE_PROTOCOL_R2.json": "c9015c8d04da3b95d43162ab087e5fe4b4dcf1c4a5e689f2df610d2e379efd78",
+    "R11_GPT_PRO_REVIEW_RESULTS_R1.md": "b6b0f1cab1afc64dc843b147375be6d381cb22f9026acd8f3df1416c7ce007b9",
+    "R11_BRIDGE_REUSE_PREFLIGHT_R1.json": "e5769df0136f57150048674362506846f7155b91eaf026694ccf28fb23964571",
+    "R11_ARM_RUNNER_STATIC_AUDIT_R2.json": "706d9dd35100f160633f6f129c108addb8655733706a757abe989687b5a63183",
+    "../mvp_same_source_v1/r11_bridge_contract.py": "d0327fd3aea5f72ac998ec9c86a586c31f89bc58548904cf8d0bd78caae44fc5",
+    "../mvp_same_source_v1/run_same_source_bridge_r11.py": "c1c364172f62e669a9eacc6477e311f6e0b3cf175db3f89c6ac079301caacc3e",
+    "../mvp_same_source_v1/test_r11_bridge_contract.py": "474786503afbc28c71d51cc4a924aa0eed68e4e1ea4b2e521ee6b504d1a4cc11",
+    "validate_r11_bridge_results.py": "73f029c4e79d713e01c9fb30c883c5731a27c8559bb5bce41d4e1c1c0850f9c3",
+    "test_validate_r11_bridge_results.py": "60884b63e47d9eee1fff7b8f4becd9276af5d0f301fc27c5d6de17cc6d087381"
+  },
+  "superseded_static_manifests": [
+    "R11_STATIC_FREEZE_MANIFEST_R2.json",
+    "R11_STATIC_FREEZE_MANIFEST_R3.json"
+  ],
+  "authorization": {
+    "cpu_static_work": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

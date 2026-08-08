@@ -1,0 +1,259 @@
+{
+  "schema_version": "r12-identity-switch-pilot-protocol-draft-r2",
+  "status": "DRAFT_STATIC_DESIGN_NOT_AUTHORIZED_NO_MODEL_RUN",
+  "design_values_frozen_for_review": true,
+  "execution_contract_frozen": false,
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "formal_confirmatory": false,
+  "run_eligible": false,
+  "model_execution_authorized": false,
+  "model_execution_performed": false,
+  "supersedes_design_draft": {
+    "path": "R12_IDENTITY_SWITCH_PILOT_PROTOCOL_DRAFT_R1.json",
+    "sha256": "b90035572b9ae7ac3a2c220db3f525eb3c222358471b8a5a212bdbd529cb2be8",
+    "r1_preserved": true,
+    "reason": "Clarify the exact design-level candidate-panel FPR estimand and prohibit empirical or policy-weighted same-FPR interpretations."
+  },
+  "purpose": "Test whether switching which frozen wrong identity receives the second positive reward changes where one-step transfer appears, while BUG_ALIGNED and BUG_PERMUTED have the same frozen candidate panel, the same unweighted design-level candidate-panel FPR, and the same unweighted binary reward-vector mass.",
+  "provenance_and_outcome_awareness": {
+    "parent_r11_protocol": "R11_GOLD_ONLY_DID_BRIDGE_PROTOCOL_R2.json",
+    "parent_r11_protocol_sha256": "c9015c8d04da3b95d43162ab087e5fe4b4dcf1c4a5e689f2df610d2e379efd78",
+    "relationship_to_r11": "NEW DRAFT ONLY. This file does not amend, supersede, authorize, or modify the frozen R11 package.",
+    "outcome_awareness": "R12 was designed after R10 development outcomes and after an identification audit of R11. It can never be relabelled confirmatory.",
+    "design_freeze_rule": "Any change to arms, FPR definitions, derangement, stacks, estimands, gates, or evidence boundaries requires a new schema version and independent review before authorization."
+  },
+  "why_r11_is_not_shared_identity_causal_proof": [
+    "R11 intervenes on BUG versus GOLD_ONLY and can identify the effect of adding a frozen false-positive reward relative to clean gold-only learning under its fixed one-step setup.",
+    "R11 does not intervene on whether the rewarded wrong identity is aligned or misaligned with the target identity.",
+    "R11 structural excess D contrasts target columns of the same observed matrix; it is fixed-codebook treatment-effect heterogeneity, not a randomized identity-alignment intervention.",
+    "R11's 120 identity-bijection enumeration re-labels the same observed outcomes and is a deterministic sensitivity diagnostic, not an inferential randomization test.",
+    "Therefore an R11 pass cannot by itself establish that shared result identity is the causal channel."
+  ],
+  "fixed_candidate_panel_and_fpr_definitions": {
+    "candidate_panel_size_per_row": 7,
+    "true_gold_candidate_count_per_row": 1,
+    "negative_candidate_count_per_row": 6,
+    "design_candidate_panel_fpr_definition": "number of negative candidates assigned positive binary reward divided by the six frozen negative candidates in that row",
+    "design_candidate_panel_fpr_by_arm": {
+      "GOLD_ONLY": "0/6",
+      "BUG_ALIGNED": "1/6",
+      "BUG_PERMUTED": "1/6"
+    },
+    "matched_fpr_contrast": "BUG_ALIGNED versus BUG_PERMUTED only",
+    "matched_reward_vector_mass": {
+      "BUG_ALIGNED": 2,
+      "BUG_PERMUTED": 2,
+      "definition": "unweighted sum of the seven binary reward entries per row"
+    },
+    "not_empirical_fpr": "The fixed 1/6 quantity is a design-level, unweighted candidate-panel ratio. It is not calibrated from observed verifier errors over a task population or natural model outputs.",
+    "not_policy_weighted_fpr": "The experiment does not match or estimate a policy-weighted FPR. Candidate probabilities can differ, so the rewarded wrong candidate can carry different policy probability mass in the two BUG arms even though both have design FPR 1/6.",
+    "not_equal_expected_reward": "Equal binary reward-vector mass does not imply equal pre-update expected reward under the model policy; that difference is neither matched nor called FPR.",
+    "forbidden_terminology": [
+      "same empirical FPR",
+      "same natural-task FPR",
+      "same policy-weighted FPR",
+      "population-calibrated FPR"
+    ]
+  },
+  "fixed_identity_space": {
+    "ordered_identities": [
+      "Z7_PLUS1",
+      "Z7_PLUS2",
+      "Z7_PLUS3",
+      "Z7_PLUS4",
+      "Z7_PLUS5"
+    ],
+    "derangement_id": "CYCLIC_PLUS_ONE_R1",
+    "derangement": {
+      "Z7_PLUS1": "Z7_PLUS2",
+      "Z7_PLUS2": "Z7_PLUS3",
+      "Z7_PLUS3": "Z7_PLUS4",
+      "Z7_PLUS4": "Z7_PLUS5",
+      "Z7_PLUS5": "Z7_PLUS1"
+    },
+    "derangement_validation": {
+      "domain_size": 5,
+      "codomain_size": 5,
+      "unique_image_count": 5,
+      "fixed_point_count": 0,
+      "cycle_structure": "one 5-cycle",
+      "outcome_selected": false
+    }
+  },
+  "canonical_pilot_stacks": {
+    "ordered_stack_ids": [
+      "TP1-M0-A_TO_B",
+      "TP2-M0-A_TO_B"
+    ],
+    "selection_rule": "Use the first M0/A_TO_B stack in the pre-existing frozen order for each task pair; do not select by outcomes.",
+    "top_level_scientific_clusters": 2,
+    "cluster_definition": "task pair",
+    "statistical_boundary": "The two task pairs are development cases only. Stacks, identities, target cells, processes, and technical replicates are not additional independent task-pair samples."
+  },
+  "arms": {
+    "GOLD_ONLY": {
+      "reward_mask_rule": "gold=1; all six frozen negative candidates=0",
+      "rewarded_candidate_count_per_row": 1,
+      "design_candidate_panel_fpr": "0/6",
+      "binary_reward_vector_mass": 1,
+      "role": "clean-learning anchor for A; not part of the same-design-FPR identity-switch contrast"
+    },
+    "BUG_ALIGNED": {
+      "reward_mask_rule": "gold=1; frozen wrong candidate for source identity r=1; all other candidates=0",
+      "rewarded_candidate_count_per_row": 2,
+      "design_candidate_panel_fpr": "1/6",
+      "binary_reward_vector_mass": 2,
+      "wrong_identity_rule": "r",
+      "role": "aligned false-positive intervention"
+    },
+    "BUG_PERMUTED": {
+      "reward_mask_rule": "gold=1; frozen wrong candidate for identity pi(r) under CYCLIC_PLUS_ONE_R1=1; all other candidates=0",
+      "rewarded_candidate_count_per_row": 2,
+      "design_candidate_panel_fpr": "1/6",
+      "binary_reward_vector_mass": 2,
+      "wrong_identity_rule": "pi(r)",
+      "role": "misaligned false-positive intervention"
+    }
+  },
+  "identity_switch_control": {
+    "contrast_arms": [
+      "BUG_ALIGNED",
+      "BUG_PERMUTED"
+    ],
+    "held_equal": [
+      "frozen seven-candidate panel and order",
+      "one gold and six negative candidates per row",
+      "design-level candidate-panel FPR of 1/6",
+      "two positive binary reward entries and reward-vector mass of 2",
+      "gold reward",
+      "source rows and row order",
+      "target rows and evaluator",
+      "checkpoint and initial trainable state",
+      "tokenizer, chat template, batching, optimizer, learning rate, clipping threshold, precision, model, and dependency inventory"
+    ],
+    "only_permitted_difference": "which frozen wrong identity receives the second positive binary reward: r versus pi(r)",
+    "unmatched_and_reported": [
+      "pre-update policy probability assigned to the selected wrong candidate",
+      "pre-update expected reward",
+      "raw gradient norm",
+      "realized update norm"
+    ],
+    "gold_contrast_boundary": "GOLD_ONLY differs from both BUG arms in design FPR and binary reward-vector mass. A is a clean-anchor error-addition contrast, not a same-design-FPR contrast."
+  },
+  "execution_variants": {
+    "MINIMAL_6_PROCESS": {
+      "status": "DRAFT_OPTION_NOT_SELECTED",
+      "ordered_replicates": [
+        "A"
+      ],
+      "os_processes": 6,
+      "process_formula": "2 stacks x 3 arms x 1 technical replicate",
+      "unique_arm_specific_source_update_cells": 30,
+      "technical_update_executions": 30,
+      "target_identity_evaluation_cells": 150,
+      "count_check": "6 processes x 5 source identities x 5 target identities = 150 target cells"
+    },
+    "REPRODUCIBILITY_12_PROCESS": {
+      "status": "DRAFT_OPTION_NOT_SELECTED",
+      "ordered_replicates": [
+        "A",
+        "B"
+      ],
+      "os_processes": 12,
+      "process_formula": "2 stacks x 3 arms x 2 technical replicates",
+      "unique_arm_specific_source_update_cells": 30,
+      "technical_update_executions": 60,
+      "target_identity_evaluation_cells": 300,
+      "replicate_matrix_absolute_tolerance": 1e-12,
+      "count_check": "12 processes x 5 source identities x 5 target identities = 300 target cells; A/B are technical repeats, not independent scientific samples"
+    },
+    "preauthorization_choice_rule": "Select and freeze exactly one variant before authorization. Running A under the 6-process variant, inspecting outcomes, and conditionally adding B is forbidden."
+  },
+  "potential_outcomes_and_estimands": {
+    "outcome": "Y(k,s,r,q,arm) is the frozen post-update target metric for replicate k, stack s, source identity r, target identity q, and arm; pre traces must be identical across arms.",
+    "clean_anchor_aligned_error_effect": "A(k,s,r)=Y(k,s,r,r,BUG_ALIGNED)-Y(k,s,r,r,GOLD_ONLY)",
+    "identity_switch_difference": "DeltaSwitch(k,s,r,q)=Y(k,s,r,q,BUG_ALIGNED)-Y(k,s,r,q,BUG_PERMUTED)",
+    "primary_identity_switch_interaction": "C(k,s,r)=DeltaSwitch(k,s,r,r)-DeltaSwitch(k,s,r,pi(r))",
+    "expanded_C": "C=[Y_ALIGNED(q=r)-Y_PERMUTED(q=r)]-[Y_ALIGNED(q=pi(r))-Y_PERMUTED(q=pi(r))]",
+    "C_sign_check": "If alignment causally redirects transfer toward the rewarded wrong identity, Y_ALIGNED-Y_PERMUTED should be larger at q=r than at q=pi(r), so the pre-specified supporting direction is C>0.",
+    "A_boundary": "A>0 supports an aligned false-positive addition effect relative to GOLD_ONLY in this panel, but A is not a same-design-FPR estimand.",
+    "C_boundary": "C is the primary same-design-FPR, equal-binary-reward-mass identity-switch estimand. It does not establish matched policy-weighted FPR.",
+    "aggregation_order": [
+      "compute A and C within replicate k and exact (s,r)",
+      "under the 12-process variant, require replicate matrices to agree within 1e-12 before equal averaging",
+      "equal-average five fixed source identities within each selected task-pair stack",
+      "report the two task-pair means separately before any descriptive overall average",
+      "report every identity-level value without treating nested values as independent samples"
+    ],
+    "practical_margin": "NOT_CLAIMED",
+    "directional_threshold": 0.0,
+    "inference_boundary": "With two task-pair clusters, no standard error, confidence interval, inferential p-value, or population-level task claim is permitted."
+  },
+  "development_decision_rule": {
+    "technical_pass_requires_all": [
+      "complete the selected 6-process or 12-process design with no missing, duplicate, swapped, or extra cell",
+      "recompute exact canonical reward masks and verify GOLD_ONLY=0/6, BUG_ALIGNED=1/6, and BUG_PERMUTED=1/6 design FPR on every row",
+      "verify binary reward-vector masses of 1, 2, and 2 for GOLD_ONLY, BUG_ALIGNED, and BUG_PERMUTED respectively",
+      "verify BUG_ALIGNED and BUG_PERMUTED differ only in r versus pi(r) for the second rewarded candidate",
+      "match all non-treatment source, target, candidate, model, checkpoint, initial-state, update, evaluator, and environment bindings",
+      "fresh checkpoint reset before every source identity",
+      "no realized gradient clipping and all values finite",
+      "under the 12-process variant, all A/B adjusted target matrices agree within absolute tolerance 1e-12"
+    ],
+    "mechanism_pilot_pass_requires_all": [
+      "technical pass",
+      "2/2 task-pair means have A > 0",
+      "2/2 task-pair means have C > 0",
+      "descriptive overall mean A > 0",
+      "descriptive overall mean C > 0"
+    ],
+    "gate_consistency_note": "The overall sign gates are redundant once both equally weighted task-pair means are positive; they are retained only as explicit summary integrity checks and do not create additional evidence.",
+    "pass_label": "R12_DEVELOPMENT_IDENTITY_SWITCH_PASS_ONLY",
+    "failure_labels": {
+      "A_GATE_FAILURE": "No consistent aligned false-positive addition effect relative to GOLD_ONLY; stop this bridge mechanism.",
+      "C_GATE_FAILURE_WITH_A_POSITIVE": "A false-positive effect may exist, but the rewarded wrong identity has not been shown to causally redirect transfer; prohibit the shared-identity claim.",
+      "TECHNICAL_GATE_FAILURE": "No scientific interpretation. Repair under a new frozen version; outcome-dependent retry is forbidden."
+    },
+    "identity_heterogeneity_policy": "Report all five fixed identity-level A and C values. Identity unanimity is not a minimum-pilot gate, and identities are not independent samples; any negative identity remains an explicit boundary condition.",
+    "automatic_progression": false,
+    "stop_after_result": "Any failure ends this draft version. No adaptive arm, FPR definition, stack, identity, threshold, derangement, or hyperparameter change is permitted within the same version."
+  },
+  "result_validator_minimum_requirements": [
+    "recompute canonical reward masks from bound rows, ordered candidates, arm, r, and pi(r); a merely non-empty mask string is insufficient",
+    "recompute design-level candidate-panel FPR and binary reward-vector mass row by row",
+    "record but do not relabel policy probability mass or expected reward as FPR",
+    "bind each result to its arm contract, execution manifest, authorization receipt, and invocation receipt",
+    "reject arm swaps, derangement drift, mask tampering, cross-arm drift, cross-replicate binding drift, clipping, and missing cells",
+    "recompute A, DeltaSwitch, and C from raw target metrics",
+    "label all summaries development-only and non-inferential"
+  ],
+  "claim_boundary": {
+    "can_support_if_passed": "Development-only evidence, within the same frozen seven-candidate panel and two selected affine-codebook task pairs, that switching the rewarded wrong identity from r to pi(r) changes relative one-step target transfer while BUG_ALIGNED and BUG_PERMUTED have the same unweighted design candidate-panel FPR of 1/6 and the same binary reward-vector mass of 2.",
+    "cannot_support": [
+      "same empirical FPR",
+      "same policy-weighted FPR",
+      "same natural-task or population FPR",
+      "formal G1 or confirmatory inference",
+      "population-level cross-task generalization",
+      "semantic or codebook-invariant sharedness",
+      "natural-task generalization",
+      "sampled or multi-step RLVR transfer",
+      "hidden-audit performance",
+      "independence of processes, technical replicates, identities, or target cells",
+      "a practical-magnitude claim"
+    ],
+    "next_stage_if_passed": "Freeze a separate design with at least six new outcome-independent task-pair clusters, an externally justified magnitude margin, and an explicit empirical or policy-weighted FPR calibration if any broader same-FPR claim is desired."
+  },
+  "authorization": {
+    "cpu_static_review_and_schema_work": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "fixed_candidate_pilot": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

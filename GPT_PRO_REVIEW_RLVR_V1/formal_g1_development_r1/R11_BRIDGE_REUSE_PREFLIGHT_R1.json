@@ -1,0 +1,77 @@
+{
+  "schema_version": "r11-bridge-reuse-preflight-result-r1",
+  "status": "PASS",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "model_execution_performed": false,
+  "model_execution_authorized": false,
+  "audit_scope": "CPU/static inspection of the frozen R10 result structure and reward interface only",
+  "parent_r10": {
+    "run_index_sha256": "9d7a13df6c84ddcdf554e26a82f62e4d65d19105a34b16a1805df1f88bf35a3f",
+    "completion_sha256": "2a70a66ed936307e4d4ef9ad7b8bd59315fa6319c55f809e2b4d9a5f9d3b009f",
+    "completion_status": "PASS",
+    "result_processes_checked": 16,
+    "result_processes_passed": 16,
+    "unique_source_update_cells_per_replicate": 40,
+    "source_update_cells_per_stack": 5,
+    "target_identity_evaluation_cells_per_stack": 25,
+    "ordered_identity_pair_coverage_per_stack": "25/25",
+    "technical_replicates": [
+      "A",
+      "B"
+    ]
+  },
+  "frozen_r10_runner": {
+    "path": "GPT_PRO_REVIEW_RLVR_V1/mvp_same_source_v1/run_same_source_mvp.py",
+    "sha256": "439cc675cf8b53c1c0ec2e70a85866a6b87a1a9eaf3539478fe087ded35c6f4d",
+    "explicit_arm_or_reward_mask_input": false,
+    "hardcoded_gold_assignment": true,
+    "hardcoded_wrong_assignment": true,
+    "can_generate_gold_only_with_same_runner_hash": false
+  },
+  "bridge_decision": {
+    "verdict": "R10_BUG_REUSE_PATH_NOT_RUN_ELIGIBLE",
+    "sixteen_process_gold_only_reuse_path_eligible": false,
+    "reason": "The frozen R10 runner hard-codes both gold and wrong reward assignments and exposes no signed arm or reward-mask input. A GOLD_ONLY result requires an implementation change, so cross-generation equivalence cannot certify reward-mask-only treatment variation under the same runner hash.",
+    "clean_fail_closed_action": "Create one arm-parameterized runner and rerun BUG and GOLD_ONLY under the same newly frozen package.",
+    "clean_fallback_cost": {
+      "new_os_processes": 32,
+      "unique_arm_specific_design_cells": 80,
+      "technical_update_executions": 160,
+      "target_identity_evaluation_cells": 800
+    },
+    "no_op_required": false,
+    "wrong_only_required": false,
+    "sampled_rlvr_progression": false
+  },
+  "review_resolution": {
+    "causal_reviewer": "RUN_GOLD_ONLY_DID_BRIDGE after version bridge",
+    "statistical_reviewer_initial": "REDESIGN_BEFORE_MODEL_ACTION under an incorrect one-update-per-stack assumption",
+    "statistical_reviewer_revised": "RUN_GOLD_ONLY_DID_BRIDGE after verifying 40 (stack, source identity) cells",
+    "implementation_reviewer": "REDESIGN_BEFORE_MODEL_ACTION until the bridge contract exists; use 32 processes if cross-generation equivalence cannot be proved",
+    "codex_resolution": "Scientific direction remains viable, but the current 16-process implementation path fails the strict bridge contract."
+  },
+  "static_artifacts": {
+    "protocol_r2_sha256": "c9015c8d04da3b95d43162ab087e5fe4b4dcf1c4a5e689f2df610d2e379efd78",
+    "pro_review_synthesis_sha256": "b6b0f1cab1afc64dc843b147375be6d381cb22f9026acd8f3df1416c7ce007b9",
+    "preflight_auditor_sha256": "e6e160576aec842aece9181fdea563081aecce412244fe9364b526f10ae6782a",
+    "preflight_tests_sha256": "fde2ce4b6573d4a33fb30c2d5ca92d52528dbb9ad1a56d0ad52245c4085bb01a"
+  },
+  "verification": {
+    "command_working_directory": "GPT_PRO_REVIEW_RLVR_V1/formal_g1_development_r1",
+    "unit_tests": 12,
+    "unit_tests_passed": 12,
+    "auditor_exit_code": 0,
+    "auditor_status": "PASS"
+  },
+  "authorization": {
+    "cpu_static_audit": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

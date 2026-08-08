@@ -1,0 +1,46 @@
+{
+  "schema_version": "r11-static-freeze-manifest-r2",
+  "status": "FROZEN_STATIC_IMPLEMENTATION_NOT_RUN_ELIGIBLE",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "run_eligible": false,
+  "model_execution_performed": false,
+  "model_execution_authorized": false,
+  "parent_manifest_sha256": "8e2731a80d34ae054d2cae28b4657f6e87447e072428862b8220b84824448754",
+  "decision": "ARM_PARAMETERIZED_RUNNER_STATIC_PASS_MANIFESTS_VALIDATORS_AND_AUTHORIZATION_STILL_REQUIRED",
+  "artifacts": {
+    "R11_STATIC_FREEZE_MANIFEST_R1.json": "8e2731a80d34ae054d2cae28b4657f6e87447e072428862b8220b84824448754",
+    "R11_ARM_RUNNER_STATIC_AUDIT_R1.json": "6f7f04a52aabcde91e723aba891164259b6a8797d2ac0fc6a24191cbba005768",
+    "../mvp_same_source_v1/r11_bridge_contract.py": "f92560287651765a6f90424bead8cd84a24218a28dd849cd7023d852acaab3bc",
+    "../mvp_same_source_v1/run_same_source_bridge_r11.py": "c1c364172f62e669a9eacc6477e311f6e0b3cf175db3f89c6ac079301caacc3e",
+    "../mvp_same_source_v1/R11_ARM_CONTRACT_TEMPLATE_R1.json": "e3702d14c6830323d1b594d6baab9f71915a9ba78762e730f930143843b41fc9",
+    "../mvp_same_source_v1/test_r11_bridge_contract.py": "c20f46d6ec9e528e95e4269894704f58ae0d3e031e6776c84c0aea02426a5ab7",
+    "../mvp_same_source_v1/run_same_source_mvp.py": "439cc675cf8b53c1c0ec2e70a85866a6b87a1a9eaf3539478fe087ded35c6f4d"
+  },
+  "verification": {
+    "new_runner_python_compile": "PASS",
+    "new_and_parent_static_contract_tests_passed": 39,
+    "new_and_parent_static_contract_tests_total": 39,
+    "parent_r10_runner_unchanged": true,
+    "protocol_hash_bound": "c9015c8d04da3b95d43162ab087e5fe4b4dcf1c4a5e689f2df610d2e379efd78",
+    "model_action_count": 0
+  },
+  "remaining_before_run_eligibility": {
+    "arm_contracts": "0/32 completed; template only",
+    "r11_execution_manifests": "0/32",
+    "r11_pair_validator": "NOT_IMPLEMENTED",
+    "r11_completion_validator": "NOT_IMPLEMENTED",
+    "external_action_specific_authorization": "ABSENT",
+    "run_eligible": false
+  },
+  "authorization": {
+    "cpu_static_work": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

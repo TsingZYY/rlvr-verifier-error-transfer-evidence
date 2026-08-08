@@ -1,0 +1,29 @@
+{
+  "manifest_entries": 30,
+  "existing_files": 30,
+  "valid_pdf_headers": 30,
+  "hash_matches": 30,
+  "parse_ok": 30,
+  "total_pages": 1650,
+  "total_bytes": 167634245,
+  "priority_counts": {
+    "1": 24,
+    "2": 5,
+    "3": 1
+  },
+  "company_counts": {
+    "Ai2": 1,
+    "Alibaba Qwen": 2,
+    "Anthropic": 5,
+    "ByteDance Seed": 1,
+    "DeepSeek": 2,
+    "Google DeepMind": 1,
+    "Meta": 1,
+    "Microsoft": 1,
+    "MiniMax": 1,
+    "Mistral AI": 1,
+    "Moonshot AI": 2,
+    "NVIDIA": 3,
+    "OpenAI": 9
+  }
+}

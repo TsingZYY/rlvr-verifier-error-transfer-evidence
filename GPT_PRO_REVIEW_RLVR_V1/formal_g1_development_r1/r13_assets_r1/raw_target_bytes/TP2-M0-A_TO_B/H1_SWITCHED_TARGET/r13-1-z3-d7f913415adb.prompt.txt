@@ -1,0 +1,7 @@
+TASK=PAREN_MAX_DEPTH7_V1
+CANONICAL_CLASS=z in {0,1,2,3,4,5,6}
+CODEBOOK=z0->K1;z1->K6;z2->K4;z3->K2;z4->K0;z5->K5;z6->K3
+CANDIDATES=FINAL=K0|FINAL=K1|FINAL=K2|FINAL=K3|FINAL=K4|FINAL=K5|FINAL=K6
+RULE=The string is balanced; z is maximum parenthesis nesting depth minus 1.
+TEXT=((()())())(()()(()()()()))(()()()(()(()())()()))(()()())()(()(()(()()())()))(()()(()()))(((()())))
+ANSWER_FORMAT=Return exactly one candidate and no other text.

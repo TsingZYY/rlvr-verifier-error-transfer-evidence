@@ -1,0 +1,78 @@
+{
+  "schema_version": "r11-current-state-r5",
+  "status": "STATIC_CUSTODY_PASS_EXTERNAL_AUTHORIZATION_PENDING_NOT_RUN",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "run_eligible": false,
+  "model_execution_performed": false,
+  "model_execution_authorized": false,
+  "scientific_direction": {
+    "verdict": "CONTINUE_WITH_GOLD_ONLY_DID_DEVELOPMENT_BRIDGE",
+    "estimands": [
+      "A(s,r)=Adj(s,r,r)",
+      "D(s,r)=Adj(s,r,r)-mean_q_not_equal_r Adj(s,r,q)"
+    ],
+    "screen_only": true,
+    "confirmatory": false,
+    "automatic_sampled_rlvr_progression": false
+  },
+  "frozen_design": {
+    "arms": [
+      "BUG",
+      "GOLD_ONLY"
+    ],
+    "replicates_per_arm_stack": 2,
+    "mapping_stacks": 8,
+    "os_processes": 32,
+    "unique_arm_specific_design_cells": 80,
+    "technical_update_executions": 160,
+    "target_identity_evaluation_cells": 800,
+    "unique_permitted_treatment_difference": "reward_mask"
+  },
+  "implemented_and_verified": {
+    "dedicated_r11_static_contract": "PASS",
+    "r11_runner_custody_adapter": "PASS",
+    "r11_32_cell_master_inclusion_contract": "PASS",
+    "r11_authorization_receipt_schema": "PASS_TEMPLATE_REJECTED_AS_NON_AUTHORIZING",
+    "r11_invocation_receipt_schema": "PASS",
+    "local_real_asset_static_rebuild": "PASS_32_OF_32",
+    "clean_directory_portable_static_rebuild": "PASS_32_OF_32",
+    "adversarial_static_checks": "PASS_4_OF_4_REJECTED",
+    "unit_regression_tests": "PASS_74_OF_74",
+    "model_action_count": 0
+  },
+  "resolved_fatal_blocker": {
+    "id": "R11_STATIC_CONTRACT_SCHEMA_CONFLICT",
+    "resolution": "R11 now owns independent exact schemas for arm contract, manifest, 32-cell master, external authorization, and invocation receipt; the R10 runner is retained only as the frozen computation path behind an R11 custody adapter."
+  },
+  "current_blocker": {
+    "id": "R11_EXTERNAL_CUSTODY_AND_AUTHORIZATION_MISSING",
+    "description": "The static package is internally frozen and audited, but its reference hashes are not an independent external anchor and the included receipt is deliberately non-authorizing. No exact user authorization receipt or per-process invocation receipt exists.",
+    "required_solution": "Copy the master and reference hashes to independent custody, create one exact time-limited user authorization receipt bound to all 32 manifests and arm contracts, then create a pre-model-load invocation receipt for each process. Run eligibility remains false until all checks pass."
+  },
+  "authoritative_artifact_hashes": {
+    "../mvp_same_source_v1/r11_static_contract.py": "4f9d829aae7eb94a5c70eb2cae13f094a9f96a3b5a815d7ea27a1b2458f7fb6e",
+    "../mvp_same_source_v1/run_same_source_bridge_r11.py": "7d9ebe5a2ede65525daa8caff794f47a5e712ac48e11059d69fa6f0c455348eb",
+    "../mvp_same_source_v1/freeze_r11_bridge_release.py": "d852b14ca195055c8618e329e67816bd452b0826dd4f3aa7b904ade59c746872",
+    "../mvp_same_source_v1/audit_r11_bridge_static.py": "072519ea223556428c5ce245a7893b9af11e5cacdfb7c12a5eed5de52a64e83b",
+    "../mvp_same_source_v1/test_r11_static_contract.py": "957b23324784f5615a91116460901ccc7824e95f69d0bf47a03dd9e9857cc454",
+    "../mvp_same_source_v1/test_r11_runner_adapter.py": "0a2be515b7f09147dec124059e7cbcb962ac78772b41f466f64e0259fbf80c72",
+    "../mvp_same_source_v1/R11_32_CELL_STATIC_AUDIT_R1.json": "dcc92ec617a68e84546a39a2ef2cbcead386e6a59f424eead3ad66b50e4ea3ae",
+    "../mvp_same_source_v1/R11_PORTABLE_STATIC_AUDIT_R1.json": "dcc92ec617a68e84546a39a2ef2cbcead386e6a59f424eead3ad66b50e4ea3ae",
+    "../mvp_same_source_v1/frozen_r11_bridge_r1/R11_32_CELL_MASTER_INCLUSION_CONTRACT_R1.json": "9842f7b7fe3c6183d277274ba7461a4de38e07207db353c65630e3a92cb496d6",
+    "../mvp_same_source_v1/frozen_r11_bridge_r1/R11_RELEASE_INDEX_R1.json": "84d73fe6815dac2273fcb2d95951c5c580684bc9f6a8f79dc2a9874905d69f2b",
+    "../mvp_same_source_v1/frozen_r11_bridge_r1/R11_AUTHORIZATION_RECEIPT_TEMPLATE_R1.json": "d4f0ee1bb641d2a2dff88ee9ea0bc76112d9a92e0cffc715708cb79980c25668"
+  },
+  "supersedes": "R11_CURRENT_STATE_R4.json",
+  "authorization": {
+    "cpu_static_work": true,
+    "tokenizer_load": false,
+    "model_weight_load": false,
+    "model_forward": false,
+    "gradient": false,
+    "optimizer_step": false,
+    "fixed_candidate_r11_bridge": false,
+    "sampled_rlvr": false,
+    "hidden_audit": false
+  }
+}

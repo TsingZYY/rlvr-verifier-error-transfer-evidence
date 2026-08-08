@@ -1,0 +1,87 @@
+{
+  "analysis_scope": "saved forward-scoring reproducibility only",
+  "candidate_delta_quarter_nats": 0.01219754104235801,
+  "candidate_practical_delta_nats": 0.04879016416943204,
+  "decision": {
+    "forward_scoring_replay": "PASS_FOR_NUMERICAL_FORWARD_REPLAY_ONLY",
+    "one_step_core_outcome_noise": "NOT_IDENTIFIABLE",
+    "scientific_claim": "NO_CHANGE"
+  },
+  "project_root": "C:\\Users\\24306\\Documents\\Codex\\2026-07-21\\https-www-linayao-com-publications\\work\\sqlite-agent-research",
+  "requested_hierarchical_bootstrap": {
+    "not_estimated": [
+      "mapping_level_sigma",
+      "one_step_update_outcome_technical_noise",
+      "treatment_effect_tau",
+      "power_for_the_new_five_or_nine_cell_design"
+    ],
+    "reason": "Kernel artifacts retain condition aggregates and prompt-level mean norms, not prompt-by-candidate gradient/transfer outcomes or repeated post-update target logits. Resampling saved rows would estimate dataset-row variation, not technical reproducibility of the one-step outcome.",
+    "status": "NOT_IDENTIFIABLE_FROM_SAVED_ARTIFACTS"
+  },
+  "schema_version": "rlvr-technical-noise-sensitivity-v1",
+  "source_forward_audit": {
+    "actions_checked": 1088,
+    "audit_kind": "independent full-action FP32 model reload and forward replay",
+    "conservative_bound_as_fraction_of_delta_quarter": 0.01766998731624243,
+    "conservative_bug_minus_gold_logp_error_bound": 0.0002155303955078125,
+    "forward_scoring_below_candidate_noise_gate": true,
+    "maximum_action_sum_logp_error_by_prompt": {
+      "count": 64,
+      "empirical_p95": 5.53131103515625e-05,
+      "empirical_p99": 0.00010776519775390625,
+      "maximum": 0.00010776519775390625,
+      "mean": 3.1501054763793945e-05,
+      "median": 3.0040740966796875e-05,
+      "median_absolute_deviation": 8.106231689453125e-06,
+      "sample_variance_across_prompt_maxima": 2.6980864103756e-10
+    },
+    "maximum_probability_error_by_prompt": {
+      "count": 64,
+      "empirical_p95": 2.469867467880249e-06,
+      "empirical_p99": 5.967915058135986e-06,
+      "maximum": 5.967915058135986e-06,
+      "mean": 1.590291503816843e-06,
+      "median": 1.560896635055542e-06,
+      "median_absolute_deviation": 3.725290298461914e-07,
+      "sample_variance_across_prompt_maxima": 6.366199971011244e-13
+    },
+    "passed_under_original_thresholds": true,
+    "path": "C:\\Users\\24306\\Documents\\Codex\\2026-07-21\\https-www-linayao-com-publications\\work\\sqlite-agent-research\\outputs\\arithmetic-gate1-stage-ISB\\engineering\\block-b000-root93001-real-v2\\source-forward-audit.json",
+    "prompt_rows_retained": 64,
+    "sha256": "4337883560eb250bb264cea2572f645cbd0af86b3b5e7df6f43679e8983ac85a"
+  },
+  "source_score_v1_v2_comparisons": {
+    "h-id": {
+      "action_key_sets_equal": true,
+      "all_saved_numeric_values_identical": true,
+      "max_abs_differences": {
+        "base_mean_logp_including_eos": 0.0,
+        "base_sum_logp_including_eos": 0.0
+      },
+      "prompt_record_hashes_equal": true,
+      "shared_actions": 544,
+      "v1_actions": 544,
+      "v1_path": "C:\\Users\\24306\\Documents\\Codex\\2026-07-21\\https-www-linayao-com-publications\\work\\sqlite-agent-research\\outputs\\arithmetic-gate1-stage-ISB\\engineering\\block-b000-root93001-real-v1\\blocks\\h-id\\source-score.json",
+      "v1_sha256": "ccd42d45df9d6f3d8a0317e2c378bf64411347593d6479f28290f4b8007c0b8e",
+      "v2_actions": 544,
+      "v2_path": "C:\\Users\\24306\\Documents\\Codex\\2026-07-21\\https-www-linayao-com-publications\\work\\sqlite-agent-research\\outputs\\arithmetic-gate1-stage-ISB\\engineering\\block-b000-root93001-real-v2\\blocks\\h-id\\source-score.json",
+      "v2_sha256": "c872862003395ccb9cc27883ba6cc067f76f415f34acd12edffc3ebcb7b37eb4"
+    },
+    "train": {
+      "action_key_sets_equal": true,
+      "all_saved_numeric_values_identical": true,
+      "max_abs_differences": {
+        "base_mean_logp_including_eos": 0.0,
+        "base_sum_logp_including_eos": 0.0
+      },
+      "prompt_record_hashes_equal": true,
+      "shared_actions": 544,
+      "v1_actions": 544,
+      "v1_path": "C:\\Users\\24306\\Documents\\Codex\\2026-07-21\\https-www-linayao-com-publications\\work\\sqlite-agent-research\\outputs\\arithmetic-gate1-stage-ISB\\engineering\\block-b000-root93001-real-v1\\blocks\\train\\source-score.json",
+      "v1_sha256": "bea581aa4680ea74c56086e445231314044f14426aa3ada1061cff1729a0b79c",
+      "v2_actions": 544,
+      "v2_path": "C:\\Users\\24306\\Documents\\Codex\\2026-07-21\\https-www-linayao-com-publications\\work\\sqlite-agent-research\\outputs\\arithmetic-gate1-stage-ISB\\engineering\\block-b000-root93001-real-v2\\blocks\\train\\source-score.json",
+      "v2_sha256": "0788ffff1339138cc589d361158d71fa341bd36e3fe55e2dbdbc358889918e17"
+    }
+  }
+}

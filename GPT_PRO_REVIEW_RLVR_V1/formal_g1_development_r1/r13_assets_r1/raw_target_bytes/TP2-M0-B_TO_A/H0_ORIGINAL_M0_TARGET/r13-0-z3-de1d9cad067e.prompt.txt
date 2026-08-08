@@ -1,0 +1,7 @@
+TASK=MARKED_RANK7_V1
+CANONICAL_CLASS=z in {0,1,2,3,4,5,6}
+CODEBOOK=z0->K0;z1->K1;z2->K2;z3->K3;z4->K4;z5->K5;z6->K6
+CANDIDATES=FINAL=K0|FINAL=K1|FINAL=K2|FINAL=K3|FINAL=K4|FINAL=K5|FINAL=K6
+RULE=z is the number of listed values strictly less than the value marked *.
+ITEMS=66,84,72,37,27,36,*41
+ANSWER_FORMAT=Return exactly one candidate and no other text.

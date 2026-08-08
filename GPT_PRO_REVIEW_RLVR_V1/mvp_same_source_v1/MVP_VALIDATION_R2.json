@@ -1,0 +1,49 @@
+{
+  "schema_version": "same-source-diagnostic-mvp-validation-r2",
+  "validation_status": "PASS",
+  "scientific_evidence": false,
+  "formal_experiment": false,
+  "replicate_a_sha256": "d69adbc4dfa18991d144011febcb3d613919e5cea59e3d7de01304ef9c946e73",
+  "replicate_b_sha256": "b1b719bb8743b1c6a7ffd29a514222bca1a3d741d0fc9e64cf6999323a9d6f49",
+  "determinism_addendum_sha256": "72f800d4d078b45b9021f82651ef8737f45f69bc59b98a38c79c8500e2cc1cb0",
+  "substantive_sha256": "bb544e35de848c629cb6c905fd995572997f27bb1bb0ef24422ef7b910af5da1",
+  "substantive_replicates_identical": true,
+  "excluded_volatile_fields": [
+    "created_at_utc",
+    "peak_gpu_memory_gib",
+    "runtime_seconds"
+  ],
+  "errors": [],
+  "verified_invariants": [
+    "diagnostic-only status",
+    "14 source rows and 7 calibration target rows",
+    "5 source updates and exact 25/25 ordered identity-pair coverage",
+    "one source-update hash reused across all five target identities",
+    "five distinct reset-based source updates",
+    "balanced candidate supervised-token counts",
+    "exact LoRA restoration",
+    "finite recorded values",
+    "substantive replicate equality"
+  ],
+  "stack_summary": {
+    "mean_diagonal_excess": 0.0014351197651454317,
+    "positive_diagonal_excess_count": 3,
+    "source_rule_count": 5
+  },
+  "per_source_diagonal_excess": {
+    "Z7_PLUS1": 0.021374668393816257,
+    "Z7_PLUS2": -0.012390409197126112,
+    "Z7_PLUS3": 0.008839658328465047,
+    "Z7_PLUS4": -0.04692210469927108,
+    "Z7_PLUS5": 0.036273785999843045
+  },
+  "runtime_seconds": {
+    "a": 81.86200289998669,
+    "b": 81.3545252000331
+  },
+  "peak_gpu_memory_gib": {
+    "a": 3.7496871948242188,
+    "b": 3.7496871948242188
+  },
+  "claim_boundary": true
+}
