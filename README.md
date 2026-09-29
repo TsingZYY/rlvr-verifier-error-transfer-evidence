@@ -1,5 +1,12 @@
 # RLVR verifier-error cross-task structure
 
+## 项目档案：时间线、笔记、代码与反思
+
+[项目总览](https://github.com/TsingZYY/project-experience/blob/main/projects/rlvr-audit/README.md) · [时间线](https://github.com/TsingZYY/project-experience/blob/main/projects/rlvr-audit/TIMELINE.md) · [开发／研究笔记](https://github.com/TsingZYY/project-experience/blob/main/projects/rlvr-audit/NOTES.md) · [实际代码与入口](https://github.com/TsingZYY/project-experience/blob/main/projects/rlvr-audit/CODE.md) · [最终反思](https://github.com/TsingZYY/project-experience/blob/main/projects/rlvr-audit/REFLECTION.md)
+
+以上档案于2026-09-30依据跨对话记录及现存文件整理，保留原始结果的适用范围；此次整理没有重新运行实验。
+
+
 This repository is a curated evidence snapshot for the research question:
 
 > Can verifier errors with similar aggregate false-positive rates produce different cross-task transfer risk because their error structure interacts differently with a target task or interface?
